@@ -4,21 +4,21 @@ Programa::Programa() {
 
 }
 
-char Programa:: obtener_opcion() {
+char Programa:: obtenerOpcion() {
     return opcion;
 }
 
-void Programa:: mostrar_menu() {
-        cout << "\n\t***************  MENU AEROPUERTO**************"<< endl << endl;
-        cout << "\t1. Mostrar por Aeropuerto" << endl;
-        cout << "\t2. Dar de Alta Aeropuerto" << endl;
-        cout << "\t3. Dar de Baja Aeropuerto" << endl;
-        cout << "\t4. Mostrar Aeropuertos (Recorrido In Orden)" << endl;
-        cout << "\t4. Mostrar Aeropuertos (Formato ABB)" << endl;
-        cout << "\t0. Salir del programa" << endl;
+void Programa:: mostrarMenu() {
+    cout << "\n\t***************  MENU AEROPUERTO**************"<< endl << endl;
+    cout << "\t1. Mostrar por Aeropuerto" << endl;
+    cout << "\t2. Dar de Alta Aeropuerto" << endl;
+    cout << "\t3. Dar de Baja Aeropuerto" << endl;
+    cout << "\t4. Mostrar Aeropuertos (Recorrido In Orden)" << endl;
+    cout << "\t4. Mostrar Aeropuertos (Formato ABB)" << endl;
+    cout << "\t0. Salir del programa" << endl;
 }
 
-void Programa:: elegir_opcion(){
+void Programa:: elegirOpcion(){
     cout << MSJ_OPCION;
     cin >> opcion;
 }
@@ -30,36 +30,30 @@ void Programa:: elegir_opcion(){
 - mostrar todos los aeropuertos (recorrido in orden)
 - mostrar los aeropuertos conservando el formato del ABB*/
 
+void Programa::abrirMenuInterno(Lista<Aeropuertos*> &lista){
 
-void Programa::abrir_menu_interno(Lista<Aeropuertos*> &lista){
-
-    switch ( opcion ){
-        case CONSULTAR_AEROPUERTO: {
-                                     cout<<" ingrese aeropuerto que desea consultar (? " <<endl;
-                                     cin>> dato;
-                                     mostrar_aeropuerto( dato);
-
-                                    break;
-                                }
+    switch(opcion){
+        case CONSULTAR_AEROPUERTO:
+            cout << " ingrese aeropuerto que desea consultar (? " <<endl;
+            cin >> dato;
+            mostrarAeropuerto(dato);
+            break;
 
         case ALTA_AEROPUERTO:
-                                alta_aeropuerto( dato);
-                                break;
+            altaAeropuerto(dato);
+            break;
 
-        case BAJA_AEROPUERTO:{
-                                baja_aeropuerto( dato);
+        case BAJA_AEROPUERTO:
+            bajaAeropuerto(dato);
+            break;
 
-                                break;
+        case MOSTRAR_AEROPUERTO_INORDEN:
+            mostrarAeropuertosInorden( );  //mostrar in orden
+            break;
 
-         case MOSTRAR_AEROPUERTO_INORDEN:{
-                                mostrar_aeropuertos_inorden( );  //mostrar in orden
-
-                                break;
-        case MOSTRAR_AEROPUERTO_ABB:{
-                                mostrar_aeropuertos_abb( );  //mostrar abb
-
-                                break;
-                                }
+        case MOSTRAR_AEROPUERTO_ABB:
+            mostrarAeropuertosAbb();  //mostrar abb
+            break;
 
         case SALIR:
             cout << MSJ_FIN_PROGRAMA << endl;
@@ -70,15 +64,14 @@ void Programa::abrir_menu_interno(Lista<Aeropuertos*> &lista){
     }
 }
 
-
-void Programa:: mostrar_lista( Lista<Aeropuertos*> &lista ){
+void Programa::mostrarLista(Lista<Aeropuertos*> &lista){
 
     cout << endl << MSJ_AEROPUERTOS << endl;
 
-    if ( !lista.lista_vacia() ){
-        for ( int i = 1; i <= lista.obtener_tam(); i++ ){
+    if ( !lista.listaVacia() ){
+        for ( int i = 1; i <= lista.obtenerTam(); i++ ){
             cout << i  << ". " << endl;
-            lista.obtener_dato(i)->mostrar_aeropuertos();
+            lista.obtenerDato(i)->mostrarAeropuertos();
             cout << endl;
         }
     }

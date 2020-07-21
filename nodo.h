@@ -8,10 +8,10 @@
 
 class Nodo
 {
-    private
-        Aeropuertos  valor ;
-    Nodo* hijoIzquierda ;
-    Nodo* hijoDerecha ;
+    private:
+        Aeropuertos valor;
+	    Nodo* hijoIzquierda;
+	    Nodo* hijoDerecha;
 
 }
 

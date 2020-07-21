@@ -23,28 +23,27 @@ class Programa{
         //Descripcion:
         //PRE: -
         //Post: Muestra las opciones del menu
-        void mostrar_menu();
+        void mostrarMenu();
 
         //Descripcion:
         //PRE:
         //Post: Se ingresa por teclado una opcion del menu
-        void elegir_opcion();
+        void elegirOpcion();
 
         //Descripcion:
         //PRE:
         //Post:
-        void abrir_menu_interno(Lista<Dato> &lista );
+        void abrirMenuInterno(Lista<Dato> &lista );
 
         //Descripcion:
         //PRE:
         //Post:
-        char obtener_opcion();
+        char obtenerOpcion();
 
         //Descripcion: Muestra  lista completa
         //PRE: Ingresa una lista bien formada
         //Post: Muestra todos los elementos de dicha lista
-        void mostrar_lista_aeropuertos(Lista <Dato> &lista);
-
+        void mostrarListaAeropuertos(Lista <Dato> &lista);
 
 
 #endif // PROGRAMA_H_INCLUDED

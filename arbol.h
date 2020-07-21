@@ -3,11 +3,13 @@
 
 class Arbol
 {
-    private
-        Nodo* raiz ;
-    public
-        Arbol (Aeropuerto valor) // constructor
-        { this -> raiz = new Nodo (valor);
+    private:
+        Nodo* raiz;
+
+    public:
+    	// Constructor
+        Arbol(Aeropuerto valor){
+        	this->raiz = new Nodo (valor);
         }
 
 }
