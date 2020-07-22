@@ -97,6 +97,18 @@ void Aeropuerto::mostrarAeropuerto()
 	cout << "Cantidad de Destinos Internacionales: " << destinosInternacionales << endl;
 }
 
+ostream& operator<<(ostream& salida, Aeropuerto& aeropuerto)
+{
+	salida << endl << aeropuerto.getNombre() << endl;
+	salida << "Ciudad: " << aeropuerto.getCiudad() << endl;
+	salida << "Pais: " << aeropuerto.getPais() << endl;
+	salida << "Superficie: "<< aeropuerto.getSuperficie() << endl;
+	salida << "Cantidad de Terminales: " << aeropuerto.getCantidadTerminales() << endl;
+	salida << "Cantidad de Destinos Nacionales: " << aeropuerto.getDestinosNacionales() << endl;
+	salida << "Cantidad de Destinos Internacionales: " << aeropuerto.getDestinosInternacionales() << endl;
+    return salida;
+}
+
 
 
 

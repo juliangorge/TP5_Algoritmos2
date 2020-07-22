@@ -22,7 +22,7 @@ public:
 	Aeropuerto();
 
 	// POST: destruye un objeto Aeropuerto
-	virtual ~Aeropuerto(){};
+	virtual ~Aeropuerto();
 
 	// POST: setea el atributo nombre
 	void setNombre(string nombre);
@@ -37,40 +37,55 @@ public:
 	// POST: setea el atributo superficie
 	void setSuperficie(float superficie);
 
+	// PRE:
 	// POST: setea el atributo cantidadTerminales
 	void setCantidadTerminales(unsigned cantidadTerminales);
 
+	// PRE:
 	// POST: setea el atributo destinosNacionales
 	void setDestinosNacionales(unsigned destinosNacionales);
 
+	// PRE:
 	// POST: setea el atributo destinosInternacionales
 	void setDestinosInternacionales(unsigned destinosInternacionales);
 
+	// PRE:
 	// POST: devuelve el valor del atributo naombre
 	string getNombre();
 
+	// PRE:
 	// POST: devuelve el valor del atributo ciudad
 	string getCiudad();
 
+	// PRE:
 	// POST: devuelve el valor del atributo pais
 	string getPais();
 
+	// PRE:
 	// POST: devuelve el valor del atributo superficie
 	float getSuperficie();
 
+	// PRE:
 	// POST: devuelve el valor del atributo cantidadTerminales
 	unsigned getCantidadTerminales();
 
+	// PRE:
 	// POST: devuelve el valor del atributo destinosNacionales
 	unsigned getDestinosNacionales();
 
+	// PRE:
 	// POST: devuelve el valor del atributo destinosInternacionales
 	unsigned getDestinosInternacionales();
 
+	// PRE:
 	// POST: imprime un objeto Aeropuerto
 	void mostrarAeropuerto();
+
+	// PRE:
+	// POST: imprime un objeto Aeropuerto
+
 };
 
-
+ostream& operator<<(ostream& salida, Aeropuerto& aeropuerto);
 
 #endif /* TP5_ALGORITMOS2_AEROPUERTO_H_ */
