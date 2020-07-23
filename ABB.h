@@ -81,8 +81,8 @@ ABBNodo<Valor>* ABB<Valor>::insertar(ABBNodo<Valor>* nodo, Clave clave, Valor va
     	nodo = new ABBNodo<Valor>(clave, valor);
     }
 
-    else if (clave > nodo->get_clave()) {
-    	nodo->setHijoDerecho(insertar(nodo->getHijoDerechot(), clave, valor), nodo);
+    else if (clave > nodo->getClave()) {
+    	nodo->setHijoDerecho(insertar(nodo->getHijoDerecho(), clave, valor), nodo);
     }
 
     else {
@@ -106,7 +106,7 @@ void ABB<Valor>::imprimirInOrder(ABBNodo<Valor>* nodo)
     	imprimirInOrder(nodo->getHijoIzquierdo());
 
     	std::cout << std::endl << "Clave: "<< nodo->getClave() << std::endl;
-        std::cout<<nodo->getValor()<<std::endl;
+        std::cout<<*(nodo->getValor())<<std::endl;
 
         imprimirInOrder(nodo->getHijoDerecho());
     }

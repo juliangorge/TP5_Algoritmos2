@@ -107,7 +107,7 @@ ABBNodo<Valor>::ABBNodo(Clave clave, Valor valor)
 }
 
 template <class Valor>
-virtual ABBNodo<Valor>::~ABBNodo()
+ABBNodo<Valor>::~ABBNodo()
 {
 	delete valor;
 }
