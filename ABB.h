@@ -294,7 +294,7 @@ ABBNodo<Valor>* ABB<Valor>::remover(ABBNodo<Valor>* nodo, Clave clave)
             nodo->setValor(valorSucesor);
 
             // Delete the old successor's key
-            nodo->setHijoDerecho(remover(nodo->getHIjoDerecho(), claveSucesor));
+            nodo->setHijoDerecho(remover(nodo->getHijoDerecho(), claveSucesor));
         }
     }
 
@@ -331,21 +331,22 @@ void ABB<Valor>::borrarTodo(ABBNodo<Valor>* nodo)
 {
     if(nodo == NULL)
         return;
-    this->borrarTodo(nodo->getHijoIzquierdo());
-    this->borrarTodo(nodo->getHijoDerecho());
+    borrarTodo(nodo->getHijoIzquierdo());
+    borrarTodo(nodo->getHijoDerecho());
     delete nodo;
 }
 
 template <class Valor>
 void ABB<Valor>::borrarTodo()
 {
-    this->borrarTodo(this->raiz);
+    borrarTodo(this->raiz);
+    raiz = 0;
 }
 
 template <class Valor>
 ABB<Valor>::~ABB()
 {
-    this->borrarTodo();
+    borrarTodo();
 }
 
 
