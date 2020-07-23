@@ -350,4 +350,4 @@ ABB<Valor>::~ABB()
 }
 
 
-#endif //ABB_BST_H
+#endif //ABB_H

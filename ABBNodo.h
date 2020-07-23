@@ -1,5 +1,5 @@
-#ifndef ABB_BSTNODE_H
-#define ABB_BSTNODE_H
+#ifndef ABBNODO_H
+#define ABBNODO_H
 
 #include <iostream>
 
@@ -215,4 +215,4 @@ bool ABBNodo<Valor>::soloHijoIzquierdo()
     return (tieneHijoIzquierdo() && !tieneHijoDerecho());
 }
 
-#endif //ABB_BSTNODE_H
+#endif //ABBNODO_H
