@@ -6,7 +6,7 @@
 
 typedef std::string Clave;
 
-const Clave CLAVE_INVLIDA = "";
+const Clave CLAVE_INVALIDA = "";
 
 template <class Valor>
 class ABBNodo
@@ -22,6 +22,10 @@ public:
     //PRE:
     //POST: Crea un objeto ABBNodo, inicializando hijoIzquierdo, hijoDerecho y padre en 0
     ABBNodo(Clave clave, Valor valor);
+
+    //PRE:
+    //POST: destruye en objeto ABBNodo
+    virtual ~ABBNodo();
 
     //PRE:
     //POST: devuelve la clave del nodo
@@ -100,6 +104,12 @@ ABBNodo<Valor>::ABBNodo(Clave clave, Valor valor)
     this->hijoIzquierdo = 0;
     this->hijoDerecho = 0;
     this->padre = 0;
+}
+
+template <class Valor>
+virtual ABBNodo<Valor>::~ABBNodo()
+{
+	delete valor;
 }
 
 template <class Valor>
