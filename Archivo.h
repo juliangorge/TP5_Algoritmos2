@@ -27,7 +27,9 @@ Hacer una clase de lectura general que tenga 2 hijos uno para la lectura de los 
 #ifndef ARCHIVO_H
 #define ARCHIVO_H
 
-#include <string>
+#include <iostream>
+
+using namespace std;
 
 const string ARCHIVO_AEROPUERTOS = "aeropuertos.txt";
 const string ARCHIVO_VUELOS = "vuelos.txt";
@@ -43,7 +45,7 @@ class Archivo
         Archivo(string nombre);
 
         //Destructor
-        ~Archivo();
+        virtual ~Archivo();
 
         //PRE: -
         //POST: 
@@ -72,5 +74,5 @@ class ArchivoVuelos : public Archivo {
         // Instanciacion del metodo virtual puro de la clase Archivo
         void cargar();
 
-}
+};
 #endif // ARCHIVO_H
