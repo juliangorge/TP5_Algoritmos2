@@ -1,6 +1,6 @@
 #include "Archivo.h"
 
-#include "Aeropuertos.h"
+#include "Aeropuerto.h"
 #include "ABB.h"
 //#include "Grafo.h"
 //#include "Vuelos.h"
@@ -38,7 +38,7 @@ Archivo::ArchivoAeropuertos(){
 void ArchivoAeropuertos::cargar(){
 
 	ifstream archivo;
-	archivo.open(this->archivo);
+	archivo.open(this->nombre);
 
 	string codigoIATA;
 	string nombre;
@@ -71,7 +71,7 @@ void ArchivoAeropuertos::cargar(){
 void ArchivoVuelos::cargar(){
 
 	ifstream archivo;
-	archivo.open(this->archivo);
+	archivo.open(this->nombre);
 
 	string codigoIATApartida;
 	string codigoIATAdestino;
