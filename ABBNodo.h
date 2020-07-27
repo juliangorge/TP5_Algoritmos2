@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-
 typedef std::string Clave;
 
 const Clave CLAVE_INVALIDA = "";
