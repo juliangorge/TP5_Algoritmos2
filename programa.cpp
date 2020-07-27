@@ -1,5 +1,8 @@
 #include "Programa.h"
 
+const string MSJ_RANGO_MENU = "\tOpcion invalida, por favor elija una opcion del menu [0-5]\n";
+
+
 Programa::Programa() {
 
 }
@@ -30,39 +33,40 @@ void Programa:: elegirOpcion(){
 - mostrar todos los aeropuertos (recorrido in orden)
 - mostrar los aeropuertos conservando el formato del ABB*/
 
-void Programa::abrirMenuInterno(Lista<Aeropuertos*> &lista){
+void Programa:: abrirMenuInterno(Lista<Aeropuertos*> &lista){
 
-    switch(opcion){
-        case CONSULTAR_AEROPUERTO:
-            cout << " ingrese aeropuerto que desea consultar (? " <<endl;
-            cin >> dato;
-            mostrarAeropuerto(dato);
-            break;
+    switch( opcion ){
+                    case CONSULTAR_AEROPUERTO:
+                                                cout << " ingrese aeropuerto que desea consultar (? " <<endl;
+                                                cin >> dato;
+                                                mostrarAeropuerto(dato) ;
+                                                break;
 
-        case ALTA_AEROPUERTO:
-            altaAeropuerto(dato);
-            break;
+                    case ALTA_AEROPUERTO:
+                                            altaAeropuerto(dato) ;
+                                            break;
 
-        case BAJA_AEROPUERTO:
-            bajaAeropuerto(dato);
-            break;
+                    case BAJA_AEROPUERTO:
+                                            bajaAeropuerto(dato) ;
+                                            break;
 
-        case MOSTRAR_AEROPUERTO_INORDEN:
-            mostrarAeropuertosInorden( );  //mostrar in orden
-            break;
+                    case MOSTRAR_AEROPUERTO_INORDEN:
+                                                        mostrarAeropuertosInorden( ) ;  //mostrar in orden
+                                                        break;
 
-        case MOSTRAR_AEROPUERTO_ABB:
-            mostrarAeropuertosAbb();  //mostrar abb
-            break;
+                    case MOSTRAR_AEROPUERTO_ABB:
+                                                    mostrarAeropuertosAbb() ;  //mostrar abb
+                                                    break;
 
-        case SALIR:
-            cout << MSJ_FIN_PROGRAMA << endl;
-            return;
+                    case SALIR:
+                                cout << MSJ_FIN_PROGRAMA << endl ;
+                                return;
 
-        default:
-            cout << "\tOpcion invalida, por favor elija una opcion del menu [0-5]\n";
+                    default:
+                                cout << MSJ_RANGO_MENU << endl ;
     }
 }
+
 
 void Programa::mostrarLista(Lista<Aeropuertos*> &lista){
 
