@@ -1,8 +1,9 @@
 #include "Archivo.h"
 
+#include <fstream>
 #include "ABB.h"
 #include "Grafo.h"
-#include "Aeropuertos.h"
+#include "Aeropuerto.h"
 #include "Vuelos.h"
 
 using namespace std;
@@ -35,7 +36,7 @@ void Archivo::abrirLectura()
 void ArchivoAeropuertos::cargar(){
 
 	ifstream archivo;
-	archivo.open(this->archivo);
+	archivo.open(this->nombre);
 
 	string codigoIATA; //char codigoIATA[3];
 	string nombre;
