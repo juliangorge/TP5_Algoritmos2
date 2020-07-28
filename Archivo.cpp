@@ -19,10 +19,10 @@ Archivo::~Archivo()
 
 void Archivo::abrirLectura()
 {
-	if(this->nombre == 'aeropuertos.txt'){
+	if(this->nombre == ARCHIVO_AEROPUERTOS){
 		ArchivoAeropuertos aeropuerto;
 		aeropuerto.cargar();
-	}else if(this->nombre == 'vuelos.txt'){
+	}else if(this->nombre == ARCHIVO_VUELOS){
 		ArchivoVuelos vuelos;
 		vuelos.cargar();
 	}else{
@@ -31,14 +31,23 @@ void Archivo::abrirLectura()
 	return 0;
 }
 
-Archivo::ArchivoAeropuertos(){
+ArchivoAeropuertos::ArchivoAeropuertos(){
 	ABB<int>* arbol = new ABB<int>();
+}
+
+ArchivoAeropuertos::~ArchivoAeropuertos()
+{
+
 }
 
 void ArchivoAeropuertos::cargar(){
 
 	ifstream archivo;
-	archivo.open(this->nombre);
+	archivo.open(ARCHIVO_AEROPUERTOS);
+
+	if(archivo.fail()){
+		throw ExcepcionLectura(ARCHIVO_AEROPUERTOS);
+    }
 
 	string codigoIATA;
 	string nombre;
@@ -68,10 +77,22 @@ void ArchivoAeropuertos::cargar(){
 
 }
 
+ArchivoAeropuertos::ArchivoVuelos(){
+}
+
+ArchivoVuelos::~ArchivoVuelos()
+{
+
+}
+
 void ArchivoVuelos::cargar(){
 
 	ifstream archivo;
-	archivo.open(this->nombre);
+	archivo.open(ARCHIVO_VUELOS);
+
+	if(archivo.fail()){
+		throw ExcepcionLectura(ARCHIVO_VUELOS);
+    }
 
 	string codigoIATApartida;
 	string codigoIATAdestino;
@@ -86,7 +107,7 @@ void ArchivoVuelos::cargar(){
 
 		// Falta grafo
 		// Se genera el grafo y se insertan los datos del archivo
-    	//Vuelos* vuelo = new Vuelo(codigoIATApartida, codigoIATAdestino, costo, horas);
+    	//vuelo = new Vuelo(codigoIATApartida, codigoIATAdestino, costo, horas);
 		//int indice_partida = grafo.getIndice(codigoIATApartida);
 		//int indice_destino = grafo.getIndice(codigoIATAdestino);
 		//grafo.agregarViaje(indice_partida, indice_destino, costo_vuelo);
