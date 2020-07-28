@@ -44,7 +44,7 @@ void ArchivoAeropuertos::cargar(){
 	archivo.open(ARCHIVO_AEROPUERTOS);
 
 	if(archivo.fail()){
-		throw ExcepcionLectura(ARCHIVO_AEROPUERTOS);
+		throw ExcepcionArchivo(ARCHIVO_AEROPUERTOS);
     }
 
 	string codigoIATA;
@@ -85,7 +85,7 @@ void ArchivoVuelos::cargar(){
 	archivo.open(ARCHIVO_VUELOS);
 
 	if(archivo.fail()){
-		throw ExcepcionLectura(ARCHIVO_VUELOS);
+		throw ExcepcionArchivo(ARCHIVO_VUELOS);
     }
 
 	string codigoIATApartida;
