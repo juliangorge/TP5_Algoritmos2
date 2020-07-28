@@ -4,6 +4,7 @@
 #include "ABB.h"
 //#include "Grafo.h"
 //#include "Vuelos.h"
+#include "ExcepcionArchivo.h"
 
 using namespace std;
 
@@ -19,10 +20,10 @@ Archivo::~Archivo()
 
 void Archivo::abrirLectura()
 {
-	if(this->nombre == 'aeropuertos.txt'){
+	if(this->nombre == ARCHIVO_AEROPUERTOS){
 		ArchivoAeropuertos aeropuerto;
 		aeropuerto.cargar();
-	}else if(this->nombre == 'vuelos.txt'){
+	}else if(this->nombre == ARCHIVO_VUELOS){
 		ArchivoVuelos vuelos;
 		vuelos.cargar();
 	}else{
@@ -31,16 +32,22 @@ void Archivo::abrirLectura()
 	return 0;
 }
 
-Archivo::ArchivoAeropuertos(){
+ArchivoAeropuertos::ArchivoAeropuertos(){
 	ABB<int>* arbol = new ABB<int>();
 }
+
+ArchivoAeropuertos::~ArchivoAeropuertos(){}
 
 void ArchivoAeropuertos::cargar(){
 
 	ifstream archivo;
-	archivo.open(this->nombre);
+	archivo.open(ARCHIVO_AEROPUERTOS);
 
-	string codigoIATA;
+	if(archivo.fail()){
+		throw ExcepcionArchivo(ARCHIVO_AEROPUERTOS);
+    }
+
+	string iata;
 	string nombre;
 	string ciudad;
 	string pais;
@@ -50,7 +57,7 @@ void ArchivoAeropuertos::cargar(){
 	int destinosInternacionales;
 
 	while(!archivo.eof()){
-		getline(archivo, codigoIATA);
+		getline(archivo, iata);
 		getline(archivo, nombre);
 		getline(archivo, ciudad);
 		getline(archivo, pais);
@@ -60,36 +67,44 @@ void ArchivoAeropuertos::cargar(){
 		getline(archivo, destinosInternacionales);
 
 		// Se crea el arbol y se insertan los datos del archivo
-    	Aeropuerto* aeropuerto = new Aeropuerto(codigoIATA, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
-    	arbol->insertar(codigoIATA, aeropuerto);
+    	Aeropuerto* aeropuerto = new Aeropuerto(iata, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
+    	arbol->insertar(iata, aeropuerto);
 	}
 
 	archivo.close();
 
 }
 
+ArchivoAeropuertos::ArchivoVuelos(){}
+
+ArchivoVuelos::~ArchivoVuelos(){}
+
 void ArchivoVuelos::cargar(){
 
 	ifstream archivo;
-	archivo.open(this->nombre);
+	archivo.open(ARCHIVO_VUELOS);
 
-	string codigoIATApartida;
-	string codigoIATAdestino;
+	if(archivo.fail()){
+		throw ExcepcionArchivo(ARCHIVO_VUELOS);
+    }
+
+	string iataPartida;
+	string iataDestino;
 	float costo;
 	float horas;
 
 	while(!archivo.eof()){
-		getline(archivo, codigoIATApartida);
-		getline(archivo, codigoIATAdestino);
+		getline(archivo, iataPartida);
+		getline(archivo, iataDestino);
 		getline(archivo, costo);
 		getline(archivo, horas);
 
 		// Falta grafo
 		// Se genera el grafo y se insertan los datos del archivo
-    	//Vuelos* vuelo = new Vuelo(codigoIATApartida, codigoIATAdestino, costo, horas);
-		//int indice_partida = grafo.getIndice(codigoIATApartida);
-		//int indice_destino = grafo.getIndice(codigoIATAdestino);
-		//grafo.agregarViaje(indice_partida, indice_destino, costo_vuelo);
+    	vuelo = new Vuelo(iataPartida, iataDestino, costo, horas);
+		//int indice_partida = grafo.getIndice(iataPartida);
+		//int indice_destino = grafo.getIndice(iataDestino);
+		//grafo.insertar(indice_partida, indice_destino, costo_vuelo);
 	}
 
 	archivo.close();
