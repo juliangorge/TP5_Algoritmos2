@@ -2,7 +2,7 @@
 #define ARCHIVO_H
 
 #include <string>
-#include "Aeropuertos.h"
+#include "Aeropuerto.h"
 #include "ABB.h"
 //#include "Grafo.h"
 //#include "Vuelos.h"
@@ -21,7 +21,7 @@ class Archivo
         Archivo(string nombre);
 
         //Destructor
-        ~Archivo();
+        virtual ~Archivo();
 
         //PRE: -
         //POST: 
@@ -36,7 +36,7 @@ class Archivo
 class ArchivoAeropuertos : public Archivo {
 
     private: 
-        ABB<Aeropuerto>* arbol;
+        ABB<Aeropuerto*>* arbol;
 
     public:
 
@@ -68,5 +68,5 @@ class ArchivoVuelos : public Archivo {
         // Instanciacion del metodo virtual puro de la clase Archivo
         void cargar();
 
-}
+};
 #endif // ARCHIVO_H
