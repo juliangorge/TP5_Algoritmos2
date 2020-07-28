@@ -11,8 +11,8 @@ template <class Valor>
 class ABBNodo
 {
 private:
-    Clave clave;
-    Valor valor;
+	Clave clave;
+	Valor valor;
     ABBNodo<Valor>* hijoIzquierdo;
     ABBNodo<Valor>* hijoDerecho;
     ABBNodo<Valor>* padre;

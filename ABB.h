@@ -1,8 +1,11 @@
-#include "ABBNodo.h"
-#include<iostream>
-
 #ifndef ABB_H
 #define ABB_H
+
+#include "ABBNodo.h"
+#include "Cola.h"
+#include<iostream>
+
+using namespace std;
 
 template <class Valor>
 class ABB
@@ -13,14 +16,16 @@ private:
 
     // methods
     ABBNodo<Valor>* insertar(ABBNodo<Valor>* nodo, Clave clave, Valor valor);
-    void imprimirInOrder(ABBNodo<Valor> * node);
-    ABBNodo<Valor>* buscar(ABBNodo<Valor>* node, Clave clave);
-    Clave encontrarMinimo(ABBNodo<Valor>* node);
-    Clave encontrarMaximo(ABBNodo<Valor>* node);
-    Clave sucesor(ABBNodo<Valor>* node);
-    Clave predecesor(ABBNodo<Valor>* node);
-    ABBNodo<Valor>* remover(ABBNodo<Valor>* node, Clave clave);
-    void borrarTodo(ABBNodo<Valor>* node);
+    void imprimirInOrder(ABBNodo<Valor> * nodo);
+    void armarColaPrioritaria(ABBNodo<Valor> * nodo, Cola<string*> colaDePrioridad[], unsigned prioridad);
+    ABBNodo<Valor>* buscar(ABBNodo<Valor>* nodo, Clave clave);
+    Clave encontrarMinimo(ABBNodo<Valor>* nodo);
+    Clave encontrarMaximo(ABBNodo<Valor>* nodo);
+    Clave sucesor(ABBNodo<Valor>* nodo);
+    Clave predecesor(ABBNodo<Valor>* nodo);
+    unsigned altura(ABBNodo<Valor>* nodo);
+    ABBNodo<Valor>* remover(ABBNodo<Valor>* nodo, Clave clave);
+    void borrarTodo(ABBNodo<Valor>* nodo);
 
 public:
     //methods
@@ -35,6 +40,11 @@ public:
     // Prints all the data stored in the BST, sorted from the
     // smallest value to the greatest value.
     void imprimirInOrder();
+
+    // Prints all the data stored in the BST, sorted from the
+    // smallest value to the greatest value.
+    void imprimirEnAnchura();
+
 
     // Finds a given value in the BST. If the key exists it returns
     // TRUE, otherwise it returns FALSE.
@@ -53,6 +63,9 @@ public:
 
     // Finds the predecessor of a given data value.
     Clave predecesor(Clave clave);
+
+    // POST: devuelve la altura del arbol
+    unsigned altura();
 
     // Removes a given data from the BST
     void remover(Clave clave);
@@ -105,8 +118,8 @@ void ABB<Valor>::imprimirInOrder(ABBNodo<Valor>* nodo)
     {
     	imprimirInOrder(nodo->getHijoIzquierdo());
 
-    	std::cout << std::endl << "Clave: "<< nodo->getClave() << std::endl;
-        std::cout<<*(nodo->getValor())<<std::endl;
+    	cout << endl << "Clave: "<< nodo->getClave() << endl;
+        cout<<*(nodo->getValor())<<endl;
 
         imprimirInOrder(nodo->getHijoDerecho());
     }
@@ -116,6 +129,42 @@ template <class Valor>
 void ABB<Valor>::imprimirInOrder()
 {
     this->imprimirInOrder(this->raiz);
+}
+
+template <class Valor>
+void ABB<Valor>::armarColaPrioritaria(ABBNodo<Valor> * nodo, Cola<string*>* colaDePrioridad, unsigned prioridad)
+{
+	if(nodo != 0)
+	{
+		string* aux = new string;
+		*aux = nodo->getClave();
+		colaDePrioridad[prioridad].insertar(aux);
+		armarColaPrioritaria(nodo->getHijoIzquierdo(), colaDePrioridad, prioridad+1);
+		armarColaPrioritaria(nodo->getHijoDerecho(), colaDePrioridad, prioridad+1);
+	}
+}
+
+template <class Valor>
+void ABB<Valor>::imprimirEnAnchura()
+{
+	unsigned alturaArbol = altura();
+	if(alturaArbol != 0)
+	{
+		Cola<string*>* colaDePrioridad = new Cola<string*>[alturaArbol];
+		string *aux;
+		armarColaPrioritaria(this->raiz, colaDePrioridad, 0);
+		for(unsigned i = 0; i < alturaArbol; i++)
+		{
+			while(!colaDePrioridad[i].colaVacia())
+			{
+				aux = (colaDePrioridad[i].bajaDato());
+				cout << *aux << " ";
+				delete aux;
+			}
+			cout << endl;
+		}
+		delete [] colaDePrioridad;
+	}
 }
 
 template <class Valor>
@@ -250,6 +299,24 @@ Clave ABB<Valor>::predecesor(Clave clave)
     if(claveNodo == 0)
         return CLAVE_INVALIDA;
     else return predecesor(claveNodo);
+}
+
+template <class Valor>
+unsigned ABB<Valor>::altura(ABBNodo<Valor>* nodo)
+{
+	if(nodo == 0)
+		return 0;
+	unsigned aux1 = altura(nodo->getHijoIzquierdo());
+	unsigned aux2 = altura(nodo->getHijoDerecho());
+	if(aux1>aux2)
+		return aux1+1;
+	return aux2+1;
+}
+
+template <class Valor>
+unsigned ABB<Valor>::altura()
+{
+	return altura(this->raiz);
 }
 
 template <class Valor>
