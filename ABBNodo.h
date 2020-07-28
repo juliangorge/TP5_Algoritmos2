@@ -108,7 +108,8 @@ ABBNodo<Valor>::ABBNodo(Clave clave, Valor valor)
 template <class Valor>
 ABBNodo<Valor>::~ABBNodo()
 {
-	delete valor;
+	if (valor != 0)
+		delete valor;
 }
 
 template <class Valor>

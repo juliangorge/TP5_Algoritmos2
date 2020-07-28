@@ -52,6 +52,8 @@ public:
 
     Valor obtenerValor(Clave clave);
 
+    void cambiarValor(Clave clave, Valor valor);
+
     // Finds the minimum value that exist in the BST.
     Clave encontrarMinimo();
 
@@ -198,6 +200,14 @@ Valor ABB<Valor>::obtenerValor(Clave clave)
 }
 
 template <class Valor>
+void ABB<Valor>::cambiarValor(Clave clave, Valor valor)
+{
+	ABBNodo<Valor>* resultado = buscar(this->raiz, clave);
+	if(resultado != 0)
+			resultado->setValor(valor);
+}
+
+template <class Valor>
 Clave ABB<Valor>::encontrarMinimo(ABBNodo<Valor>* nodo)
 {
     if(nodo == 0)
@@ -329,7 +339,10 @@ ABBNodo<Valor>* ABB<Valor>::remover(ABBNodo<Valor>* nodo, Clave clave)
     if (nodo->getClave() == clave)
     {
         if (nodo->esHoja())
+        {
             delete nodo;
+        	return 0;
+        }
         else if (nodo->soloHijoDerecho())
         {
             // The only child will be connected to the parent's of node directly
@@ -355,6 +368,8 @@ ABBNodo<Valor>* ABB<Valor>::remover(ABBNodo<Valor>* nodo, Clave clave)
             // Find successor or predecessor to avoid quarrel
             Clave claveSucesor = this->sucesor(clave);
             Valor valorSucesor = obtenerValor(claveSucesor);
+            // cambio el valor para evitar borrar el valor del nodo
+            cambiarValor(claveSucesor, 0);
 
             // Replace node's key with successor's key
             nodo->setClave(claveSucesor);
