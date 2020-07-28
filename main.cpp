@@ -4,28 +4,63 @@
 
 using namespace std;
 
-const string RUTA = "aeropuertos.txt" ;
+//const string RUTA = "aeropuertos.txt" ;
+const string RUTA_AEROPUERTOS = "aeropuertos.txt";   //copie lo q habias hecho en archivo julian aca
+const string RUTA_VUELOS = "vuelos.txt";
+
 const int SALIR = 0 ;
 
 
 int main (int argc, char *argv [] ){
 
-    Archivo archivoAeropuertos( RUTA ) ;
-   // Lista <Dato> listaAeropuertos ;
-    archivoAeropuertos.abrirLectura();
+    Archivo archivoAeropuertos( RUTA_AEROPUERTOS ) ;
+    ABB<Aeropuerto*>* arbol;
 
-    Programa programa();
+    Archivo archivoVuelos( RUTA_VUELOS ) ;
+    Grafo<Vuelo>* grafo;
 
-    do{
-      programa.mostrar_menu() ;
-      programa.elegir_opcion() ;
-      programa.abrir_menu_interno( listaAeropuertos ) ;
+
+    try{
+        if ( !archivoAeropuertos.estadoDeArchivo() )
+            throw ExcepcionEnArchivo();
+        else{
+            archivoAeropuertos.cargar( arbol );
+
+        }
     }
-    while ( programa.obtener_opcion() != SALIR ) ;
+    catch( ExcepcionEnArchivo& e ){
+        cout << e.excepcionAeropuertos() << endl;
+    }
+
+    try {
+        if ( !archivoVuelos.estadoDeArchivo() )
+            throw ExcepcionEnArchivo();
+
+        else{
+
+            archivoVuelos.cargar( grafo );
+            Programa programa;
+
+            do{
+                programa.mostrar_menu();
+                programa.elegir_opcion();
+                programa.abrirMenuInterno(grafo, arbol);
+            } while ( programa.obtener_opcion() != SALIR );
+
+
+            }
+        }
+    }
+    catch ( ExcepcionEnArchivo& l ){
+        cout << l.excepcionVuelos() << endl;
+    }
+    return 0 ;
+}
+
+
+/*
 
     for ( int i = 0 ; i < listaAeropuertos.obtener_tam() ; ++i ) {
       delete listaAeropuertos.obtener_dato(i) ;
     }
-
-    return 0 ;
-}
+*/

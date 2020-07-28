@@ -71,7 +71,7 @@ void Programa:: abrirMenuInterno(Lista<Aeropuertos*> &lista){
     }
 }
 
-
+/*
 void Programa::mostrarLista(Lista<Aeropuertos*> &lista){
 
     cout << endl << MSJ_AEROPUERTOS << endl;
@@ -83,4 +83,4 @@ void Programa::mostrarLista(Lista<Aeropuertos*> &lista){
             cout << endl;
         }
     }
-}
+}*/

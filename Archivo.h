@@ -1,47 +1,66 @@
 #ifndef ARCHIVO_H
 #define ARCHIVO_H
 
+#include <fstream>
 #include <string>
 #include "Aeropuerto.h"
 #include "ABB.h"
 //#include "Grafo.h"
 //#include "Vuelos.h"
 
-const string ARCHIVO_AEROPUERTOS = "aeropuertos.txt";
-const string ARCHIVO_VUELOS = "vuelos.txt";
+//const string ARCHIVO_AEROPUERTOS = "aeropuertos.txt";
+//const string ARCHIVO_VUELOS = "vuelos.txt";
 
 class Archivo
 {
     private:
-        string nombre;
+        ifstream archivo;
+        bool archivoAbierto;
 
     public:
 
         //Constructor
-        Archivo(string nombre);
+        Archivo(string ruta);
 
         //Destructor
-        virtual ~Archivo();
+        ~Archivo();
+
+        void cerrarArchivo();
+
+        // PRE: -
+        // POST: Si el archivo esta abierto devuelve true
+        bool estadoDeArchivo();
+
+        // PRE: El archivo se encontraba abierto
+        // POST: si se llego al final del archivo devuelve true
+        bool finalArchivo();
+
+        // PRE: ingresa string valido
+        // POST: Devuelve true si el archivo existe
+        bool existenciaDeArchivo(string ruta);
+
+        // PRE: -
+        // POST: Carga los datos del archivo en el arbol
+        void cargar(ABB<Aeropuerto*>* arbol) ;
+
+        void cargar(Grafo<Vuelo>* grafo) ;
 
         //PRE: -
-        //POST:
+        /*//POST:
         void abrirLectura();
 
         //PRE: -
         //POST:
-        virtual void cargar() = 0;
+      //  virtual void cargar() = 0;
 
 };
 
 class ArchivoAeropuertos : public Archivo {
 
-<<<<<<< HEAD
+
     private:
-        ABB<Aeropuerto>* arbol;
-=======
-    private: 
         ABB<Aeropuerto*>* arbol;
->>>>>>> b0d86ddde88954fad5e6186859d950719b643313
+
 
     public:
 
@@ -52,7 +71,7 @@ class ArchivoAeropuertos : public Archivo {
         ~ArchivoAeropuertos();
 
         // Instanciacion del metodo virtual puro de la clase Archivo
-        void cargar();
+        cargar( ABB<int>* arbol);
 
 };
 
@@ -73,5 +92,5 @@ class ArchivoVuelos : public Archivo {
         // Instanciacion del metodo virtual puro de la clase Archivo
         void cargar();
 
-};
+}; */
 #endif // ARCHIVO_H
