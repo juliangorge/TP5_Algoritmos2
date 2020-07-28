@@ -2,7 +2,7 @@
 #define ARCHIVO_H
 
 #include <string>
-#include "Aeropuertos.h"
+#include "Aeropuerto.h"
 #include "ABB.h"
 //#include "Grafo.h"
 //#include "Vuelos.h"
@@ -24,18 +24,18 @@ class Archivo
         ~Archivo();
 
         //PRE: -
-        //POST: 
+        //POST:
         void abrirLectura();
 
         //PRE: -
-        //POST: 
+        //POST:
         virtual void cargar() = 0;
 
 };
 
 class ArchivoAeropuertos : public Archivo {
 
-    private: 
+    private:
         ABB<Aeropuerto>* arbol;
 
     public:
@@ -54,7 +54,7 @@ class ArchivoAeropuertos : public Archivo {
 
 class ArchivoVuelos : public Archivo {
 
-    private: 
+    private:
         Grafo<Vuelo>* grafo;
 
     public:

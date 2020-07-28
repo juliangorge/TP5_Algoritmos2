@@ -1,4 +1,8 @@
 #include "Programa.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 const string MSJ_RANGO_MENU = "\tOpcion invalida, por favor elija una opcion del menu [0-5]\n";
 
@@ -39,23 +43,23 @@ void Programa:: abrirMenuInterno(Lista<Aeropuertos*> &lista){
                     case CONSULTAR_AEROPUERTO:
                                                 cout << " ingrese aeropuerto que desea consultar (? " <<endl;
                                                 cin >> dato;
-                                                mostrarAeropuerto(dato) ;
+                                 //               mostrarAeropuerto(dato) ;
                                                 break;
 
                     case ALTA_AEROPUERTO:
-                                            altaAeropuerto(dato) ;
+                                   //         altaAeropuerto(dato) ;
                                             break;
 
                     case BAJA_AEROPUERTO:
-                                            bajaAeropuerto(dato) ;
+                                    //        bajaAeropuerto(dato) ;
                                             break;
 
                     case MOSTRAR_AEROPUERTO_INORDEN:
-                                                        mostrarAeropuertosInorden( ) ;  //mostrar in orden
+                                              //          mostrarAeropuertosInorden( ) ;  //mostrar in orden
                                                         break;
 
                     case MOSTRAR_AEROPUERTO_ABB:
-                                                    mostrarAeropuertosAbb() ;  //mostrar abb
+                                           //         mostrarAeropuertosAbb() ;  //mostrar abb
                                                     break;
 
                     case SALIR:

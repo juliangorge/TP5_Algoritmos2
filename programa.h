@@ -1,6 +1,7 @@
 #ifndef PROGRAMA_H_INCLUDED
 #define PROGRAMA_H_INCLUDED
 
+
 const string MSJ_OPCION = "\n\tIngrese la opcion que desea: ";
 const string MSJ_PELICULAS = "\t******** Aeropuertos ********  ";
 const string MSJ_FIN_PROGRAMA = "Fin del programa";

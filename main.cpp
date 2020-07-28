@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Programa.h"
-#include "LeerArchivo.h"
+#include "Archivo.h"
 
 using namespace std;
 
@@ -10,9 +10,9 @@ const int SALIR = 0 ;
 
 int main (int argc, char *argv [] ){
 
-    LeerArchivo archivoAeropuertos( RUTA ) ;
-    Lista <Dato> listaAeropuertos ;
-    archivoAeropuertos(listaAeropuertos) ;
+    Archivo archivoAeropuertos( RUTA ) ;
+   // Lista <Dato> listaAeropuertos ;
+    archivoAeropuertos.abrirLectura();
 
     Programa programa();
 
