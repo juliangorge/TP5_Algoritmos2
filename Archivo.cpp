@@ -4,6 +4,7 @@
 #include "ABB.h"
 //#include "Grafo.h"
 //#include "Vuelos.h"
+#include "ExcepcionArchivo.h"
 
 using namespace std;
 
@@ -35,10 +36,7 @@ ArchivoAeropuertos::ArchivoAeropuertos(){
 	ABB<int>* arbol = new ABB<int>();
 }
 
-ArchivoAeropuertos::~ArchivoAeropuertos()
-{
-
-}
+ArchivoAeropuertos::~ArchivoAeropuertos(){}
 
 void ArchivoAeropuertos::cargar(){
 
@@ -77,13 +75,9 @@ void ArchivoAeropuertos::cargar(){
 
 }
 
-ArchivoAeropuertos::ArchivoVuelos(){
-}
+ArchivoAeropuertos::ArchivoVuelos(){}
 
-ArchivoVuelos::~ArchivoVuelos()
-{
-
-}
+ArchivoVuelos::~ArchivoVuelos(){}
 
 void ArchivoVuelos::cargar(){
 
