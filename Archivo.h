@@ -21,7 +21,7 @@ class Archivo
         Archivo(string nombre);
 
         //Destructor
-        ~Archivo();
+        virtual ~Archivo();
 
         //PRE: -
         //POST:
@@ -35,8 +35,13 @@ class Archivo
 
 class ArchivoAeropuertos : public Archivo {
 
+<<<<<<< HEAD
     private:
         ABB<Aeropuerto>* arbol;
+=======
+    private: 
+        ABB<Aeropuerto*>* arbol;
+>>>>>>> b0d86ddde88954fad5e6186859d950719b643313
 
     public:
 
@@ -68,5 +73,5 @@ class ArchivoVuelos : public Archivo {
         // Instanciacion del metodo virtual puro de la clase Archivo
         void cargar();
 
-}
+};
 #endif // ARCHIVO_H
