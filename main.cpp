@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Programa.h"
 #include "Archivo.h"
+#include "excepcionEnArchivo.h"
 
 using namespace std;
 
