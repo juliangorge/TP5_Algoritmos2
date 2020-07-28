@@ -47,7 +47,7 @@ void ArchivoAeropuertos::cargar(){
 		throw ExcepcionArchivo(ARCHIVO_AEROPUERTOS);
     }
 
-	string codigoIATA;
+	string iata;
 	string nombre;
 	string ciudad;
 	string pais;
@@ -57,7 +57,7 @@ void ArchivoAeropuertos::cargar(){
 	int destinosInternacionales;
 
 	while(!archivo.eof()){
-		getline(archivo, codigoIATA);
+		getline(archivo, iata);
 		getline(archivo, nombre);
 		getline(archivo, ciudad);
 		getline(archivo, pais);
@@ -67,8 +67,8 @@ void ArchivoAeropuertos::cargar(){
 		getline(archivo, destinosInternacionales);
 
 		// Se crea el arbol y se insertan los datos del archivo
-    	Aeropuerto* aeropuerto = new Aeropuerto(codigoIATA, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
-    	arbol->insertar(codigoIATA, aeropuerto);
+    	Aeropuerto* aeropuerto = new Aeropuerto(iata, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
+    	arbol->insertar(iata, aeropuerto);
 	}
 
 	archivo.close();
@@ -88,23 +88,23 @@ void ArchivoVuelos::cargar(){
 		throw ExcepcionArchivo(ARCHIVO_VUELOS);
     }
 
-	string codigoIATApartida;
-	string codigoIATAdestino;
+	string iataPartida;
+	string iataDestino;
 	float costo;
 	float horas;
 
 	while(!archivo.eof()){
-		getline(archivo, codigoIATApartida);
-		getline(archivo, codigoIATAdestino);
+		getline(archivo, iataPartida);
+		getline(archivo, iataDestino);
 		getline(archivo, costo);
 		getline(archivo, horas);
 
 		// Falta grafo
 		// Se genera el grafo y se insertan los datos del archivo
-    	//vuelo = new Vuelo(codigoIATApartida, codigoIATAdestino, costo, horas);
-		//int indice_partida = grafo.getIndice(codigoIATApartida);
-		//int indice_destino = grafo.getIndice(codigoIATAdestino);
-		//grafo.agregarViaje(indice_partida, indice_destino, costo_vuelo);
+    	vuelo = new Vuelo(iataPartida, iataDestino, costo, horas);
+		//int indice_partida = grafo.getIndice(iataPartida);
+		//int indice_destino = grafo.getIndice(iataDestino);
+		//grafo.insertar(indice_partida, indice_destino, costo_vuelo);
 	}
 
 	archivo.close();
