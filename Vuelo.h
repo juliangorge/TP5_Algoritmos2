@@ -19,7 +19,7 @@ public:
 	Vuelo();
 
 	// POST: destruye un objeto Vuelo
-	virtual ~Vuelo();
+	~Vuelo();
 
 	// POST: setea el atributo partida
 	void setPartida(string partida);
@@ -53,7 +53,7 @@ public:
 
 	// PRE:
 	// POST: imprime un objeto Vuelo
-	void mostrarVuelo();
+	void mostrar();
 };
 
 ostream& operator<<(ostream& salida, Vuelo& vuelo);

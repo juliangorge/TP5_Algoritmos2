@@ -53,7 +53,7 @@ float Vuelo::getHoras()
 	return horas;
 }
 
-void Vuelo::mostrarVuelo()
+void Vuelo::mostrar()
 {
 	cout << "Partida: " << partida << endl;
 	cout << "Destino: " << destino << endl;
