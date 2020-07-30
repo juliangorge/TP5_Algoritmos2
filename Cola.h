@@ -1,7 +1,7 @@
 #ifndef ARBOL_H_INCLUDED
 #define ARBOL_H_INCLUDED
 
-#include "ColaNodo.h"
+#include "NodoLista.h"
 
 #include<iostream>
 
@@ -13,10 +13,10 @@ class Cola
     private:
 
         // Primer elemento de la lista
-		ColaNodo<Dato>* primero;
+		Nodo<Dato>* primero;
 
 		// ultimo elemento de la lista
-		ColaNodo<Dato>* ultimo;
+		Nodo<Dato>* ultimo;
 
         // Tamaño de la lista
         unsigned tam;
@@ -108,7 +108,7 @@ bool Cola<Dato>::colaVacia()
 template<class Dato>
 void Cola<Dato>::insertar(Dato d)
  {
-	ColaNodo<Dato>* pnodo = new ColaNodo<Dato>(d);
+	Nodo<Dato>* pnodo = new Nodo<Dato>(d);
     if(this->colaVacia()){
         primero = pnodo;
         ultimo = pnodo;
@@ -147,7 +147,7 @@ void Cola<Dato>::delDato()
 {
 	if(!this->colaVacia())
 	{
-		ColaNodo<Dato>* paux = primero;
+		Nodo<Dato>* paux = primero;
 		primero = primero->getSiguiente();
 		tam--;
 		delete paux;
@@ -182,7 +182,7 @@ void Cola<Dato>::vaciarLista(bool borrarDatos)
 template<class Dato>
 Cola<Dato>& Cola<Dato>::operator+(Cola<Dato>& colaACopiar)
 {
-	ColaNodo<Dato>* paux = colaACopiar.primero;
+	Nodo<Dato>* paux = colaACopiar.primero;
 	Dato d;
 	while(paux != 0)
 	{
