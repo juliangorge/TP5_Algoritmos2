@@ -1,21 +1,20 @@
-#include "Programa.h"
-#include <iostream>
-#include <string>
+#include "programa.h"
 
-using namespace std;
 
 const string MSJ_RANGO_MENU = "\tOpcion invalida, por favor elija una opcion del menu [0-5]\n";
 
 
-Programa::Programa() {
+Programa::Programa()
+{
 
 }
 
-char Programa:: obtenerOpcion() {
+char Programa::obtenerOpcion()
+{
     return opcion;
 }
 
-void Programa:: mostrarMenu() {
+void Programa::mostrarMenu() {
     cout << "\n\t***************  MENU AEROPUERTO**************"<< endl << endl;
     cout << "\t1. Mostrar por Aeropuerto" << endl;
     cout << "\t2. Dar de Alta Aeropuerto" << endl;
@@ -25,7 +24,7 @@ void Programa:: mostrarMenu() {
     cout << "\t0. Salir del programa" << endl;
 }
 
-void Programa:: elegirOpcion(){
+void Programa::elegirOpcion(){
     cout << MSJ_OPCION;
     cin >> opcion;
 }
@@ -37,7 +36,7 @@ void Programa:: elegirOpcion(){
 - mostrar todos los aeropuertos (recorrido in orden)
 - mostrar los aeropuertos conservando el formato del ABB*/
 
-void Programa:: abrirMenuInterno(Lista<Aeropuertos*> &lista){
+void Programa::abrirMenuInterno(Lista<Aeropuertos*> &lista){
 
     switch( opcion ){
                     case CONSULTAR_AEROPUERTO:

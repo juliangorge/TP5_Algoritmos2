@@ -1,6 +1,9 @@
 #ifndef PROGRAMA_H_INCLUDED
 #define PROGRAMA_H_INCLUDED
 
+#include <iostream>
+
+using namespace std;
 
 const string MSJ_OPCION = "\n\tIngrese la opcion que desea: ";
 const string MSJ_PELICULAS = "\t******** Aeropuertos ********  ";
@@ -8,7 +11,8 @@ const string MSJ_FIN_PROGRAMA = "Fin del programa";
 
 
 
-class Programa{
+class Programa
+{
 
     private:
 
@@ -45,6 +49,7 @@ class Programa{
         //PRE: Ingresa una lista bien formada
         //Post: Muestra todos los elementos de dicha lista
         void mostrarListaAeropuertos(Lista <Dato> &lista);
+};
 
 
 #endif // PROGRAMA_H_INCLUDED
