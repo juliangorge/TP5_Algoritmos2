@@ -1,6 +1,7 @@
 #include "Grafo.h"
+#include <limits>
 
-const float INFINITO = -1;
+const float INFINITO = numeric_limits<float>::max();
 
 Grafo::Grafo(){
 
@@ -10,30 +11,45 @@ Grafo::~Grafo(){
 	vertices.vaciarLista(true);
 }
 
-void agregarVertice(string iata){
+void Grafo::agregarVertice(string iata){
+	if (!hayVertice(iata)){ //podria no chequear y pedirlo como precondicion, seria menor la complejidad
+		Vertice vertice(iata);
+		vertices.insertar(vertice);
+	}
+}
+
+bool Grafo::hayVertice(string iata){
+	Vertice aux;
+
+	for (int i = 0; i < vertices.getTam(); ++i){
+		aux = vertices.getDato(i);
+		if (iata == aux.getPartida())
+			return true;
+	}
+	return false;
+}
+ 
+bool Grafo::agregarVuelo(Vuelo& vuelo){
+	Vertice vertice;
+	for (int i = 0; i < vertices.getTam(); ++i){
+		vertice = vertices.getDato(i);
+		if (vuelo.getPartida() == vertice.getIata()){
+			vertice.agregarVuelo(vuelo);
+			return true;
+		}
+	}
+	return false;
+}
+ 
+Vertice Grafo::caminoMasBarato(string partida, string destino){
 
 }
  
-void agregarVuelo(Vuelo& vuelo){
-
-}
-
-void borrarVertice(string iata){
-
-}
-  
-void borrarVuelo(string partida, string destino){
-
-}
- 
-Vuelo caminoMasBarato(string partida, string destino){
-
-}
- 
-Vuelo caminoMasCorto(string partida, string destino){
+Vertice Grafo::caminoMasCorto(string partida, string destino){
+	Vertice resultado;
 	int n = vertices.getTam();
 	Vertice raiz = getVertice(partida); //funcion de grafo que busca en la lista segun el iata
-	int posRaiz = vertices.getPos(raiz); //posicion de la raiz en la lista vertices
+	int posRaiz = vertices.getPos(raiz); //posicion de la raiz en la lista vertices, implementar en Lista.h
  
 	float distancia [n];
 	bool visitado [n];
@@ -56,11 +72,11 @@ Vuelo caminoMasCorto(string partida, string destino){
 	
 	Vertice actual;
 	int pos;
-	while (!todosVisitados(visitado)){ //recorre el vector y devuelve true si todas las posiciones son true
-		pos = minimo_distancia(distancia, visitado); //devuelve la posicion del vertice con menor distancia que no fue visitado
+	while (!todosVisitados(visitado)){
+		pos = minimoDistancia(distancia, visitado);
 		visitado[pos] = true;
 		actual = vertices.getDato(pos);
-		for (int i = 1; i < n; ++i){ //recorre toda la lista para ver cuales son adyacentes al actual
+		for (int i = 1; i < n; ++i){ //recorro toda la lista para ver cuales son adyacentes al actual
 			vertice = vertices.getDato(i);
 			if (actual.hayVuelo( vertice.getIata() )){
 				vuelo = actual.getVuelo( vertice.getIata() );
@@ -69,4 +85,26 @@ Vuelo caminoMasCorto(string partida, string destino){
 			}
 		}
 	}
+}
+
+bool Grafo::todosVisitados(bool* visitado){
+	for (int i = 0; i < vertices.getTam(); ++i){
+		if (!visitado[i])
+			return false;
+	}
+	return true;
+}
+
+int Grafo::minimoDistancia(float* distancia, bool* visitado){
+	float minimo = INFINITO;
+	int pos = -1;
+	for (int i = 0; i < vertices.getTam(); ++i){
+	 	if (!visitado[i]){
+	 		if(distancia[i] < minimo){
+	 			minimo = distancia[i];
+	 			pos = i;
+	 		}
+	 	}
+	}
+	return pos; 
 }

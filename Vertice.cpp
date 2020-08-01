@@ -8,6 +8,11 @@ Vertice::Vertice(){
 	vuelos = Lista lista; 
 }
 
+Vertice::Vertice(string iata){
+	this->iata = iata;
+	vuelos = Lista lista; 
+}
+
 Vertice::~Vertice(){
 	vuelos.vaciarLista(true);
 }

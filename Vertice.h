@@ -18,6 +18,10 @@ public:
 	// POST: crea un objeto Vertice
 	Vertice();
 
+	// PRE: recibe un codigo iata 
+	// POST: crea un objeto Vertice con ese codigo 
+	Vertice(string iata);
+
 	// POST: destruye un objeto Vertice
 	~Vertice();
 

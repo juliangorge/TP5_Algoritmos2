@@ -15,35 +15,40 @@ private:
 
 public:
 
-	// POST: crea un objeto Grafo
+	// POST: crea un objeto Grafo.
 	Grafo();
 
-	// POST: destruye un objeto Grafo
+	// POST: destruye un objeto Grafo.
 	~Grafo();
 
-	// PRE:
-	// POST: 
+	// PRE: recibe el iata de un vertice.
+	// POST: agrega un vertice con ese codigo, si no existia previamente.
 	void agregarVertice(string iata);
 
-	// PRE:
-	// POST: 
-	void agregarVuelo(Vuelo&);
+	// PRE: recibe la direccion de memoria de un vuelo creado.
+	// POST: si el vuelo parte de un vertice perteneciente, agrega el vuelo y devuelve true. Si no, no lo agrega y devuelve false.
+	bool agregarVuelo(Vuelo&);
 
-	// PRE:
-	// POST:
-	void borrarVertice(Vertice);
+	// PRE: recibe un codigo iata.
+	// POST: devuelve true si existe un vertice del grafo con ese codigo y falso en caso contrario.
+	bool hayVertice(string iata);
 
-	// PRE:
-	// POST:  
-	void borrarVuelo(string partida, string destino);
+	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
+	// POST: devuelve un vertice con los vuelos que hacen el recorrido mas barato.
+	Vertice caminoMasBarato(string partida, string destino);
 
-	// PRE:
-	// POST: 
-	Vuelo caminoMasBarato(string partida, string destino);
+	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
+	// POST: devuelve un vertice con los vuelos que hacen el recorrido en menos horas.
+	Vertice caminoMasCorto(string partida, string destino);
 
-	// PRE:
-	// POST: 
-	Vuelo caminoMasCorto(string partida, string destino);
+private:
+	// PRE: recibe un puntero a la primera posicion del vector visitados.
+	// POST: devuelve true si todas las posiciones del vector son true.
+	bool todosVisitados(bool* visitado);
+
+	// PRE: recibe un puntero a la primera posicion del vector de distancias y de visitados.
+	// POST: devuelve la posicion del elemento no visitado con menor distancia.
+	int Grafo::minimoDistancia(float* distancia, bool* visitado);
 };
 
 #endif /* TP5_ALGORITMOS2_GRAFO_H_ */
