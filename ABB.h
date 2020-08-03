@@ -104,7 +104,7 @@ ABBNodo<Valor>* ABB<Valor>::insertar(ABBNodo<Valor>* nodo, Clave clave, Valor va
     	nodo->setHijoIzquierdo(insertar(nodo->getHijoIzquierdo(), clave, valor), nodo);
     }
     else
-    	cout << "La clave ya existe, no se puede insertar el dato" << endl;
+    	cout << "La clave "<< clave <<" ya existe, no se puede insertar el dato" << endl;
     return nodo;
 }
 
