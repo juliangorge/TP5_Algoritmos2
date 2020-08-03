@@ -7,20 +7,20 @@ typedef std::string Clave;
 
 const Clave CLAVE_INVALIDA = "";
 
-template <class Valor>
+template <class Dato>
 class ABBNodo
 {
 private:
 	Clave clave;
-	Valor valor;
-    ABBNodo<Valor>* hijoIzquierdo;
-    ABBNodo<Valor>* hijoDerecho;
-    ABBNodo<Valor>* padre;
+	Dato dato;
+    ABBNodo<Dato>* hijoIzquierdo;
+    ABBNodo<Dato>* hijoDerecho;
+    ABBNodo<Dato>* padre;
 
 public:
     //PRE:
     //POST: Crea un objeto ABBNodo, inicializando hijoIzquierdo, hijoDerecho y padre en 0
-    ABBNodo(Clave clave, Valor valor);
+    ABBNodo(Clave clave, Dato dato);
 
     //PRE:
     //POST: destruye en objeto ABBNodo
@@ -31,48 +31,48 @@ public:
     Clave getClave();
 
     //PRE:
-    //POST: devuelve el valor del nodo
-    Valor getValor();
+    //POST: devuelve el dato del nodo
+    Dato getDato();
 
     //PRE:
     //POST: setea la clave del nodo
     void setClave(Clave clave);
 
     //PRE:
-    //POST: setea el valor del nodo
-    void setValor(Valor valor);
+    //POST: setea el dato del nodo
+    void setDato(Dato dato);
 
     //PRE:
     //POST: setea el hijo derecho y el padre
-    void setHijoDerecho(ABBNodo<Valor>* hijoDerecho, ABBNodo<Valor>* padre);
+    void setHijoDerecho(ABBNodo<Dato>* hijoDerecho, ABBNodo<Dato>* padre);
 
     //PRE:
     //POST: setea el hijo izquierdo y el padre
-    void setHijoIzquierdo(ABBNodo<Valor>* hijoIzquierdo, ABBNodo<Valor>* padre);
+    void setHijoIzquierdo(ABBNodo<Dato>* hijoIzquierdo, ABBNodo<Dato>* padre);
 
     //PRE:
     //POST: setea el hijo izquierdo
-    void setHijoIzquierdo(ABBNodo<Valor>* hijoIzquierdo);
+    void setHijoIzquierdo(ABBNodo<Dato>* hijoIzquierdo);
 
     //PRE:
     //POST: setea el hijo derecho
-    void setHijoDerecho(ABBNodo<Valor>* hijoDerecho);
+    void setHijoDerecho(ABBNodo<Dato>* hijoDerecho);
 
     //PRE:
     //POST: setea el padre
-    void setPadre(ABBNodo<Valor>* padre);
+    void setPadre(ABBNodo<Dato>* padre);
 
     //PRE:
     //POST: devuelve el hijo derecho
-    ABBNodo<Valor>* getHijoDerecho();
+    ABBNodo<Dato>* getHijoDerecho();
 
     //PRE:
     //POST: devuelve el hijo izquierdo
-    ABBNodo<Valor>* getHijoIzquierdo();
+    ABBNodo<Dato>* getHijoIzquierdo();
 
     //PRE:
     //POST: devuelve el padre
-    ABBNodo<Valor>* getPadre();
+    ABBNodo<Dato>* getPadre();
 
     //PRE:
     //POST: devuelve true si tiene hijo izquierdo
@@ -95,122 +95,122 @@ public:
     bool soloHijoIzquierdo();
 };
 
-template <class Valor>
-ABBNodo<Valor>::ABBNodo(Clave clave, Valor valor)
+template <class Dato>
+ABBNodo<Dato>::ABBNodo(Clave clave, Dato dato)
 {
     this->clave = clave;
-    this->valor = valor;
+    this->dato = dato;
     this->hijoIzquierdo = 0;
     this->hijoDerecho = 0;
     this->padre = 0;
 }
 
-template <class Valor>
-ABBNodo<Valor>::~ABBNodo()
+template <class Dato>
+ABBNodo<Dato>::~ABBNodo()
 {
-	if (valor != 0)
-		delete valor;
+	if (dato != 0)
+		delete dato;
 }
 
-template <class Valor>
-Clave ABBNodo<Valor>::getClave()
+template <class Dato>
+Clave ABBNodo<Dato>::getClave()
 {
     return this->clave;
 }
 
-template <class Valor>
-Valor ABBNodo<Valor>::getValor()
+template <class Dato>
+Dato ABBNodo<Dato>::getDato()
 {
-    return this->valor;
+    return this->dato;
 }
 
-template <class Valor>
-void ABBNodo<Valor>::setHijoDerecho(ABBNodo<Valor>* hijoDerecho, ABBNodo<Valor>* padre)
+template <class Dato>
+void ABBNodo<Dato>::setHijoDerecho(ABBNodo<Dato>* hijoDerecho, ABBNodo<Dato>* padre)
 {
     this->hijoDerecho = hijoDerecho;
     this->padre = padre;
 }
 
-template <class Valor>
-void ABBNodo<Valor>::setHijoDerecho(ABBNodo<Valor>* hijoDerecho)
+template <class Dato>
+void ABBNodo<Dato>::setHijoDerecho(ABBNodo<Dato>* hijoDerecho)
 {
     this->hijoDerecho = hijoDerecho;
 }
 
-template <class Valor>
-void ABBNodo<Valor>::setHijoIzquierdo(ABBNodo<Valor>* hijoIzquierdo, ABBNodo<Valor>* padre)
+template <class Dato>
+void ABBNodo<Dato>::setHijoIzquierdo(ABBNodo<Dato>* hijoIzquierdo, ABBNodo<Dato>* padre)
 {
     this->hijoIzquierdo = hijoIzquierdo;
     this->padre = padre;
 }
 
-template <class Valor>
-void ABBNodo<Valor>::setPadre(ABBNodo<Valor>* padre)
+template <class Dato>
+void ABBNodo<Dato>::setPadre(ABBNodo<Dato>* padre)
 {
     this->padre = padre;
 }
 
-template <class Valor>
-void ABBNodo<Valor>::setValor(Valor valor)
+template <class Dato>
+void ABBNodo<Dato>::setDato(Dato dato)
 {
-    this->valor = valor;
+    this->dato = dato;
 }
 
-template <class Valor>
-void ABBNodo<Valor>::setClave(Clave clave)
+template <class Dato>
+void ABBNodo<Dato>::setClave(Clave clave)
 {
 	this->clave = clave;
 }
 
-template <class Valor>
-void ABBNodo<Valor>::setHijoIzquierdo(ABBNodo<Valor>* hijoIzquierdo)
+template <class Dato>
+void ABBNodo<Dato>::setHijoIzquierdo(ABBNodo<Dato>* hijoIzquierdo)
 {
     this->hijoIzquierdo = hijoIzquierdo;
 }
 
-template <class Valor>
-ABBNodo<Valor>* ABBNodo<Valor>::getHijoDerecho()
+template <class Dato>
+ABBNodo<Dato>* ABBNodo<Dato>::getHijoDerecho()
 {
     return this->hijoDerecho;
 }
 
-template <class Valor>
-ABBNodo<Valor>* ABBNodo<Valor>::getHijoIzquierdo()
+template <class Dato>
+ABBNodo<Dato>* ABBNodo<Dato>::getHijoIzquierdo()
 {
     return this->hijoIzquierdo;
 }
 
-template <class Valor>
-ABBNodo<Valor>* ABBNodo<Valor>::getPadre()
+template <class Dato>
+ABBNodo<Dato>* ABBNodo<Dato>::getPadre()
 {
     return this->padre;
 }
-template <class Valor>
-bool ABBNodo<Valor>::tieneHijoDerecho()
+template <class Dato>
+bool ABBNodo<Dato>::tieneHijoDerecho()
 {
 	return (this->getHijoDerecho() != 0);
 }
 
-template <class Valor>
-bool ABBNodo<Valor>::tieneHijoIzquierdo()
+template <class Dato>
+bool ABBNodo<Dato>::tieneHijoIzquierdo()
 {
 	return (this->getHijoIzquierdo() != 0);
 }
 
-template <class Valor>
-bool ABBNodo<Valor>::esHoja()
+template <class Dato>
+bool ABBNodo<Dato>::esHoja()
 {
     return (!tieneHijoIzquierdo() && !tieneHijoDerecho());
 }
 
-template <class Valor>
-bool ABBNodo<Valor>::soloHijoDerecho()
+template <class Dato>
+bool ABBNodo<Dato>::soloHijoDerecho()
 {
     return (!tieneHijoIzquierdo() && tieneHijoDerecho());
 }
 
-template <class Valor>
-bool ABBNodo<Valor>::soloHijoIzquierdo()
+template <class Dato>
+bool ABBNodo<Dato>::soloHijoIzquierdo()
 {
     return (tieneHijoIzquierdo() && !tieneHijoDerecho());
 }

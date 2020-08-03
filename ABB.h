@@ -7,25 +7,25 @@
 
 using namespace std;
 
-template <class Valor>
+template <class Dato>
 class ABB
 {
 private:
     // attributes
-	ABBNodo<Valor>* raiz;
+	ABBNodo<Dato>* raiz;
 
     // methods
-    ABBNodo<Valor>* insertar(ABBNodo<Valor>* nodo, Clave clave, Valor valor);
-    void imprimirInOrder(ABBNodo<Valor> * nodo);
-    void armarColaPrioritaria(ABBNodo<Valor> * nodo, Cola<string*> colaDePrioridad[], unsigned prioridad);
-    ABBNodo<Valor>* buscar(ABBNodo<Valor>* nodo, Clave clave);
-    Clave encontrarMinimo(ABBNodo<Valor>* nodo);
-    Clave encontrarMaximo(ABBNodo<Valor>* nodo);
-    Clave sucesor(ABBNodo<Valor>* nodo);
-    Clave predecesor(ABBNodo<Valor>* nodo);
-    unsigned altura(ABBNodo<Valor>* nodo);
-    ABBNodo<Valor>* remover(ABBNodo<Valor>* nodo, Clave clave);
-    void borrarTodo(ABBNodo<Valor>* nodo);
+    ABBNodo<Dato>* insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato);
+    void imprimirInOrder(ABBNodo<Dato> * nodo);
+    void armarColaPrioritaria(ABBNodo<Dato> * nodo, Cola<string*> colaDePrioridad[], unsigned prioridad);
+    ABBNodo<Dato>* buscar(ABBNodo<Dato>* nodo, Clave clave);
+    Clave encontrarMinimo(ABBNodo<Dato>* nodo);
+    Clave encontrarMaximo(ABBNodo<Dato>* nodo);
+    Clave sucesor(ABBNodo<Dato>* nodo);
+    Clave predecesor(ABBNodo<Dato>* nodo);
+    unsigned altura(ABBNodo<Dato>* nodo);
+    ABBNodo<Dato>* remover(ABBNodo<Dato>* nodo, Clave clave);
+    void borrarTodo(ABBNodo<Dato>* nodo);
 
 public:
     //methods
@@ -35,7 +35,7 @@ public:
 
      // Adds a new node to the actual BST. If its the tree is empty
      // the node inserted will be the root
-    void insertar(Clave clave, Valor valor);
+    void insertar(Clave clave, Dato dato);
 
     // Prints all the data stored in the BST, sorted from the
     // smallest value to the greatest value.
@@ -50,9 +50,9 @@ public:
     // TRUE, otherwise it returns FALSE.
     bool buscar(Clave clave);
 
-    Valor obtenerValor(Clave clave);
+    Dato obtenerDato(Clave clave);
 
-    void cambiarValor(Clave clave, Valor valor);
+    void cambiarDato(Clave clave, Dato dato);
 
     // Finds the minimum value that exist in the BST.
     Clave encontrarMinimo();
@@ -72,7 +72,7 @@ public:
     // Removes a given data from the BST
     void remover(Clave clave);
 
-    ABBNodo<Valor>* getRaiz();
+    ABBNodo<Dato>* getRaiz();
 
     bool vacio();
 
@@ -100,41 +100,43 @@ ABBNodo<Valor>* ABB<Valor>::insertar(ABBNodo<Valor>* nodo, Clave clave, Valor va
     	nodo->setHijoDerecho(insertar(nodo->getHijoDerecho(), clave, valor), nodo);
     }
 
-    else {
+    else if (clave < nodo->getClave()){
     	nodo->setHijoIzquierdo(insertar(nodo->getHijoIzquierdo(), clave, valor), nodo);
     }
+    else
+    	cout << "La clave ya existe, no se puede insertar el dato" << endl;
     return nodo;
 }
 
 
-template <class Valor>
-void ABB<Valor>::insertar(Clave clave, Valor valor)
+template <class Dato>
+void ABB<Dato>::insertar(Clave clave, Dato dato)
 {
-    this->raiz = insertar(this->raiz, clave, valor);
+    this->raiz = insertar(this->raiz, clave, dato);
 }
 
-template <class Valor>
-void ABB<Valor>::imprimirInOrder(ABBNodo<Valor>* nodo)
+template <class Dato>
+void ABB<Dato>::imprimirInOrder(ABBNodo<Dato>* nodo)
 {
     if (nodo != 0)
     {
     	imprimirInOrder(nodo->getHijoIzquierdo());
 
     	cout << endl << "Clave: "<< nodo->getClave() << endl;
-        cout<<*(nodo->getValor())<<endl;
+        cout<<*(nodo->getDato())<<endl;
 
         imprimirInOrder(nodo->getHijoDerecho());
     }
 }
 
-template <class Valor>
-void ABB<Valor>::imprimirInOrder()
+template <class Dato>
+void ABB<Dato>::imprimirInOrder()
 {
     this->imprimirInOrder(this->raiz);
 }
 
-template <class Valor>
-void ABB<Valor>::armarColaPrioritaria(ABBNodo<Valor> * nodo, Cola<string*>* colaDePrioridad, unsigned prioridad)
+template <class Dato>
+void ABB<Dato>::armarColaPrioritaria(ABBNodo<Dato> * nodo, Cola<string*>* colaDePrioridad, unsigned prioridad)
 {
 	if(nodo != 0)
 	{
@@ -146,8 +148,8 @@ void ABB<Valor>::armarColaPrioritaria(ABBNodo<Valor> * nodo, Cola<string*>* cola
 	}
 }
 
-template <class Valor>
-void ABB<Valor>::imprimirEnAnchura()
+template <class Dato>
+void ABB<Dato>::imprimirEnAnchura()
 {
 	unsigned alturaArbol = altura();
 	if(alturaArbol != 0)
@@ -169,8 +171,8 @@ void ABB<Valor>::imprimirEnAnchura()
 	}
 }
 
-template <class Valor>
-ABBNodo<Valor>* ABB<Valor>::buscar(ABBNodo<Valor>* nodo, Clave clave)
+template <class Dato>
+ABBNodo<Dato>* ABB<Dato>::buscar(ABBNodo<Dato>* nodo, Clave clave)
 {
     if (nodo == 0 || nodo->getClave() == clave)
         return nodo;
@@ -181,34 +183,34 @@ ABBNodo<Valor>* ABB<Valor>::buscar(ABBNodo<Valor>* nodo, Clave clave)
     return buscar(nodo->getHijoIzquierdo(), clave);
 }
 
-template <class Valor>
-bool ABB<Valor>::buscar(Clave clave)
+template <class Dato>
+bool ABB<Dato>::buscar(Clave clave)
 {
-	ABBNodo<Valor>* resultado = buscar(this->raiz, clave);
+	ABBNodo<Dato>* resultado = buscar(this->raiz, clave);
 
     return resultado != 0;
 }
 
-template <class Valor>
-Valor ABB<Valor>::obtenerValor(Clave clave)
+template <class Dato>
+Dato ABB<Dato>::obtenerDato(Clave clave)
 {
-	ABBNodo<Valor>* resultado = buscar(this->raiz, clave);
+	ABBNodo<Dato>* resultado = buscar(this->raiz, clave);
 
 	if(resultado != 0)
-		return resultado->getValor();
+		return resultado->getDato();
 	return 0;
 }
 
-template <class Valor>
-void ABB<Valor>::cambiarValor(Clave clave, Valor valor)
+template <class Dato>
+void ABB<Dato>::cambiarDato(Clave clave, Dato dato)
 {
-	ABBNodo<Valor>* resultado = buscar(this->raiz, clave);
+	ABBNodo<Dato>* resultado = buscar(this->raiz, clave);
 	if(resultado != 0)
-			resultado->setValor(valor);
+			resultado->setDato(dato);
 }
 
-template <class Valor>
-Clave ABB<Valor>::encontrarMinimo(ABBNodo<Valor>* nodo)
+template <class Dato>
+Clave ABB<Dato>::encontrarMinimo(ABBNodo<Dato>* nodo)
 {
     if(nodo == 0)
         return CLAVE_INVALIDA;
@@ -218,14 +220,14 @@ Clave ABB<Valor>::encontrarMinimo(ABBNodo<Valor>* nodo)
         return encontrarMinimo(nodo->getHijoIzquierdo());
 }
 
-template <class Valor>
-Clave ABB<Valor>::encontrarMinimo()
+template <class Dato>
+Clave ABB<Dato>::encontrarMinimo()
 {
     return encontrarMinimo(this->raiz);
 }
 
-template <class Valor>
-Clave ABB<Valor>::encontrarMaximo(ABBNodo<Valor>* nodo)
+template <class Dato>
+Clave ABB<Dato>::encontrarMaximo(ABBNodo<Dato>* nodo)
 {
     if(nodo == 0)
         return CLAVE_INVALIDA;
@@ -235,21 +237,21 @@ Clave ABB<Valor>::encontrarMaximo(ABBNodo<Valor>* nodo)
         return encontrarMaximo(nodo->getHijoDerecho());
 }
 
-template <class Valor>
-Clave ABB<Valor>::encontrarMaximo()
+template <class Dato>
+Clave ABB<Dato>::encontrarMaximo()
 {
     return encontrarMaximo(this->raiz);
 }
 
-template <class Valor>
-Clave ABB<Valor>::sucesor(ABBNodo<Valor>* nodo)
+template <class Dato>
+Clave ABB<Dato>::sucesor(ABBNodo<Dato>* nodo)
 {
     if (nodo->getHijoDerecho() != 0)
     {
         return encontrarMinimo(nodo->getHijoDerecho());
     }
-    ABBNodo<Valor>* sucesor = NULL;
-    ABBNodo<Valor>* ancestro = this->raiz;
+    ABBNodo<Dato>* sucesor = NULL;
+    ABBNodo<Dato>* ancestro = this->raiz;
     Clave claveAux = nodo->getClave();
     while(ancestro != nodo)
     {
@@ -266,26 +268,26 @@ Clave ABB<Valor>::sucesor(ABBNodo<Valor>* nodo)
     return sucesor->getClave();
 }
 
-template <class Valor>
-Clave ABB<Valor>::sucesor(Clave clave)
+template <class Dato>
+Clave ABB<Dato>::sucesor(Clave clave)
 {
-    ABBNodo<Valor>* claveNodo = this->buscar(this->raiz, clave);
+    ABBNodo<Dato>* claveNodo = this->buscar(this->raiz, clave);
     // Return the key. If the key is not found or successor is not found, return -1
     if(claveNodo == NULL)
         return CLAVE_INVALIDA;
     else return sucesor(claveNodo);
 }
 
-template <class Valor>
-Clave ABB<Valor>::predecesor(ABBNodo<Valor>* nodo)
+template <class Dato>
+Clave ABB<Dato>::predecesor(ABBNodo<Dato>* nodo)
 {
     if (nodo->getHijoIzquierdo() != NULL)
     {
         return encontrarMaximo(nodo->getHijoIzquierdo());
     }
 
-    ABBNodo<Valor>* predecesor = 0;
-    ABBNodo<Valor>* ancestro = this->raiz;
+    ABBNodo<Dato>* predecesor = 0;
+    ABBNodo<Dato>* ancestro = this->raiz;
     Clave claveAux = nodo->getClave();
     while(ancestro != nodo) {
         if(claveAux > ancestro->getClave())
@@ -301,18 +303,18 @@ Clave ABB<Valor>::predecesor(ABBNodo<Valor>* nodo)
     return predecesor->getClave();
 }
 
-template <class Valor>
-Clave ABB<Valor>::predecesor(Clave clave)
+template <class Dato>
+Clave ABB<Dato>::predecesor(Clave clave)
 {
-	ABBNodo<Valor>* claveNodo = this->buscar(this->raiz, clave);
+	ABBNodo<Dato>* claveNodo = this->buscar(this->raiz, clave);
 
     if(claveNodo == 0)
         return CLAVE_INVALIDA;
     else return predecesor(claveNodo);
 }
 
-template <class Valor>
-unsigned ABB<Valor>::altura(ABBNodo<Valor>* nodo)
+template <class Dato>
+unsigned ABB<Dato>::altura(ABBNodo<Dato>* nodo)
 {
 	if(nodo == 0)
 		return 0;
@@ -323,14 +325,14 @@ unsigned ABB<Valor>::altura(ABBNodo<Valor>* nodo)
 	return aux2+1;
 }
 
-template <class Valor>
-unsigned ABB<Valor>::altura()
+template <class Dato>
+unsigned ABB<Dato>::altura()
 {
 	return altura(this->raiz);
 }
 
-template <class Valor>
-ABBNodo<Valor>* ABB<Valor>::remover(ABBNodo<Valor>* nodo, Clave clave)
+template <class Dato>
+ABBNodo<Dato>* ABB<Dato>::remover(ABBNodo<Dato>* nodo, Clave clave)
 {
     // The given node is not found in BST
     if (nodo == 0)
@@ -348,7 +350,7 @@ ABBNodo<Valor>* ABB<Valor>::remover(ABBNodo<Valor>* nodo, Clave clave)
             // The only child will be connected to the parent's of node directly
             nodo->getHijoDerecho()->setPadre(nodo->getPadre());
             // Bypass node
-            ABBNodo<Valor>* aux = nodo;
+            ABBNodo<Dato>* aux = nodo;
             nodo = nodo->getHijoDerecho();
             delete aux;
         }
@@ -357,7 +359,7 @@ ABBNodo<Valor>* ABB<Valor>::remover(ABBNodo<Valor>* nodo, Clave clave)
             // The only child will be connected to the parent's of node directly
             nodo->getHijoIzquierdo()->setPadre(nodo->getPadre());
             // Bypass node
-            ABBNodo<Valor>* aux = nodo;
+            ABBNodo<Dato>* aux = nodo;
             nodo = nodo->getHijoIzquierdo();
             delete aux;
         }
@@ -367,13 +369,13 @@ ABBNodo<Valor>* ABB<Valor>::remover(ABBNodo<Valor>* nodo, Clave clave)
         {
             // Find successor or predecessor to avoid quarrel
             Clave claveSucesor = this->sucesor(clave);
-            Valor valorSucesor = obtenerValor(claveSucesor);
+            Dato datoSucesor = obtenerDato(claveSucesor);
             // cambio el valor para evitar borrar el valor del nodo
-            cambiarValor(claveSucesor, 0);
+            cambiarDato(claveSucesor, 0);
 
             // Replace node's key with successor's key
             nodo->setClave(claveSucesor);
-            nodo->setValor(valorSucesor);
+            nodo->setDato(datoSucesor);
 
             // Delete the old successor's key
             nodo->setHijoDerecho(remover(nodo->getHijoDerecho(), claveSucesor));
@@ -389,27 +391,27 @@ ABBNodo<Valor>* ABB<Valor>::remover(ABBNodo<Valor>* nodo, Clave clave)
     return nodo;
 }
 
-template <class Valor>
-void ABB<Valor>::remover(Clave clave)
+template <class Dato>
+void ABB<Dato>::remover(Clave clave)
 {
     this->raiz = remover(this->raiz, clave);
 }
 
-template <class Valor>
-ABBNodo<Valor>* ABB<Valor>::getRaiz()
+template <class Dato>
+ABBNodo<Dato>* ABB<Dato>::getRaiz()
 {
     return this->raiz;
 }
 
-template <class Valor>
-bool ABB<Valor>::vacio()
+template <class Dato>
+bool ABB<Dato>::vacio()
 {
     return this->raiz == NULL;
 }
 
 
-template <class Valor>
-void ABB<Valor>::borrarTodo(ABBNodo<Valor>* nodo)
+template <class Dato>
+void ABB<Dato>::borrarTodo(ABBNodo<Dato>* nodo)
 {
     if(nodo == NULL)
         return;
@@ -418,15 +420,15 @@ void ABB<Valor>::borrarTodo(ABBNodo<Valor>* nodo)
     delete nodo;
 }
 
-template <class Valor>
-void ABB<Valor>::borrarTodo()
+template <class Dato>
+void ABB<Dato>::borrarTodo()
 {
     borrarTodo(this->raiz);
     raiz = 0;
 }
 
-template <class Valor>
-ABB<Valor>::~ABB()
+template <class Dato>
+ABB<Dato>::~ABB()
 {
     borrarTodo();
 }
