@@ -7,7 +7,7 @@ const int ALTA_AEROPUERTO = 2 ;
 const int BAJA_AEROPUERTO = 3 ;
 const int MOSTRAR_AEROPUERTO_INORDEN = 4  ;
 const int MOSTRAR_AEROPUERTO_ABB = 5 ;
-const string MSJ_IATA: " Ingresar IATA" ;
+const string MSJ_IATA= " Ingresar IATA" ;
 
 
 Programa::Programa(){
@@ -73,18 +73,21 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*> arbol){
     }
 }
 
-void mostrarAeropuerto ( ABB<Aeropuerto*> arbol){
+void menuMostrarAeropuerto ( ABB<Aeropuerto*> arbol){
 
-      arbol.obtenerDato(iata())->mostrarAeropuerto() << endl;
+    //Programa* p=new Programa();
 
+      arbol.obtenerDato( iata() )->mostrarAeropuerto() ;
+    cout << endl;
 }
 
-string iata(){
+string Programa::iata(){
 
     string iata;
 
     cout<< MSJ_IATA <<endl ;
     cin >> iata ;
+
     return iata;
 }
 

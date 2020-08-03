@@ -18,7 +18,8 @@ class Programa
 
     private:
 
-        int opcion;
+        char opcion;
+
 
     public:
 
@@ -38,21 +39,25 @@ class Programa
         void elegirOpcion();
 
         //Descripcion:
-        //PRE:
-        //Post:
+        //PRE: arbol bien formado
+        //Post: Accede a las diferentes partes del menu
         void abrirMenuInterno(ABB<Aeropuerto*> arbol);
 
         //Descripcion:
-        //PRE:
-        //Post:
+        //PRE: -
+        //Post: devuelve opcion ingresada
         char obtenerOpcion();
 
-        //Descripcion: Muestra  lista completa
-        //PRE: Ingresa una lista bien formada
-        //Post: Muestra todos los elementos de dicha lista
-       void menuMostrarAeropuerto(arbol) ;
+        //Descripcion: Muestra aeropuerto
+        //PRE: arbol bien formado
+        //Post: Muestra el aeropuerto seleccionado
+       void menuMostrarAeropuerto(ABB<Aeropuerto*> arbol) ;
 
-       string iata();
+
+       //Descripcion: ingresa codigo IATA
+        //PRE: -
+        //Post: Devuelve el valor IATA ingresado del tipo string
+        string iata();
 };
 
 
