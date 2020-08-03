@@ -73,7 +73,7 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*> arbol){
     }
 }
 
-void menuMostrarAeropuerto ( ABB<Aeropuerto*> arbol){
+void Programa:: menuMostrarAeropuerto ( ABB<Aeropuerto*> arbol){
 
     //Programa* p=new Programa();
 
