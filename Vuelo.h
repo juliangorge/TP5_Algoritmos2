@@ -49,7 +49,7 @@ public:
 
 	// PRE:
 	// POST: devuelve el valor del atributo horas 
-	float gethoras();
+	float getHoras();
 
 	// PRE:
 	// POST: imprime un objeto Vuelo

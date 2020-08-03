@@ -2,8 +2,8 @@
 
 Vuelo::Vuelo()
 {
-	partida = "";
-	destino = "";
+	iataPartida = "";
+	iataDestino = "";
 	costo = 0;
 	horas = 0;
 }
@@ -15,15 +15,15 @@ Vuelo::~Vuelo()
 
 void Vuelo::setPartida(string partida)
 {
-	this->partida = partida;
+	this->iataPartida = partida;
 }
 
 void Vuelo::setDestino(string destino)
 {
-	this->destino = destino;
+	this->iataDestino = destino;
 }
 
-void Vuelo::setCosto(unsigned costo);
+void Vuelo::setCosto(unsigned costo)
 {
 	this->costo = costo;
 }
@@ -35,12 +35,12 @@ void Vuelo::setHoras(float horas)
 
 string Vuelo::getPartida()
 {
-	return partida;
+	return iataPartida;
 }
 
 string Vuelo::getDestino()
 {
-	return destino;
+	return iataDestino;
 }
 
 unsigned Vuelo::getCosto()
@@ -55,8 +55,8 @@ float Vuelo::getHoras()
 
 void Vuelo::mostrar()
 {
-	cout << "Partida: " << partida << endl;
-	cout << "Destino: " << destino << endl;
+	cout << "Partida: " << iataPartida << endl;
+	cout << "Destino: " << iataDestino << endl;
 	cout << "Duracion: "<< horas <<  " horas" <<endl;
 	cout << "Costo: " << "$" << costo << endl;
 }
