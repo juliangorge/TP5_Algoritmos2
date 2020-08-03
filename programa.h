@@ -50,7 +50,9 @@ class Programa
         //Descripcion: Muestra  lista completa
         //PRE: Ingresa una lista bien formada
         //Post: Muestra todos los elementos de dicha lista
-      //  void mostrarListaAeropuertos();
+       void menuMostrarAeropuerto(arbol) ;
+
+       string iata();
 };
 
 
