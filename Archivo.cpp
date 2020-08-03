@@ -1,4 +1,9 @@
 #include "Archivo.h"
+#include <iostream>
+
+using namespace std;
+
+const string MSJ_OK_APERTURA = "\tarchivo abierto";
 
 Archivo::Archivo(string ruta){
     if(existenciaDeArchivo(ruta)){
@@ -32,8 +37,8 @@ bool Archivo::finalArchivo(){
 bool Archivo::estadoDeArchivo(){
     return archivoAbierto;
 }
-
-void Archivo::cargar(ABB<Aeropuerto*>* arbol){
+/*
+void Archivo::cargar(ABB<Aeropuerto*> &arbol){
     if(archivoAbierto){
 		string iata;
         string nombre;
@@ -58,9 +63,10 @@ void Archivo::cargar(ABB<Aeropuerto*>* arbol){
             Aeropuerto* aeropuerto = new Aeropuerto(iata, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
             arbol->insertar(iata, aeropuerto);
 		}
+    cout<< "carga correcta"<<endl;
     }
 }
-
+/*
 void Archivo::cargar(Grafo<Vuelo>* grafo){
     if(archivoAbierto){
     	string iataPartida;
@@ -82,3 +88,4 @@ void Archivo::cargar(Grafo<Vuelo>* grafo){
     }
 
 }
+*/

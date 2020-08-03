@@ -2,6 +2,7 @@
 #include "Programa.h"
 #include "Archivo.h"
 #include "excepcionEnArchivo.h"
+#include "ABB.h"
 
 using namespace std;
 
@@ -11,25 +12,26 @@ const int SALIR = 0;
 
 int main(int argc, char *argv []){
 
-    Archivo archivoAeropuertos(RUTA_AEROPUERTOS);
-    ABB<Aeropuerto*>* arbol;
+    Archivo archivoAeropuertos( RUTA_AEROPUERTOS ) ;
+    ABB<Aeropuerto*> arbol ;
 
-    Archivo archivoVuelos(RUTA_VUELOS);
-    Grafo<Vuelo>* grafo;
-
+ /*   Archivo archivoVuelos(RUTA_VUELOS) ;
+    Grafo<Vuelo>* grafo ;
+*/
     try
     {
         if(!archivoAeropuertos.estadoDeArchivo()){
-            throw ExcepcionEnArchivo();
+            throw ExcepcionEnArchivo() ;
         }
         else{
-            archivoAeropuertos.cargar(arbol);
+     //           archivoAeropuertos.cargar( arbol ) ;
+                cout<<"en esta seccion cargamos arbol !!"<< endl;
         }
     }
     catch(ExcepcionEnArchivo& e){
         cout << e.excepcionAeropuertos() << endl;
     }
-
+/*
     try
     {
         if(!archivoVuelos.estadoDeArchivo()){
@@ -37,21 +39,22 @@ int main(int argc, char *argv []){
         }
         else{
             archivoVuelos.cargar(grafo);
-            Programa programa;
+ */           Programa programa;
 
             do{
-                programa.mostrar_menu();
-                programa.elegir_opcion();
-                programa.abrirMenuInterno(grafo, arbol);
-            } while(programa.obtener_opcion() != SALIR){
-                //
+                programa.mostrarMenu();
+                programa.elegirOpcion();
+                programa.abrirMenuInterno(arbol) ;
             }
+            while(programa.obtenerOpcion()!= SALIR) ;
+
+  /*          }
         }
-    }
+   }
     catch(ExcepcionEnArchivo& l){
         cout << l.excepcionVuelos() << endl;
     }
-
+*/
     return 0;
 }
 

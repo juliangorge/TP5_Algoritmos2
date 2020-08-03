@@ -5,13 +5,13 @@
 #include <string>
 #include "Aeropuerto.h"
 #include "ABB.h"
-#include "Vuelo.h"
-#include "Grafo.h"
+//#include "Vuelo.h"
+//#include "Grafo.h"
 
-using namespace std;
+using namespace std ;
 
-class Archivo
-{
+class Archivo{
+
     private:
         ifstream archivo;
         bool archivoAbierto;
@@ -40,11 +40,11 @@ class Archivo
 
         // PRE: -
         // POST: Carga los datos del archivo en el arbol
-        void cargar(ABB<Aeropuerto*>* arbol);
+   //   void cargar(ABB<Aeropuerto*> &arbol);
 
         // PRE: -
         // POST: Carga los datos del archivo en el grafo
-        void cargar(Grafo<Vuelo>* grafo);
-}
+     //   void cargar(Grafo<Vuelo>* grafo);
+};
 
 #endif // ARCHIVO_H

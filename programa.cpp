@@ -1,26 +1,28 @@
 #include "programa.h"
 
-
 const string MSJ_RANGO_MENU = "\tOpcion invalida, por favor elija una opcion del menu [0-5]\n";
+const int SALIR = 0;
+const int CONSULTAR_AEROPUERTO = 1 ;
+const int ALTA_AEROPUERTO = 2 ;
+const int BAJA_AEROPUERTO = 3 ;
+const int MOSTRAR_AEROPUERTO_INORDEN = 4  ;
+const int MOSTRAR_AEROPUERTO_ABB = 5 ;
 
 
-Programa::Programa()
-{
-
+Programa::Programa(){
 }
 
-char Programa::obtenerOpcion()
-{
+char Programa::obtenerOpcion(){
     return opcion;
 }
 
 void Programa::mostrarMenu() {
     cout << "\n\t***************  MENU AEROPUERTO**************"<< endl << endl;
-    cout << "\t1. Mostrar por Aeropuerto" << endl;
+    cout << "\t1. Consultar Aeropuerto" << endl;
     cout << "\t2. Dar de Alta Aeropuerto" << endl;
     cout << "\t3. Dar de Baja Aeropuerto" << endl;
     cout << "\t4. Mostrar Aeropuertos (Recorrido In Orden)" << endl;
-    cout << "\t4. Mostrar Aeropuertos (Formato ABB)" << endl;
+    cout << "\t5. Mostrar Aeropuertos (Formato ABB)" << endl;
     cout << "\t0. Salir del programa" << endl;
 }
 
@@ -36,35 +38,36 @@ void Programa::elegirOpcion(){
 - mostrar todos los aeropuertos (recorrido in orden)
 - mostrar los aeropuertos conservando el formato del ABB*/
 
-void Programa::abrirMenuInterno(Lista<Aeropuertos*> &lista){
+void Programa::abrirMenuInterno(ABB<Aeropuerto*> arbol){
 
+    int posicion ;
     switch( opcion ){
-                    case CONSULTAR_AEROPUERTO:
+                    case CONSULTAR_AEROPUERTO:{
                                                 cout << " ingrese aeropuerto que desea consultar (? " <<endl;
-                                                cin >> dato;
+                                                cin >> posicion;
                                  //               mostrarAeropuerto(dato) ;
                                                 break;
-
-                    case ALTA_AEROPUERTO:
+                    }
+                    case ALTA_AEROPUERTO:{
                                    //         altaAeropuerto(dato) ;
                                             break;
-
-                    case BAJA_AEROPUERTO:
+                    }
+                    case BAJA_AEROPUERTO:{
                                     //        bajaAeropuerto(dato) ;
                                             break;
-
-                    case MOSTRAR_AEROPUERTO_INORDEN:
+                    }
+                    case MOSTRAR_AEROPUERTO_INORDEN:{
                                               //          mostrarAeropuertosInorden( ) ;  //mostrar in orden
                                                         break;
-
-                    case MOSTRAR_AEROPUERTO_ABB:
+                    }
+                    case MOSTRAR_AEROPUERTO_ABB:{
                                            //         mostrarAeropuertosAbb() ;  //mostrar abb
                                                     break;
-
-                    case SALIR:
+                    }
+                    case SALIR: {
                                 cout << MSJ_FIN_PROGRAMA << endl ;
                                 return;
-
+                    }
                     default:
                                 cout << MSJ_RANGO_MENU << endl ;
     }

@@ -2,6 +2,8 @@
 #define PROGRAMA_H_INCLUDED
 
 #include <iostream>
+#include "ABB.h"
+#include "Aeropuerto.h"
 
 using namespace std;
 
@@ -16,7 +18,7 @@ class Programa
 
     private:
 
-        char opcion;
+        int opcion;
 
     public:
 
@@ -38,7 +40,7 @@ class Programa
         //Descripcion:
         //PRE:
         //Post:
-        void abrirMenuInterno(Lista<Dato> &lista );
+        void abrirMenuInterno(ABB<Aeropuerto*> arbol);
 
         //Descripcion:
         //PRE:
@@ -48,7 +50,7 @@ class Programa
         //Descripcion: Muestra  lista completa
         //PRE: Ingresa una lista bien formada
         //Post: Muestra todos los elementos de dicha lista
-        void mostrarListaAeropuertos(Lista <Dato> &lista);
+      //  void mostrarListaAeropuertos();
 };
 
 
