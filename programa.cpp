@@ -43,9 +43,8 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*> arbol){
     int posicion ;
     switch( opcion ){
                     case CONSULTAR_AEROPUERTO:{
-                                                cout << " ingrese aeropuerto que desea consultar (? " <<endl;
-                                                cin >> posicion;
-                                 //               mostrarAeropuerto(dato) ;
+
+                                 //               mostrarAeropuerto(arbol) ;
                                                 break;
                     }
                     case ALTA_AEROPUERTO:{
@@ -71,6 +70,22 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*> arbol){
                     default:
                                 cout << MSJ_RANGO_MENU << endl ;
     }
+}
+/*
+void mostrarAeropuerto ( ABB<Aeropuerto*> arbol){
+
+     iata();
+
+     arbol.obtenerValor( iata() ) ;
+}
+
+string iata(){
+
+    string iata;
+
+    cout<<" Ingresar IATA" <<endl ;
+    cin >> iata ;
+    return iata;
 }
 
 /*
