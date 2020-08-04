@@ -1,7 +1,7 @@
 #ifndef ITERADOR_H_
 #define ITERADOR_H_
 
-#include "Nodo_Template.h"
+#include "NodoLista.h"
 
 // Iterador de listas
 template<class Dato>

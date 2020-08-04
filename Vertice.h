@@ -31,7 +31,7 @@ public:
 
 	// PRE: recibe un puntero a un vuelo creado
 	// POST: lo agrega a la lista del vertice
-	void agregarVuelo(Vuelo&);
+	void agregarVuelo(Vuelo* vuelo);
 
 	// PRE:
 	// POST: devuelve el codigo iata del vertice
@@ -39,15 +39,11 @@ public:
 
 	// PRE: recibe el codigo iata de un destino
 	// POST: devuelve un puntero al Vuelo correspondiente, si existe
-	Vuelo getVuelo(string destino);
+	Vuelo* getVuelo(string destino);
 
 	// PRE: recibe el codigo iata de un destino
 	// POST: devuelve true si existe un vuelo a ese destino
 	bool hayVuelo(string destino);
-
-	// PRE: recibe el codigo iata de un destino
-	// POST: borra el vuelo correspondiente
-	void borrarVuelo(string destino);
 };
 
 #endif /* TP5_ALGORITMOS2_VERTICE_H_ */
