@@ -7,7 +7,7 @@ const int ALTA_AEROPUERTO = 2 ;
 const int BAJA_AEROPUERTO = 3 ;
 const int MOSTRAR_AEROPUERTO_INORDEN = 4  ;
 const int MOSTRAR_AEROPUERTO_ABB = 5 ;
-const string MSJ_IATA= " Ingresar IATA" ;
+const string MSJ_IATA= "\n\tIngresar IATA: " ;
 
 
 Programa::Programa(){
@@ -85,7 +85,7 @@ string Programa:: iata(){
 
     string iata;
 
-    cout<< MSJ_IATA <<endl ;
+    cout<< MSJ_IATA  ;
     cin >> iata ;
 
     return iata;

@@ -11,10 +11,10 @@ template <class Dato>
 class ABB
 {
 private:
-    // attributes
+    // ATRIBUTOS
 	ABBNodo<Dato>* raiz;
 
-    // methods
+    // METODOS
     ABBNodo<Dato>* insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato);
     void imprimirInOrder(ABBNodo<Dato> * nodo);
     void armarColaPrioritaria(ABBNodo<Dato> * nodo, Cola<string*> colaDePrioridad[], unsigned prioridad);
@@ -28,57 +28,75 @@ private:
     void borrarTodo(ABBNodo<Dato>* nodo);
 
 public:
-    //methods
+    //metodos
 
-    // Creates an empty tree
+    // PRE: -
+    // POST: Crea un arbol vacio
     ABB();
 
-     // Adds a new node to the actual BST. If its the tree is empty
-     // the node inserted will be the root
+    // PRE: -
+    // POST: Agrega un nuevo nodo al actual ABB. Si el arbol esta vacio
+    // el nodo insertado sera la raiz
     void insertar(Clave clave, Dato dato);
 
-    // Prints all the data stored in the BST, sorted from the
-    // smallest value to the greatest value.
+    // PRE: -
+    // POST: Imprime toda la data almacenada en el ABB, ordenado desde el valor mas pequeño
+    // hasta el mas grande
     void imprimirInOrder();
 
-    // Prints all the data stored in the BST, sorted from the
-    // smallest value to the greatest value.
+    // PRE: -
+    // POST: Imprime toda la data almacenada en el ABB, ordenado desde el valor mas pequeño
+    // hasta el mas grande
     void imprimirEnAnchura();
 
-
-    // Finds a given value in the BST. If the key exists it returns
-    // TRUE, otherwise it returns FALSE.
+    // PRE: Clave bien formada
+    // POST: Encuentra un valor dado en el ABB. Si la clave existe, este devuelve
+    // TRUE, de forma contraria devuelve FALSE.
     bool buscar(Clave clave);
 
+    // PRE:
+    // POST:
     Dato obtenerDato(Clave clave);
 
+    // PRE:
+    // POST:
     void cambiarDato(Clave clave, Dato dato);
 
-    // Finds the minimum value that exist in the BST.
+    // PRE: -
+    // POST: Encuentra el minimo valor que existe en el ABB.
     Clave encontrarMinimo();
 
-    // Finds the maximum value that exist in the BST.
+    // POST: Encuentra el maximo valor que existe en el ABB.
     Clave encontrarMaximo();
 
+    // PRE: clave bien formada
     // Finds the successor of a given data value.
     Clave sucesor(Clave clave);
 
-    // Finds the predecessor of a given data value.
+    // PRE: clave bien formada
+    // POST: Encuentra el predecesor de un valor dado.
     Clave predecesor(Clave clave);
 
     // POST: devuelve la altura del arbol
     unsigned altura();
 
-    // Removes a given data from the BST
+    // PRE: clave bien formada
+    // POST: Remueve la data dada del ABB
     void remover(Clave clave);
 
+    // PRE:
+    // POST:
     ABBNodo<Dato>* getRaiz();
 
+    // PRE:
+    // POST:
     bool vacio();
 
-    // Deletes all the nodes in the BST
+    // POST: Borra todos los nodos del ABB
     void borrarTodo();
 
+    // PRE:
+    // POST:
     ~ABB();
 
 };

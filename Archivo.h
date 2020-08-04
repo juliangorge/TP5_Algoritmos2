@@ -24,6 +24,8 @@ class Archivo{
         //Destructor
         ~Archivo();
 
+        // PRE: Archivo abierto
+        // POST: Cierra archivo, y estado de archivoAbierto
         void cerrarArchivo();
 
         // PRE: -

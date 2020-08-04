@@ -54,8 +54,7 @@ class Programa
         //Post: Muestra el aeropuerto seleccionado
         void menuMostrarAeropuerto(ABB<Aeropuerto*> arbol) ;
 
-
-       //Descripcion: Devuelve el codigo IATA ingresado
+        //Descripcion: Devuelve el codigo IATA ingresado
         //PRE: -
         //Post: Devuelve el valor IATA ingresado del tipo string
         string iata();
