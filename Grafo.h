@@ -11,7 +11,7 @@ using namespace std;
 class Grafo
 {
 private:
-	Lista<Vertice> vertices;
+	Lista<Vertice*> vertices;
 
 public:
 
@@ -27,7 +27,11 @@ public:
 
 	// PRE: recibe la direccion de memoria de un vuelo creado.
 	// POST: si el vuelo parte de un vertice perteneciente, agrega el vuelo y devuelve true. Si no, no lo agrega y devuelve false.
-	bool agregarVuelo(Vuelo&);
+	bool agregarVuelo(Vuelo* vuelo);
+
+	// PRE: recibe el iata de un vertice.
+	// POST: devuelve un puntero a dicho vertice, si pertenece al grafo.
+	Vertice* getVertice(string iata);
 
 	// PRE: recibe un codigo iata.
 	// POST: devuelve true si existe un vertice del grafo con ese codigo y falso en caso contrario.
@@ -35,11 +39,11 @@ public:
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
 	// POST: devuelve un vertice con los vuelos que hacen el recorrido mas barato.
-	Vertice caminoMasBarato(string partida, string destino);
+	Vertice* caminoMasBarato(string partida, string destino);
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
 	// POST: devuelve un vertice con los vuelos que hacen el recorrido en menos horas.
-	Vertice caminoMasCorto(string partida, string destino);
+	Vertice* caminoMasCorto(string partida, string destino);
 
 private:
 	// PRE: recibe un puntero a la primera posicion del vector visitados.
@@ -48,7 +52,7 @@ private:
 
 	// PRE: recibe un puntero a la primera posicion del vector de distancias y de visitados.
 	// POST: devuelve la posicion del elemento no visitado con menor distancia.
-	int Grafo::minimoDistancia(float* distancia, bool* visitado);
+	int minimoDistancia(float* distancia, bool* visitado);
 };
 
 #endif /* TP5_ALGORITMOS2_GRAFO_H_ */

@@ -59,6 +59,10 @@ class Lista
         // POST: Devuelve tam (cantidad de nodos de la lista)
         unsigned getTam();
 
+        // PRE: Lista creada, recibe un dato
+        // POST: Devuelve la posicion del dato en la lista. Si el dato no pertenece, devuelve 0.
+        unsigned getPos(Dato dato);
+
         // POST: vacia la lista. si borrarDatos es verdadero borra los datos almacenados
         void vaciarLista(bool borrarDatos);
 
@@ -164,6 +168,25 @@ template<class Dato>
 unsigned Lista<Dato>::getTam()
 {
     return tam;
+}
+
+template<class Dato>
+unsigned Lista<Dato>::getPos(Dato dato)
+{
+    Nodo<Dato>* paux = primero;
+    bool encontrado = false;
+    unsigned i = 1;
+
+    while (i <= tam && !encontrado){
+        if (paux->getDato() == dato)
+            encontrado = true;
+        paux = paux->getSiguiente();
+        i++;
+    }
+    if (encontrado)
+        return (i - 1);
+    return 0;
+
 }
 
 template<class Dato>

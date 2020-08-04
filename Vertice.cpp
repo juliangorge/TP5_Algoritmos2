@@ -29,20 +29,24 @@ string Vertice::getIata(){
 
 Vuelo* Vertice::getVuelo(string destino){
 	Vuelo* aux;
-	for (int i = 0; i < vuelos.getTam(); ++i){
+	unsigned i = 0;
+	bool encontrado = false;
+
+	while (i < vuelos.getTam() && !encontrado){
 		aux = vuelos.getDato(i);
 		if (aux->getDestino() == destino)
-			return aux;
+			encontrado = true;
+		i++;
 	}
+	if (encontrado)
+		return aux;
 	return 0;
 }
 
 bool Vertice::hayVuelo(string destino){
-	Vuelo* aux;
-	for (int i = 1; i < vuelos.getTam(); ++i){
-		aux = vuelos.getDato(i);
-		if (aux->getDestino() == destino)
-			return true;
-	}
-	return false;
+	Vuelo* vuelo = getVuelo(destino);
+
+	if (vuelo == 0)
+		return false;
+	return true;
 }

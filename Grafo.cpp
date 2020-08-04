@@ -4,7 +4,6 @@
 const float INFINITO = numeric_limits<float>::max();
 
 Grafo::Grafo(){
-
 }
 
 Grafo::~Grafo(){
@@ -13,64 +12,80 @@ Grafo::~Grafo(){
 
 void Grafo::agregarVertice(string iata){
 	if (!hayVertice(iata)){ //podria no chequear y pedirlo como precondicion, seria menor la complejidad
-		Vertice vertice(iata);
-		vertices.insertar(vertice);
+		Vertice* nuevo = new Vertice(iata);
+		vertices.insertar(nuevo);
 	}
-}
-
-bool Grafo::hayVertice(string iata){
-	Vertice aux;
-
-	for (int i = 0; i < vertices.getTam(); ++i){
-		aux = vertices.getDato(i);
-		if (iata == aux.getPartida())
-			return true;
-	}
-	return false;
 }
  
-bool Grafo::agregarVuelo(Vuelo& vuelo){
-	Vertice vertice;
-	for (int i = 0; i < vertices.getTam(); ++i){
-		vertice = vertices.getDato(i);
-		if (vuelo.getPartida() == vertice.getIata()){
-			vertice.agregarVuelo(vuelo);
-			return true;
+bool Grafo::agregarVuelo(Vuelo* vuelo){
+	Vertice* aux;
+	unsigned i = 0;
+	bool agregado = false;
+
+	while (i < vertices.getTam() && !agregado){
+		aux = vertices.getDato(i);
+		if (vuelo->getPartida() == aux->getIata()){
+			aux->agregarVuelo(vuelo);
+			agregado = true;
 		}
 	}
-	return false;
+	return agregado;
+}
+
+Vertice* Grafo::getVertice(string iata){
+	Vertice* aux;
+	unsigned i = 0;
+	bool encontrado = false;
+
+	while (i < vertices.getTam() && !encontrado){
+		aux = vertices.getDato(i);
+		if (aux->getIata() == iata)
+			encontrado = true;
+		i++;
+	}
+	if (encontrado)
+		return aux;
+	return 0;
 }
  
-Vertice Grafo::caminoMasBarato(string partida, string destino){
+bool Grafo::hayVertice(string iata){
+	Vertice* vertice = getVertice(iata);
+
+	if (vertice == 0)
+		return false;
+	return true;
+}
+
+Vertice* Grafo::caminoMasBarato(string partida, string destino){
 
 }
  
-Vertice Grafo::caminoMasCorto(string partida, string destino){
-	Vertice resultado;
+Vertice* Grafo::caminoMasCorto(string partida, string destino){
+	Vertice* resultado;
 	int n = vertices.getTam();
-	Vertice raiz = getVertice(partida); //funcion de grafo que busca en la lista segun el iata
-	int posRaiz = vertices.getPos(raiz); //posicion de la raiz en la lista vertices, implementar en Lista.h
+	Vertice* raiz = getVertice(partida);
+	int posRaiz = vertices.getPos(raiz);
  
 	float distancia [n];
 	bool visitado [n];
 
-	Vertice vertice; //variables auxiliares
-	Vuelo vuelo;
+	Vertice* vertice; //variables auxiliares
+	Vuelo* vuelo;
 
-	for (int i = 1; i < n; ++i){ //inicializa las etiquetas
+	for (int i = 0; i < n; ++i){ //inicializa las etiquetas
 		vertice = vertices.getDato(i);
-		if (!raiz.hayVuelo( vertice.getIata() )){
+		if (!raiz->hayVuelo( vertice->getIata() )){
 			distancia[i] = INFINITO;
 		} else {
-			vuelo = raiz.getVuelo( vertice.getIata() );
-			distancia[i] = vuelo.getHoras();
+			vuelo = raiz->getVuelo( vertice->getIata() );
+			distancia[i] = vuelo->getHoras();
 		}
-		visto[i] = falso;
+		visitado[i] = false;
 	}
 	distancia[posRaiz] = 0;
 	visitado[posRaiz] = true; 
 	
-	Vertice actual;
+	Vertice* actual;
 	int pos;
 	while (!todosVisitados(visitado)){
 		pos = minimoDistancia(distancia, visitado);
@@ -78,26 +93,30 @@ Vertice Grafo::caminoMasCorto(string partida, string destino){
 		actual = vertices.getDato(pos);
 		for (int i = 1; i < n; ++i){ //recorro toda la lista para ver cuales son adyacentes al actual
 			vertice = vertices.getDato(i);
-			if (actual.hayVuelo( vertice.getIata() )){
-				vuelo = actual.getVuelo( vertice.getIata() );
-				if (distancia[i] > distancia[pos] + vuelo.getHoras())
-					distancia[i] = distancia[pos] + vuelo.getHoras();
+			if (actual->hayVuelo( vertice->getIata() )){
+				vuelo = actual->getVuelo( vertice->getIata() );
+				if (distancia[i] > distancia[pos] + vuelo->getHoras())
+					distancia[i] = distancia[pos] + vuelo->getHoras();
 			}
 		}
 	}
 }
 
 bool Grafo::todosVisitados(bool* visitado){
-	for (int i = 0; i < vertices.getTam(); ++i){
+	unsigned i = 0;
+	bool visitados = true;
+
+	while (i < vertices.getTam() && visitados){
 		if (!visitado[i])
-			return false;
+			visitados = false;
 	}
-	return true;
+	return visitados;
 }
 
 int Grafo::minimoDistancia(float* distancia, bool* visitado){
 	float minimo = INFINITO;
 	int pos = -1;
+
 	for (int i = 0; i < vertices.getTam(); ++i){
 	 	if (!visitado[i]){
 	 		if(distancia[i] < minimo){
