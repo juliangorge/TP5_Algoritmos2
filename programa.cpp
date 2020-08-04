@@ -13,7 +13,7 @@ const string MSJ_IATA= " Ingresar IATA" ;
 Programa::Programa(){
 }
 
-char Programa::obtenerOpcion(){
+int Programa::obtenerOpcion(){
     return opcion;
 }
 
@@ -41,7 +41,7 @@ void Programa::elegirOpcion(){
 
 void Programa::abrirMenuInterno(ABB<Aeropuerto*> arbol){
 
-    int posicion ;
+
     switch( opcion ){
                     case CONSULTAR_AEROPUERTO:{
 
@@ -49,19 +49,19 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*> arbol){
                                                 break;
                     }
                     case ALTA_AEROPUERTO:{
-                                   //         altaAeropuerto(dato) ;
+                                            altaAeropuerto(arbol) ;
                                             break;
                     }
                     case BAJA_AEROPUERTO:{
-                                    //        bajaAeropuerto(dato) ;
+                                           bajaAeropuerto(arbol) ;
                                             break;
                     }
                     case MOSTRAR_AEROPUERTO_INORDEN:{
-                                              //          mostrarAeropuertosInorden( ) ;  //mostrar in orden
+                                                        mostrarAeropuertosInorden( arbol ) ;  //mostrar in orden
                                                         break;
                     }
                     case MOSTRAR_AEROPUERTO_ABB:{
-                                           //         mostrarAeropuertosAbb() ;  //mostrar abb
+                                                    mostrarAeropuertosAbb(arbol) ;  //mostrar abb
                                                     break;
                     }
                     case SALIR: {
@@ -77,11 +77,11 @@ void Programa:: menuMostrarAeropuerto ( ABB<Aeropuerto*> arbol){
 
     //Programa* p=new Programa();
 
-      arbol.obtenerDato( iata() )->mostrarAeropuerto() ;
+    arbol.obtenerDato( iata() )->mostrarAeropuerto() ;
     cout << endl;
 }
 
-string Programa::iata(){
+string Programa:: iata(){
 
     string iata;
 
@@ -90,6 +90,24 @@ string Programa::iata(){
 
     return iata;
 }
+
+
+void Programa:: altaAeropuerto( ABB<Aeropuerto*> arbol){
+ //EN CONSTRUCCION. jackie
+}
+void Programa:: bajaAeropuerto( ABB<Aeropuerto*> arbol){
+ //EN CONSTRUCCION. jackie
+}
+
+void Programa:: mostrarAeropuertosInorden( ABB<Aeropuerto*> arbol){
+    //EN CONSTRUCCION. jackie
+}
+
+
+void Programa:: mostrarAeropuertosAbb( ABB<Aeropuerto*> arbol){
+    //EN CONSTRUCCION. jackie
+}
+
 
 /*
 void Programa::mostrarLista(Lista<Aeropuertos*> &lista){

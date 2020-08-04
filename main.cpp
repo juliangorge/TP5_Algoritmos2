@@ -10,6 +10,8 @@ const string RUTA_AEROPUERTOS = "aeropuertos.txt";
 const string RUTA_VUELOS = "vuelos.txt";
 const int SALIR = 0;
 
+
+
 int main(int argc, char *argv []){
 
     Archivo archivoAeropuertos( RUTA_AEROPUERTOS ) ;
