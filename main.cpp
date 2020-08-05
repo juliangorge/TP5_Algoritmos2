@@ -10,8 +10,6 @@ const string RUTA_AEROPUERTOS = "aeropuertos.txt";
 const string RUTA_VUELOS = "vuelos.txt";
 const int SALIR = 0;
 
-
-
 int main(int argc, char *argv []){
 
     Archivo archivoAeropuertos(RUTA_AEROPUERTOS);
@@ -19,6 +17,7 @@ int main(int argc, char *argv []){
 
     Archivo archivoVuelos(RUTA_VUELOS);
     Grafo grafo;
+
     try
     {
         if(!archivoAeropuertos.estadoDeArchivo()){
@@ -26,7 +25,7 @@ int main(int argc, char *argv []){
         }
         else{
             cout << "# En esta seccion cargamos arbol!!" << endl;
-            archivoAeropuertos.cargar(arbol);
+            archivoAeropuertos.cargar(&arbol);
         }
     }
     catch(ExcepcionEnArchivo& e){
