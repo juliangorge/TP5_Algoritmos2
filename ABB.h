@@ -3,7 +3,7 @@
 
 #include "ABBNodo.h"
 #include "Cola.h"
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
@@ -224,7 +224,7 @@ void ABB<Dato>::cambiarDato(Clave clave, Dato dato)
 {
 	ABBNodo<Dato>* resultado = buscar(this->raiz, clave);
 	if(resultado != 0)
-			resultado->setDato(dato);
+		resultado->setDato(dato);
 }
 
 template <class Dato>
