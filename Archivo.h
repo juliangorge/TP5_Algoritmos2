@@ -43,7 +43,7 @@ class Archivo{
 
         // PRE: -
         // POST: Carga los datos del archivo en el arbol
-        void cargar(ABB<Aeropuerto*> arbol);
+        void cargar(ABB<Aeropuerto*>* arbol);
 
         // PRE: -
         // POST: Carga los datos del archivo en el grafo

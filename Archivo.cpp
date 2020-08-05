@@ -27,7 +27,7 @@ bool Archivo::estadoDeArchivo(){
     return archivoAbierto;
 }
 
-void Archivo::cargar(ABB<Aeropuerto*> arbol){
+void Archivo::cargar(ABB<Aeropuerto*>* arbol){
     if(archivoAbierto){
 		string iata;
         string nombre;
@@ -50,7 +50,7 @@ void Archivo::cargar(ABB<Aeropuerto*> arbol){
 
             // Se crea el arbol y se insertan los datos del archivo
             Aeropuerto* aeropuerto = new Aeropuerto(nombre, ciudad, pais, stof(superficie), stoul(cantidadTerminales), stoul(destinosNacionales), stoul(destinosInternacionales));
-            arbol.insertar(iata, aeropuerto);
+            arbol->insertar(iata, aeropuerto);
 		}
         cout << "\tCarga de arbol correcta" << endl;
     }
