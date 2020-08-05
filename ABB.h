@@ -116,11 +116,11 @@ ABBNodo<Dato>* ABB<Dato>::insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato, 
     }
 
     else if (clave > nodo->getClave()) {
-    	nodo->setHijoDerecho(insertar(nodo->getHijoDerecho(), clave, dato), nodo);
+    	nodo->setHijoDerecho(insertar(nodo->getHijoDerecho(), clave, dato, insercionExitosa), nodo);
     }
 
     else if (clave < nodo->getClave()){
-    	nodo->setHijoIzquierdo(insertar(nodo->getHijoIzquierdo(), clave, dato), nodo);
+    	nodo->setHijoIzquierdo(insertar(nodo->getHijoIzquierdo(), clave, dato, insercionExitosa), nodo);
     }
     else
     {
