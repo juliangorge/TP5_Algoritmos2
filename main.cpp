@@ -46,7 +46,7 @@ int main(int argc, char *argv []){
             do{
                 programa.mostrarMenu();
                 programa.elegirOpcion();
-                programa.abrirMenuInterno(arbol) ;
+                programa.abrirMenuInterno(&arbol);
             }
             while(programa.obtenerOpcion()!= SALIR) ;
 
