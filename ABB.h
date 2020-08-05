@@ -15,7 +15,7 @@ private:
 	ABBNodo<Dato>* raiz;
 
     // METODOS
-    ABBNodo<Dato>* insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato);
+    ABBNodo<Dato>* insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato, bool* insercionExitosa);
     void imprimirInOrder(ABBNodo<Dato> * nodo);
     void armarColaPrioritaria(ABBNodo<Dato> * nodo, Cola<string*> colaDePrioridad[], unsigned prioridad);
     ABBNodo<Dato>* buscar(ABBNodo<Dato>* nodo, Clave clave);
@@ -36,8 +36,8 @@ public:
 
     // PRE: -
     // POST: Agrega un nuevo nodo al actual ABB. Si el arbol esta vacio
-    // el nodo insertado sera la raiz
-    void insertar(Clave clave, Dato dato);
+    // el nodo insertado sera la raiz. Devuleve true si se pudo insertar
+    bool insertar(Clave clave, Dato dato);
 
     // PRE: -
     // POST: Imprime toda la data almacenada en el ABB, ordenado desde el valor mas pequeño
@@ -108,10 +108,11 @@ ABB<Dato>::ABB()
 }
 
 template <class Dato>
-ABBNodo<Dato>* ABB<Dato>::insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato) {
+ABBNodo<Dato>* ABB<Dato>::insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato, bool* insercionExitosa) {
 
     if (nodo == 0) {
     	nodo = new ABBNodo<Dato>(clave, dato);
+    	*insercionExitosa = true;
     }
 
     else if (clave > nodo->getClave()) {
@@ -122,15 +123,19 @@ ABBNodo<Dato>* ABB<Dato>::insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato) 
     	nodo->setHijoIzquierdo(insertar(nodo->getHijoIzquierdo(), clave, dato), nodo);
     }
     else
-    	cout << "La clave "<< clave <<" ya existe, no se puede insertar el dato" << endl;
+    {
+    	*insercionExitosa = false;
+    }
     return nodo;
 }
 
 
 template <class Dato>
-void ABB<Dato>::insertar(Clave clave, Dato dato)
+bool ABB<Dato>::insertar(Clave clave, Dato dato)
 {
-    this->raiz = insertar(this->raiz, clave, dato);
+	bool insercionExitosa = true;
+    this->raiz = insertar(this->raiz, clave, dato,&insercionExitosa );
+    return insercionExitosa;
 }
 
 template <class Dato>
