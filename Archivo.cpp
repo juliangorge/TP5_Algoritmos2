@@ -1,5 +1,4 @@
 #include "Archivo.h"
-#include <iostream>
 
 using namespace std;
 
@@ -29,7 +28,6 @@ bool Archivo::estadoDeArchivo(){
 }
 
 void Archivo::cargar(ABB<Aeropuerto*> arbol){
-
     if(archivoAbierto){
 		string iata;
         string nombre;
