@@ -14,8 +14,16 @@ Archivo::Archivo(string ruta){
 }
 
 Archivo::~Archivo(){
+    cerrarArchivo();
+}
+
+void Archivo::cerrarArchivo(){
     archivo.close();
     archivoAbierto = false;
+}
+
+bool Archivo::finalArchivo(){
+    return archivo.eof();
 }
 
 bool Archivo::existenciaDeArchivo(string ruta){
@@ -38,7 +46,7 @@ void Archivo::cargar(ABB<Aeropuerto*>* arbol){
         string destinosNacionales;
         string destinosInternacionales;
 
-        while(!archivo.eof()){
+        while(!finalArchivo()){
 			getline(archivo, iata, ' ');
             getline(archivo, nombre, ' ');
             getline(archivo, ciudad, ' ');

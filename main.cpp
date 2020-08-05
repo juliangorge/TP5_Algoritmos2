@@ -40,7 +40,7 @@ int main(int argc, char *argv []){
         else{
             cout << "# En esta seccion cargamos el grafo!!" << endl;
             archivoVuelos.cargar(grafo);
-            
+
             Programa programa;
 
             do{
@@ -50,7 +50,7 @@ int main(int argc, char *argv []){
             }
             while(programa.obtenerOpcion()!= SALIR) ;
 
-  
+
         }
     }
     catch(ExcepcionEnArchivo& l){

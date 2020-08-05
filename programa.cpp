@@ -1,4 +1,6 @@
 #include "Programa.h"
+#include <cctype>
+#include <string>
 
 const string MSJ_RANGO_MENU = "\tOpcion invalida, por favor elija una opcion del menu [0-5]\n";
 const int SALIR = 0;
@@ -8,6 +10,7 @@ const int BAJA_AEROPUERTO = 3 ;
 const int MOSTRAR_AEROPUERTO_INORDEN = 4  ;
 const int MOSTRAR_AEROPUERTO_ABB = 5 ;
 const string MSJ_IATA= "\n\tIngresar IATA: " ;
+const int TAMANIO_IATA = 3 ;
 
 
 Programa::Programa(){
@@ -18,6 +21,7 @@ int Programa::obtenerOpcion(){
 }
 
 void Programa::mostrarMenu() {
+    cout << endl << endl ;
     cout << "\n\t***************  MENU AEROPUERTO**************"<< endl << endl;
     cout << "\t1. Consultar Aeropuerto" << endl;
     cout << "\t2. Dar de Alta Aeropuerto" << endl;
@@ -75,8 +79,6 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*>* arbol){
 
 void Programa:: menuMostrarAeropuerto ( ABB<Aeropuerto*> *arbol){
 
-    //Programa* p=new Programa();
-
     arbol->obtenerDato( iata() )->mostrarAeropuerto() ;
     cout << endl;
 }
@@ -87,9 +89,21 @@ string Programa:: iata(){
 
     cout<< MSJ_IATA  ;
     cin >> iata ;
+    pasarAMayuscula(iata, TAMANIO_IATA);
 
     return iata;
+
+
 }
+
+void Programa::pasarAMayuscula(string &palabra, int tamanioPalabra){
+
+	string palabraMinuscula;
+
+	for(int i=0 ; i < tamanioPalabra ; i++)
+                palabra[i] = toupper( palabra[i] );
+}
+
 
 
 void Programa:: altaAeropuerto( ABB<Aeropuerto*>* arbol){

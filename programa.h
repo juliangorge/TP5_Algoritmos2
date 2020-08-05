@@ -59,6 +59,10 @@ class Programa
         //Post: Devuelve el valor IATA ingresado del tipo string
         string iata();
 
+        //PRE: -
+        //Post: Devuelve la palabra convertida a mayuscula
+        void pasarAMayuscula(string &palabra, int tamanioPalabra);
+
         //Descripcion: Da de alta un aeropuerto
         //PRE: arbol bien formado
         //Post: Da de alta un aeropuerto

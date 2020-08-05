@@ -98,13 +98,23 @@ unsigned Aeropuerto::getDestinosInternacionales()
 
 void Aeropuerto::mostrarAeropuerto()
 {
-	cout << endl << nombre << endl;
-	cout << "Ciudad: " << ciudad << endl;
-	cout << "Pais: " << pais << endl;
-	cout << "Superficie: "<< superficie << endl;
-	cout << "Cantidad de Terminales: " << cantidadTerminales << endl;
-	cout << "Cantidad de Destinos Nacionales: " << destinosNacionales << endl;
-	cout << "Cantidad de Destinos Internacionales: " << destinosInternacionales << endl;
+    cout << endl << endl << endl;
+	cout << "\t---------------------------------------------------- "<< nombre <<"---------------------------------------------- "<< endl<<endl ;
+    cout << "\tCiudad:\t\tPais:\t\tSuperficie:\tCant.Terminales:\tCant.Destinos Nacionales:\tCant.Destinos Internacionales:" <<endl;
+    cout << "\t -------------------------------------------------------------------------------------------------------------- "<< endl<<endl ;
+    cout << "\t"<<ciudad <<"\t          "<<pais<<"\t     "<<superficie <<"\t\t"<< cantidadTerminales<<"\t\t\t"<<destinosNacionales <<"\t\t\t\t"<<destinosInternacionales << endl;
+
+/*
+    cout << endl << endl << endl;
+	cout << "\t--------- "<< nombre <<"-------- "<< endl<<endl ;
+	cout << "\tCiudad: " << ciudad << endl;
+	cout << "\tPais: " << pais << endl;
+	cout << "\tSuperficie: "<< superficie << endl;
+	cout << "\tCantidad de Terminales: " << cantidadTerminales << endl;
+	cout << "\tCantidad de Destinos Nacionales: " << destinosNacionales << endl;
+	cout << "\tCantidad de Destinos Internacionales: " << destinosInternacionales << endl << endl;
+	cout << "\t --------------------------------------- "<< endl<<endl ;
+*/
 }
 
 ostream& operator<<(ostream& salida, Aeropuerto& aeropuerto)
