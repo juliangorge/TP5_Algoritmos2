@@ -1,4 +1,4 @@
-#include "programa.h"
+#include "Programa.h"
 
 const string MSJ_RANGO_MENU = "\tOpcion invalida, por favor elija una opcion del menu [0-5]\n";
 const int SALIR = 0;

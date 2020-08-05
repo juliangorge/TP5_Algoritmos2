@@ -8,6 +8,13 @@ Vuelo::Vuelo()
 	horas = 0;
 }
 
+Vuelo::Vuelo(string iataPartida, string iataDestino, unsigned costo, float horas){
+	this->iataPartida = iataPartida;
+	this->iataDestino = iataDestino;
+	this->costo = costo;
+	this->horas = horas;
+}
+
 Vuelo::~Vuelo()
 {
 

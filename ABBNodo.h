@@ -1,5 +1,5 @@
-#ifndef ABBNODO_H
-#define ABBNODO_H
+#ifndef ABBNodo_H
+#define ABBNodo_H
 
 #include <iostream>
 
@@ -108,8 +108,7 @@ ABBNodo<Dato>::ABBNodo(Clave clave, Dato dato)
 template <class Dato>
 ABBNodo<Dato>::~ABBNodo()
 {
-	if (dato != 0)
-		delete dato;
+    //if(dato != 0) delete dato;
 }
 
 template <class Dato>
@@ -215,4 +214,4 @@ bool ABBNodo<Dato>::soloHijoIzquierdo()
     return (tieneHijoIzquierdo() && !tieneHijoDerecho());
 }
 
-#endif //ABBNODO_H
+#endif //ABBNodo_H

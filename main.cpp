@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Programa.h"
 #include "Archivo.h"
-#include "excepcionEnArchivo.h"
+#include "ExcepcionEnArchivo.h"
 #include "ABB.h"
 
 using namespace std;
@@ -23,11 +23,11 @@ int main(int argc, char *argv []){
     try
     {
         if(!archivoAeropuertos.estadoDeArchivo()){
-            throw ExcepcionEnArchivo() ;
+            throw ExcepcionEnArchivo();
         }
         else{
-     //           archivoAeropuertos.cargar( arbol ) ;
-                cout<<"en esta seccion cargamos arbol !!"<< endl;
+            cout << "En esta seccion cargamos arbol!!" << endl;
+            archivoAeropuertos.cargar(arbol);
         }
     }
     catch(ExcepcionEnArchivo& e){

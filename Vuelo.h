@@ -17,6 +17,7 @@ public:
 
 	// POST: crea un objeto Vuelo
 	Vuelo();
+	Vuelo(string iataPartida, string iataDestino, unsigned costo, float horas);
 
 	// POST: destruye un objeto Vuelo
 	~Vuelo();

@@ -11,6 +11,16 @@ Aeropuerto::Aeropuerto()
 	destinosInternacionales = 0;
 }
 
+Aeropuerto::Aeropuerto(string nombre, string ciudad, string pais, float superficie, unsigned cantidadTerminales, unsigned destinosNacionales, unsigned destinosInternacionales){
+	this->nombre = nombre;
+	this->ciudad = ciudad;
+	this->pais = pais;
+	this->superficie = superficie;
+	this->cantidadTerminales = cantidadTerminales;
+	this->destinosNacionales = destinosNacionales;
+	this->destinosInternacionales = destinosInternacionales;
+}
+
 Aeropuerto::~Aeropuerto()
 {
 

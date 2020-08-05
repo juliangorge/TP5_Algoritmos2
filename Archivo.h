@@ -5,10 +5,10 @@
 #include <string>
 #include "Aeropuerto.h"
 #include "ABB.h"
-//#include "Vuelo.h"
-//#include "Grafo.h"
+#include "Vuelo.h"
+#include "Grafo.h"
 
-using namespace std ;
+using namespace std;
 
 class Archivo{
 
@@ -26,7 +26,7 @@ class Archivo{
 
         // PRE: Archivo abierto
         // POST: Cierra archivo, y estado de archivoAbierto
-        void cerrarArchivo();
+        //void cerrarArchivo();
 
         // PRE: -
         // POST: Retorna true si el archivo esta abierto
@@ -34,7 +34,7 @@ class Archivo{
 
         // PRE: El archivo se encuentra abierto
         // POST: Retorna true si el archivo llega al final
-        bool finalArchivo();
+        //bool finalArchivo();
 
         // PRE: Ingresa string valido
         // POST: Retorna true si el archivo existe
@@ -42,11 +42,11 @@ class Archivo{
 
         // PRE: -
         // POST: Carga los datos del archivo en el arbol
-   //   void cargar(ABB<Aeropuerto*> &arbol);
+        void cargar(ABB<Aeropuerto*> arbol);
 
         // PRE: -
         // POST: Carga los datos del archivo en el grafo
-     //   void cargar(Grafo<Vuelo>* grafo);
+        void cargar(Grafo& grafo);
 };
 
 #endif // ARCHIVO_H

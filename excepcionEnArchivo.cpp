@@ -1,4 +1,4 @@
-#include "excepcionEnArchivo.h"
+#include "ExcepcionEnArchivo.h"
 
 const char * ExcepcionEnArchivo::excepcionAeropuertos() const throw()  {
     return "\tError: El archivo AEROPUERTOS no se pudo abrir correctamente";

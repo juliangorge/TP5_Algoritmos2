@@ -21,6 +21,8 @@ public:
 	// POST: crea un objeto Aeropuerto
 	Aeropuerto();
 
+	Aeropuerto(string nombre, string ciudad, string pais, float superficie, unsigned cantidadTerminales, unsigned destinosNacionales, unsigned destinosInternacionales);
+
 	// POST: destruye un objeto Aeropuerto
 	virtual ~Aeropuerto();
 

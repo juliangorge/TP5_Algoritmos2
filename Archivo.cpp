@@ -3,13 +3,11 @@
 
 using namespace std;
 
-const string MSJ_OK_APERTURA = "\tarchivo abierto";
-
 Archivo::Archivo(string ruta){
     if(existenciaDeArchivo(ruta)){
         archivo.open(ruta, ios::out);
         archivoAbierto = true;
-        cout << MSJ_OK_APERTURA << endl;
+        cout << "\tArchivo abierto" << endl;
     }
     else {
         archivoAbierto = false;
@@ -17,7 +15,8 @@ Archivo::Archivo(string ruta){
 }
 
 Archivo::~Archivo(){
-    cerrarArchivo();
+    archivo.close();
+    archivoAbierto = false;
 }
 
 bool Archivo::existenciaDeArchivo(string ruta){
@@ -25,67 +24,58 @@ bool Archivo::existenciaDeArchivo(string ruta){
     return archivo.good();
 }
 
-void Archivo::cerrarArchivo(){
-    archivo.close();
-    archivoAbierto = false;
-}
-
-bool Archivo::finalArchivo(){
-    return archivo.eof();
-}
-
 bool Archivo::estadoDeArchivo(){
     return archivoAbierto;
 }
-/*
-void Archivo::cargar(ABB<Aeropuerto*> &arbol){
+
+void Archivo::cargar(ABB<Aeropuerto*> arbol){
+
     if(archivoAbierto){
 		string iata;
         string nombre;
         string ciudad;
         string pais;
-        float superficie;
-        int cantidadTerminales;
-        int destinosNacionales;
-        int destinosInternacionales;
+        string superficie;
+        string cantidadTerminales;
+        string destinosNacionales;
+        string destinosInternacionales;
 
-        while(!finalArchivo()){
-			getline(archivo, iata);
-            getline(archivo, nombre);
-            getline(archivo, ciudad);
-			getline(archivo, pais);
-			getline(archivo, superficie);
-			getline(archivo, cantidadTerminales);
-			getline(archivo, destinosNacionales);
+        while(!archivo.eof()){
+			getline(archivo, iata, ' ');
+            getline(archivo, nombre, ' ');
+            getline(archivo, ciudad, ' ');
+			getline(archivo, pais, ' ');
+			getline(archivo, superficie, ' ');
+			getline(archivo, cantidadTerminales, ' ');
+			getline(archivo, destinosNacionales, ' ');
 			getline(archivo, destinosInternacionales);
 
             // Se crea el arbol y se insertan los datos del archivo
-            Aeropuerto* aeropuerto = new Aeropuerto(iata, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
-            arbol->insertar(iata, aeropuerto);
+            Aeropuerto* aeropuerto = new Aeropuerto(nombre, ciudad, pais, stof(superficie), stoul(cantidadTerminales), stoul(destinosNacionales), stoul(destinosInternacionales));
+            arbol.insertar(iata, aeropuerto);
 		}
-    cout<< "carga correcta"<<endl;
+        cout << "Carga correcta" << endl;
     }
 }
-/*
-void Archivo::cargar(Grafo<Vuelo>* grafo){
+
+void Archivo::cargar(Grafo& grafo){
     if(archivoAbierto){
     	string iataPartida;
     	string iataDestino;
-    	float costo;
-    	float horas;
+    	string costo;
+    	string horas;
 
-        while(!finalArchivo()){
-            getline(archivo, iataPartida);
-    		getline(archivo, iataDestino);
-    		getline(archivo, costo);
+        while(!archivo.eof()){
+            getline(archivo, iataPartida, ' ');
+    		getline(archivo, iataDestino, ' ');
+    		getline(archivo, costo, ' ');
     		getline(archivo, horas);
 
             // Se crea el grafo y se insertan los datos del archivo
-    		Vuelo* vuelo = new Vuelo(iataPartida, iataDestino, costo, horas);
-    		grafo.insertar(grafo.getIndice(iataPartida), grafo.getIndice(iataDestino), costo_vuelo);
+    		Vuelo* vuelo = new Vuelo(iataPartida, iataDestino, stoul(costo), stof(horas));
+            grafo.agregarVuelo(vuelo);
     	}
 
     }
 
 }
-*/
