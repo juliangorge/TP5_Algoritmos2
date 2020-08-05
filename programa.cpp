@@ -39,7 +39,7 @@ void Programa::elegirOpcion(){
 - mostrar todos los aeropuertos (recorrido in orden)
 - mostrar los aeropuertos conservando el formato del ABB*/
 
-void Programa::abrirMenuInterno(ABB<Aeropuerto*> arbol){
+void Programa::abrirMenuInterno(ABB<Aeropuerto*>* arbol){
 
 
     switch( opcion ){
@@ -73,11 +73,11 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*> arbol){
     }
 }
 
-void Programa:: menuMostrarAeropuerto ( ABB<Aeropuerto*> arbol){
+void Programa:: menuMostrarAeropuerto ( ABB<Aeropuerto*> *arbol){
 
     //Programa* p=new Programa();
 
-    arbol.obtenerDato( iata() )->mostrarAeropuerto() ;
+    arbol->obtenerDato( iata() )->mostrarAeropuerto() ;
     cout << endl;
 }
 
@@ -92,19 +92,19 @@ string Programa:: iata(){
 }
 
 
-void Programa:: altaAeropuerto( ABB<Aeropuerto*> arbol){
+void Programa:: altaAeropuerto( ABB<Aeropuerto*>* arbol){
  //EN CONSTRUCCION. jackie
 }
-void Programa:: bajaAeropuerto( ABB<Aeropuerto*> arbol){
+void Programa:: bajaAeropuerto( ABB<Aeropuerto*>* arbol){
  //EN CONSTRUCCION. jackie
 }
 
-void Programa:: mostrarAeropuertosInorden( ABB<Aeropuerto*> arbol){
+void Programa:: mostrarAeropuertosInorden( ABB<Aeropuerto*>* arbol){
     //EN CONSTRUCCION. jackie
 }
 
 
-void Programa:: mostrarAeropuertosAbb( ABB<Aeropuerto*> arbol){
+void Programa:: mostrarAeropuertosAbb( ABB<Aeropuerto*>* arbol){
     //EN CONSTRUCCION. jackie
 }
 

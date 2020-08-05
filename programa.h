@@ -42,7 +42,7 @@ class Programa
         //Descripcion:
         //PRE: arbol bien formado
         //Post: Accede a las diferentes partes del menu
-        void abrirMenuInterno(ABB<Aeropuerto*> arbol);
+        void abrirMenuInterno(ABB<Aeropuerto*>* arbol);
 
         //Descripcion: devuelve opcion ingresada
         //PRE: -
@@ -52,7 +52,7 @@ class Programa
         //Descripcion: Muestra aeropuerto
         //PRE: arbol bien formado
         //Post: Muestra el aeropuerto seleccionado
-        void menuMostrarAeropuerto(ABB<Aeropuerto*> arbol) ;
+        void menuMostrarAeropuerto(ABB<Aeropuerto*>* arbol) ;
 
         //Descripcion: Devuelve el codigo IATA ingresado
         //PRE: -
@@ -62,22 +62,22 @@ class Programa
         //Descripcion: Da de alta un aeropuerto
         //PRE: arbol bien formado
         //Post: Da de alta un aeropuerto
-        void altaAeropuerto(ABB<Aeropuerto*> arbol) ;
+        void altaAeropuerto(ABB<Aeropuerto*>* arbol) ;
 
         //Descripcion: Da de baja un aeropuerto
         //PRE: arbol bien formado
         //Post: Da de baja un aeropuerto
-        void bajaAeropuerto(ABB<Aeropuerto*> arbol) ;
+        void bajaAeropuerto(ABB<Aeropuerto*>* arbol) ;
 
         //Descripcion: muestra los aeropuertos con recorrido in orden
         //PRE: arbol bien formado
         //Post: muestra los aeropuertos  (recorrido in orden)
-        void mostrarAeropuertosInorden(ABB<Aeropuerto*> arbol) ;
+        void mostrarAeropuertosInorden(ABB<Aeropuerto*>* arbol) ;
 
         //Descripcion: muestra los aeropuertos (formato abb)
         //PRE: arbol bien formado
         //Post: muestra los aeropuertos (formato abb)
-        void mostrarAeropuertosAbb(ABB<Aeropuerto*> arbol) ;
+        void mostrarAeropuertosAbb(ABB<Aeropuerto*>* arbol) ;
 };
 
 
