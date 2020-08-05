@@ -101,25 +101,25 @@ public:
 
 };
 
-template <class Valor>
-ABB<Valor>::ABB()
+template <class Dato>
+ABB<Dato>::ABB()
 {
     this->raiz = 0;
 }
 
-template <class Valor>
-ABBNodo<Valor>* ABB<Valor>::insertar(ABBNodo<Valor>* nodo, Clave clave, Valor valor) {
+template <class Dato>
+ABBNodo<Dato>* ABB<Dato>::insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato) {
 
     if (nodo == 0) {
-    	nodo = new ABBNodo<Valor>(clave, valor);
+    	nodo = new ABBNodo<Dato>(clave, dato);
     }
 
     else if (clave > nodo->getClave()) {
-    	nodo->setHijoDerecho(insertar(nodo->getHijoDerecho(), clave, valor), nodo);
+    	nodo->setHijoDerecho(insertar(nodo->getHijoDerecho(), clave, dato), nodo);
     }
 
     else if (clave < nodo->getClave()){
-    	nodo->setHijoIzquierdo(insertar(nodo->getHijoIzquierdo(), clave, valor), nodo);
+    	nodo->setHijoIzquierdo(insertar(nodo->getHijoIzquierdo(), clave, dato), nodo);
     }
     else
     	cout << "La clave "<< clave <<" ya existe, no se puede insertar el dato" << endl;
