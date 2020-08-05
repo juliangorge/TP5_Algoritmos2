@@ -7,7 +7,7 @@ Archivo::Archivo(string ruta){
     if(existenciaDeArchivo(ruta)){
         archivo.open(ruta, ios::out);
         archivoAbierto = true;
-        cout << "\tArchivo abierto" << endl;
+        cout << "\tArchivo " << ruta << " abierto" << endl;
     }
     else {
         archivoAbierto = false;
@@ -54,7 +54,7 @@ void Archivo::cargar(ABB<Aeropuerto*> arbol){
             Aeropuerto* aeropuerto = new Aeropuerto(nombre, ciudad, pais, stof(superficie), stoul(cantidadTerminales), stoul(destinosNacionales), stoul(destinosInternacionales));
             arbol.insertar(iata, aeropuerto);
 		}
-        cout << "Carga correcta" << endl;
+        cout << "\tCarga de arbol correcta" << endl;
     }
 }
 
@@ -75,7 +75,7 @@ void Archivo::cargar(Grafo& grafo){
     		Vuelo* vuelo = new Vuelo(iataPartida, iataDestino, stoul(costo), stof(horas));
             grafo.agregarVuelo(vuelo);
     	}
-
+        cout << "\tCarga de grafo correcta" << endl;
     }
 
 }
