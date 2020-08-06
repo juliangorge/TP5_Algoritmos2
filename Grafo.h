@@ -38,11 +38,13 @@ public:
 	bool hayVertice(string iata);
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
-	// POST: devuelve un vector de vuelos que hacen el recorrido mas barato.
+	// POST: devuelve un vector dinamico de punteros a los vuelos que forman el camino mas barato. 
+	//		 Debe liberarse la memoria del vector luego de usarlo.
 	Vuelo** caminoMasBarato(string partida, string destino);
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
-	// POST: devuelve un vector de vuelos que hacen el recorrido en menos horas.
+	// POST: devuelve un vector dinamico de punteros a los vuelos que forman el camino mas corto.
+	//		 Debe liberarse la memoria del vector luego de usarlo.
 	Vuelo** caminoMasCorto(string partida, string destino);
 
 private:

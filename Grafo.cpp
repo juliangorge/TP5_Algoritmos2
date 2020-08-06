@@ -111,7 +111,7 @@ Vuelo** Grafo::caminoMasCorto(string partida, string destino){ //MODULARIZAR
 	
 Vuelo** Grafo::cargarVuelos(string* predecesor, string raiz, string final){
 	int n = vertices.getTam() + 1;
-	Vuelo** resultado = new Vuelo*[n - 1];
+	Vuelo** vuelos = new Vuelo*[n - 1];
 
 	Vertice* partida;
 	string destino = final;
@@ -120,14 +120,20 @@ Vuelo** Grafo::cargarVuelos(string* predecesor, string raiz, string final){
 	
 	while (destino != raiz){
 		partida = getVertice(predecesor[i]);
-		resultado[tope] = partida->getVuelo(destino);
+		vuelos[tope] = partida->getVuelo(destino);
 
 		destino = partida->getIata();
 		i = vertices.getPos( getVertice(destino) );
 		tope ++;
 	}
 	tope --;
-	//puedo borrar el vector resultado y crear otro dinamico con el tamanio justo.
+
+	Vuelo** resultado = new Vuelo*[tope];
+	for (int i = 0; i <= tope; ++i){ //libero el vector vuelos y creo otro dinamico con el tamanio justo.
+		resultado[i] = vuelos[i];
+	}
+	delete vuelos;
+
 	invertirVector(resultado, tope); //invierto el vector para que se pueda leer desde la salida hasta la llegada
 	return resultado;
 }
