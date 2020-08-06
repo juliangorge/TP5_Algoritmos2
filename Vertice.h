@@ -38,12 +38,14 @@ public:
 	string getIata();
 
 	// PRE: recibe el codigo iata de un destino
-	// POST: devuelve un puntero al Vuelo correspondiente, si existe
+	// POST: devuelve un puntero al Vuelo correspondiente, si existe. Si no, devuelve un puntero nulo.
 	Vuelo* getVuelo(string destino);
 
 	// PRE: recibe el codigo iata de un destino
 	// POST: devuelve true si existe un vuelo a ese destino
 	bool hayVuelo(string destino);
+
+	void listarVuelos();
 };
 
 #endif /* TP5_ALGORITMOS2_VERTICE_H_ */

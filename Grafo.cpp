@@ -19,25 +19,26 @@ void Grafo::agregarVertice(string iata){
  
 bool Grafo::agregarVuelo(Vuelo* vuelo){
 	Vertice* aux;
-	unsigned i = 0;
+	unsigned i = 1;
 	bool agregado = false;
 
-	while (i < vertices.getTam() && !agregado){
+	while (i <= vertices.getTam() && !agregado){
 		aux = vertices.getDato(i);
 		if (vuelo->getPartida() == aux->getIata()){
 			aux->agregarVuelo(vuelo);
 			agregado = true;
 		}
+		i++;
 	}
 	return agregado;
 }
 
 Vertice* Grafo::getVertice(string iata){
 	Vertice* aux;
-	unsigned i = 0;
+	unsigned i = 1;
 	bool encontrado = false;
 
-	while (i < vertices.getTam() && !encontrado){
+	while (i <= vertices.getTam() && !encontrado){
 		aux = vertices.getDato(i);
 		if (aux->getIata() == iata)
 			encontrado = true;
@@ -56,68 +57,95 @@ bool Grafo::hayVertice(string iata){
 	return true;
 }
 
-Vertice* Grafo::caminoMasBarato(string partida, string destino){
+Vuelo** Grafo::caminoMasBarato(string partida, string destino){
 
 }
  
-Vertice* Grafo::caminoMasCorto(string partida, string destino){
-	Vertice* resultado;
-	int n = vertices.getTam();
+Vuelo** Grafo::caminoMasCorto(string partida, string destino){ //MODULARIZAR
+	int n = vertices.getTam() + 1;
 	Vertice* raiz = getVertice(partida);
 	int posRaiz = vertices.getPos(raiz);
  
-	float distancia [n];
-	bool visitado [n];
+	float distancia [n]; //guarda la distancia desde la raiz al vertice de la posicion
+	bool visitado [n]; //guarda si el vertice de la posicion ya fue visitado
+	string predecesor [n]; //guarda para cada posicion el codigo iata del vertice que lo precede en el camino mas corto
 
-	Vertice* vertice; //variables auxiliares
-	Vuelo* vuelo;
+	Vertice* verticeAux;
+	Vuelo* vueloAux;
 
-	for (int i = 0; i < n; ++i){ //inicializa las etiquetas
-		vertice = vertices.getDato(i);
-		if (!raiz->hayVuelo( vertice->getIata() )){
-			distancia[i] = INFINITO;
+	for (int i = 1; i < n; ++i){ //inicializa las etiquetas
+		verticeAux = vertices.getDato(i);
+		if (!raiz->hayVuelo( verticeAux->getIata() )){
+			distancia[i] = INFINITO - 1;
 		} else {
-			vuelo = raiz->getVuelo( vertice->getIata() );
-			distancia[i] = vuelo->getHoras();
+			vueloAux = raiz->getVuelo( verticeAux->getIata() );
+			distancia[i] = vueloAux->getHoras();
+			predecesor[i] = raiz->getIata();
 		}
 		visitado[i] = false;
 	}
 	distancia[posRaiz] = 0;
 	visitado[posRaiz] = true; 
 	
-	Vertice* actual;
 	int pos;
-	while (!todosVisitados(visitado)){
+	Vertice* actual = raiz;
+	while (actual->getIata() != destino){
 		pos = minimoDistancia(distancia, visitado);
 		visitado[pos] = true;
 		actual = vertices.getDato(pos);
-		for (int i = 1; i < n; ++i){ //recorro toda la lista para ver cuales son adyacentes al actual
-			vertice = vertices.getDato(i);
-			if (actual->hayVuelo( vertice->getIata() )){
-				vuelo = actual->getVuelo( vertice->getIata() );
-				if (distancia[i] > distancia[pos] + vuelo->getHoras())
-					distancia[i] = distancia[pos] + vuelo->getHoras();
+		if (actual->getIata() != destino){
+			for (int i = 1; i < n; ++i){ //recorro toda la lista para ver cuales son adyacentes al actual
+				verticeAux = vertices.getDato(i);
+				if (actual->hayVuelo( verticeAux->getIata() )){
+					vueloAux = actual->getVuelo( verticeAux->getIata() );
+					if (distancia[i] > distancia[pos] + vueloAux->getHoras()){
+						distancia[i] = distancia[pos] + vueloAux->getHoras(); //actualizo el nuevo valor de distancia
+						predecesor[i] = actual->getIata();
+					}
+				}
 			}
 		}
 	}
+	return cargarVuelos(predecesor, partida, destino); //se cargan los vuelos buscando cada uno segun el vector predecesores. Devuelve un vector q se lee hasta llegar al destino 
+} //usar una lista podria traer problemas con el destructor, destruye la direccion de memoria original?
+	
+Vuelo** Grafo::cargarVuelos(string* predecesor, string raiz, string final){
+	int n = vertices.getTam() + 1;
+	Vuelo** resultado = new Vuelo*[n - 1];
+
+	Vertice* partida;
+	string destino = final;
+	int i = vertices.getPos( getVertice(final) ); 
+	int tope = 0; //tamano logico del vector
+	
+	while (destino != raiz){
+		partida = getVertice(predecesor[i]);
+		resultado[tope] = partida->getVuelo(destino);
+
+		destino = partida->getIata();
+		i = vertices.getPos( getVertice(destino) );
+		tope ++;
+	}
+	tope --;
+	//puedo borrar el vector resultado y crear otro dinamico con el tamanio justo.
+	invertirVector(resultado, tope); //invierto el vector para que se pueda leer desde la salida hasta la llegada
+	return resultado;
 }
 
-bool Grafo::todosVisitados(bool* visitado){
-	unsigned i = 0;
-	bool visitados = true;
-
-	while (i < vertices.getTam() && visitados){
-		if (!visitado[i])
-			visitados = false;
+void Grafo::invertirVector(Vuelo** resultado, int tope){
+	Vuelo* aux;
+	for (int i = 0; i < (tope + 1)/ 2; ++i){
+		aux = resultado[i];
+		resultado[i] = resultado[tope - i];
+		resultado[tope - i] = aux;
 	}
-	return visitados;
 }
 
 int Grafo::minimoDistancia(float* distancia, bool* visitado){
 	float minimo = INFINITO;
 	int pos = -1;
 
-	for (int i = 0; i < vertices.getTam(); ++i){
+	for (int i = 1; (i < vertices.getTam() + 1); ++i){
 	 	if (!visitado[i]){
 	 		if(distancia[i] < minimo){
 	 			minimo = distancia[i];

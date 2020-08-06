@@ -38,21 +38,22 @@ public:
 	bool hayVertice(string iata);
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
-	// POST: devuelve un vertice con los vuelos que hacen el recorrido mas barato.
-	Vertice* caminoMasBarato(string partida, string destino);
+	// POST: devuelve un vector de vuelos que hacen el recorrido mas barato.
+	Vuelo** caminoMasBarato(string partida, string destino);
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
-	// POST: devuelve un vertice con los vuelos que hacen el recorrido en menos horas.
-	Vertice* caminoMasCorto(string partida, string destino);
+	// POST: devuelve un vector de vuelos que hacen el recorrido en menos horas.
+	Vuelo** caminoMasCorto(string partida, string destino);
 
 private:
-	// PRE: recibe un puntero a la primera posicion del vector visitados.
-	// POST: devuelve true si todas las posiciones del vector son true.
-	bool todosVisitados(bool* visitado);
 
 	// PRE: recibe un puntero a la primera posicion del vector de distancias y de visitados.
 	// POST: devuelve la posicion del elemento no visitado con menor distancia.
 	int minimoDistancia(float* distancia, bool* visitado);
+
+	Vuelo** cargarVuelos(string* predecesor, string raiz, string final);
+	
+	void invertirVector(Vuelo** resultado, int tam);
 };
 
 #endif /* TP5_ALGORITMOS2_GRAFO_H_ */
