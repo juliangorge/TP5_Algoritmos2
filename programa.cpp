@@ -1,6 +1,8 @@
 #include "Programa.h"
 #include <cctype>
 #include <string>
+#include "ExcepcionEnArchivo.h"
+#include <exception>
 
 const string MSJ_RANGO_MENU = "\tOpcion invalida, por favor elija una opcion del menu [0-5]\n";
 const int SALIR = 0;
@@ -11,6 +13,21 @@ const int MOSTRAR_AEROPUERTO_INORDEN = 4  ;
 const int MOSTRAR_AEROPUERTO_ABB = 5 ;
 const string MSJ_IATA= "\n\tIngresar IATA: " ;
 const int TAMANIO_IATA = 3 ;
+const string MSJ_NOMBRE= "\tNombre: " ;
+const string MSJ_CIUDAD= "\tCiudad: " ;
+const string MSJ_PAIS= "\tPais: " ;
+const string MSJ_SUPERFICIE= "\tSuperficie: " ;
+const string MSJ_TERMINALES= "\tTerminales: " ;
+const string MSJ_NACIONALES= "\tCantidad Destinos Nacionales: " ;
+const string MSJ_INTERNACIONALES= "\tCantidad Destinos Internacionales: " ;
+const string MSJ_REMOCION_CORRECTA = "\tIATA removido con Exito";
+const string MSJ_IATA_EXISTE= "\n\tERROR: IATA Existente" ;
+const string MSJ_REMOCION_INCORRECTA = "\tERROR: IATA INEXISTENTE";
+const string MSJ_AEROPUERTO_INEXISTENTE = "\n\tATENCION: El aeropuerto no es valido";
+const string MSJ_MENU="\n\n\t\t ---------- M E N U -------------\n\n\t(1) MENU AEROPUERTO\n\t(2) MENU VUELOS\n" ;
+const int AEROPUERTO= 1;
+const int VUELOS= 2 ;
+
 
 
 Programa::Programa(){
@@ -34,14 +51,8 @@ void Programa::mostrarMenu() {
 void Programa::elegirOpcion(){
     cout << MSJ_OPCION;
     cin >> opcion;
+    cout <<endl << endl << endl;
 }
-
-/*
-- consultar por un aeropuerto en particular
-- dar de alta un nuevo aeropuerto
-- dar de baja a alguno
-- mostrar todos los aeropuertos (recorrido in orden)
-- mostrar los aeropuertos conservando el formato del ABB*/
 
 void Programa::abrirMenuInterno(ABB<Aeropuerto*>* arbol){
 
@@ -74,19 +85,30 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*>* arbol){
                     }
                     default:
                                 cout << MSJ_RANGO_MENU << endl ;
+
     }
+
 }
 
 void Programa:: menuMostrarAeropuerto ( ABB<Aeropuerto*> *arbol){
+     string iataIngresado= iata();
 
-    arbol->obtenerDato( iata() )->mostrarAeropuerto() ;
-    cout << endl;
+    if (existeIATA(arbol, iataIngresado))
+            arbol->obtenerDato(iataIngresado) -> mostrarAeropuerto();
+    else
+            cout << MSJ_AEROPUERTO_INEXISTENTE ;
+    cout <<endl << endl;
 }
+
+
+bool Programa::existeIATA( ABB<Aeropuerto*> *arbol, string iata){
+    return (arbol->obtenerDato(iata));
+}
+
 
 string Programa:: iata(){
 
     string iata;
-
     cout<< MSJ_IATA  ;
     cin >> iata ;
     pasarAMayuscula(iata, TAMANIO_IATA);
@@ -107,32 +129,116 @@ void Programa::pasarAMayuscula(string &palabra, int tamanioPalabra){
 
 
 void Programa:: altaAeropuerto( ABB<Aeropuerto*>* arbol){
- //EN CONSTRUCCION. jackie
-}
-void Programa:: bajaAeropuerto( ABB<Aeropuerto*>* arbol){
- //EN CONSTRUCCION. jackie
+
+   string iataIngresado ;
+   iataIngresado = iata();
+
+   if (existeIATA(arbol, iataIngresado)){
+        cout <<MSJ_IATA_EXISTE<< endl;
+        altaAeropuerto(arbol);
+   }
+
+   Aeropuerto* aeropuerto = new Aeropuerto;
+   cargarAeropuerto(aeropuerto);
+   arbol->insertar( iataIngresado, aeropuerto);
+
 }
 
+
+void Programa:: cargarAeropuerto( Aeropuerto* aeropuerto){
+
+    aeropuerto->setNombre (cargarString( MSJ_NOMBRE )) ;
+    aeropuerto->setCiudad( cargarString( MSJ_CIUDAD ));
+    aeropuerto->setPais( cargarString( MSJ_PAIS ));
+    aeropuerto->setSuperficie( cargarFloat( MSJ_SUPERFICIE ));
+    aeropuerto->setCantidadTerminales( cargarUnsigned( MSJ_TERMINALES ));
+    aeropuerto->setDestinosNacionales( cargarUnsigned( MSJ_NACIONALES ));
+    aeropuerto->setDestinosInternacionales( cargarUnsigned( MSJ_INTERNACIONALES ));
+}
+
+string Programa::cargarString( string mensaje){
+    string sDato;
+    cout << mensaje;
+    cin >> sDato ;
+    return sDato ;
+}
+
+
+float Programa::cargarFloat( string mensaje){
+    float fDato;
+    cout << mensaje;
+    cin >> fDato ;
+    return fDato ;
+}
+
+unsigned Programa::cargarUnsigned( string mensaje){
+    unsigned uDato;
+    cout<< mensaje;
+    cin>> uDato ;
+    return uDato ;
+
+}
+
+void Programa:: bajaAeropuerto( ABB<Aeropuerto*>* arbol){
+
+   string iataIngresado = iata();
+
+   if ( existeIATA(arbol, iataIngresado)){
+        arbol->remover(iataIngresado);
+        cout << MSJ_REMOCION_CORRECTA <<endl;
+   }
+   else {
+        cout << MSJ_REMOCION_INCORRECTA << endl ;
+        bajaAeropuerto(arbol);
+    }
+}
+
+
+
 void Programa:: mostrarAeropuertosInorden( ABB<Aeropuerto*>* arbol){
-    //EN CONSTRUCCION. jackie
+    arbol->imprimirInOrder();
 }
 
 
 void Programa:: mostrarAeropuertosAbb( ABB<Aeropuerto*>* arbol){
-    //EN CONSTRUCCION. jackie
+    arbol->imprimirEnAnchura();
 }
 
 
-/*
-void Programa::mostrarLista(Lista<Aeropuertos*> &lista){
 
-    cout << endl << MSJ_AEROPUERTOS << endl;
+void Programa::eleccionMenu( ABB<Aeropuerto*>* arbol, Grafo grafo){
 
-    if ( !lista.listaVacia() ){
-        for ( int i = 1; i <= lista.obtenerTam(); i++ ){
-            cout << i  << ". " << endl;
-            lista.obtenerDato(i)->mostrarAeropuertos();
-            cout << endl;
-        }
-    }
-}*/
+    int opcionMenu;
+
+    cout<< MSJ_MENU<<endl ;
+    cout<<"\tOpcion: " ;
+    cin>> opcionMenu;
+
+    switch(opcionMenu){
+
+                case AEROPUERTO: menuAeropuerto(arbol);
+                                 break;
+
+                case VUELOS:    menuVuelos(grafo);
+                                break;
+                default : break;
+   }
+}
+
+
+void Programa::menuAeropuerto(ABB<Aeropuerto*>* arbol){
+
+
+    do{
+               mostrarMenu();
+               elegirOpcion();
+               abrirMenuInterno(arbol);
+            }
+            while(obtenerOpcion()!= SALIR) ;
+
+}
+
+void Programa:: menuVuelos (Grafo grafo){
+
+cout<<"EN CONSTRUCCION.JACKIE"<<endl;
+}

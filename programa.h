@@ -4,6 +4,7 @@
 #include <iostream>
 #include "ABB.h"
 #include "Aeropuerto.h"
+#include "Grafo.h"
 
 
 using namespace std;
@@ -49,6 +50,10 @@ class Programa
         //Post: devuelve opcion ingresada
         int obtenerOpcion();
 
+        void eleccionMenu( ABB<Aeropuerto*>* arbol, Grafo grafo);
+        void menuAeropuerto(ABB<Aeropuerto*>* arbol);
+        void menuVuelos (Grafo grafo);
+
         //Descripcion: Muestra aeropuerto
         //PRE: arbol bien formado
         //Post: Muestra el aeropuerto seleccionado
@@ -67,6 +72,26 @@ class Programa
         //PRE: arbol bien formado
         //Post: Da de alta un aeropuerto
         void altaAeropuerto(ABB<Aeropuerto*>* arbol) ;
+
+        //PRE: arbol bien formado
+        //Post: Me devuelve un true si el codigo IATA ya existe, forma contraria devuelve false
+        bool existeIATA( ABB<Aeropuerto*> *arbol, string iata) ;
+
+        //PRE:
+        //Post: Metodo encargado de cargar todos los atributos de la clase aeropuerto
+        void cargarAeropuerto( Aeropuerto* aeropuerto);
+
+        //PRE:
+        //Post: Devuelve el string ingresado
+        string cargarString( string mensaje);
+
+        //PRE:
+        //Post: Devuelve el valor unsigned ingresado
+        unsigned cargarUnsigned( string mensaje);
+
+        //PRE:
+        //Post: Devuelve el valor float ingresado
+        float cargarFloat( string mensaje) ;
 
         //Descripcion: Da de baja un aeropuerto
         //PRE: arbol bien formado

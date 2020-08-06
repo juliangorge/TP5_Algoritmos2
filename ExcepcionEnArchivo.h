@@ -14,6 +14,7 @@ class ExcepcionEnArchivo: public exception{
         const char* excepcionAeropuertos() const throw() ;
         const char* excepcionVuelos() const throw() ;
 
+
 };
 
 #endif // EXCEPCIONENARCHIVO_H_INCLUDED

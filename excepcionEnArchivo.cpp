@@ -7,3 +7,6 @@ const char * ExcepcionEnArchivo::excepcionAeropuertos() const throw()  {
 const char * ExcepcionEnArchivo::excepcionVuelos() const throw() {
     return "\tError: El archivo VUELOS no se pudo abrir correctamente. Fin del programa";
 }
+
+
+

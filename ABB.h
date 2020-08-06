@@ -145,8 +145,8 @@ void ABB<Dato>::imprimirInOrder(ABBNodo<Dato>* nodo)
     {
     	imprimirInOrder(nodo->getHijoIzquierdo());
 
-    	cout << endl << "Clave: "<< nodo->getClave() << endl;
-        cout<<*(nodo->getDato())<<endl;
+    	cout << endl << "\tCodigo IATA: "<< nodo->getClave() << endl;
+        cout<<"\t"<<*(nodo->getDato())<<endl;
 
         imprimirInOrder(nodo->getHijoDerecho());
     }
@@ -185,7 +185,7 @@ void ABB<Dato>::imprimirEnAnchura()
 			while(!colaDePrioridad[i].colaVacia())
 			{
 				aux = (colaDePrioridad[i].bajaDato());
-				cout << *aux << " ";
+				cout <<"\t"<< *aux << " ";
 				delete aux;
 			}
 			cout << endl;
