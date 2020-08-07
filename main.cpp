@@ -14,6 +14,8 @@ const int SALIR = 0;
 const string MSJ_CARGA_GRAFO= "# En esta seccion cargamos el grafo!!" ;
 const string MSJ_CARGA_ARBOL="# En esta seccion cargamos arbol!!" ;
 
+
+
 int main(int argc, char *argv []){
 
     Archivo archivoAeropuertos(RUTA_AEROPUERTOS);

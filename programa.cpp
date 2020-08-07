@@ -4,6 +4,8 @@
 #include "ExcepcionEnArchivo.h"
 #include <exception>
 
+
+const string MSJ_RANGO= = "\tOpcion invalida";
 const string MSJ_RANGO_MENU = "\tOpcion invalida, por favor elija una opcion del menu [0-5]\n";
 const int SALIR = 0;
 const int CONSULTAR_AEROPUERTO = 1 ;
@@ -227,18 +229,77 @@ void Programa::eleccionMenu( ABB<Aeropuerto*>* arbol, Grafo grafo){
 
 
 void Programa::menuAeropuerto(ABB<Aeropuerto*>* arbol){
-
-
     do{
                mostrarMenu();
                elegirOpcion();
                abrirMenuInterno(arbol);
-            }
-            while(obtenerOpcion()!= SALIR) ;
+      }
+    while(obtenerOpcion()!= SALIR) ;
 
 }
 
 void Programa:: menuVuelos (Grafo grafo){
 
-cout<<"EN CONSTRUCCION.JACKIE"<<endl;
+    do{
+            mostrarMenuVuelos();
+            elegirOpcion();
+            abrirMenuInternoVuelos(grafo);
+    }
+    while (obtenerOpcion()!= SALIR) ;
 }
+
+
+
+void mostrarMenuVuelos(){
+ cout << endl << endl ;
+    cout << "\n\t***************  MENU VUELOS**************"<< endl << endl;
+    cout << "\t1. Consultar Vuelos" << endl;
+    cout << "\t0. Salir del programa" << endl;
+
+}
+
+
+
+void abrirMenuInternoVuelos(Grafo grafo){
+
+       switch(opcion){
+
+
+                case CONSULTA_VUELOS:    consultarVuelos();
+                                         elegirOpcion();
+                                         abrirMenu2InternoVuelos(grafo);
+                                         break;
+
+                case SALIR:  cout << MSJ_FIN_PROGRAMA << endl ;
+                             return;
+
+       }
+}
+
+void  consultarVuelos(){
+    cout << "\n\t*************** CONSULTAR VUELOS**************"<< endl << endl;
+    cout << "\t1. Menor Costo" << endl;
+    cout << "\t2. Menor Duracion" << endl;
+    cout << "\t0. Salir del programa" << endl;
+
+}
+
+void abrirMenu2InternoVuelos(Grafo grafo){
+
+        switch(opcion){
+
+
+                case CONSULTA_VUELOS:    consultarVuelos();
+                                         elegirOpcion();
+                                         abrirMenu2InternoVuelos(grafo);
+                                         break;
+
+                case SALIR:  cout << MSJ_FIN_PROGRAMA << endl ;
+                             return;
+                default:
+                         cout << MSJ_RANGO << endl ;
+        }
+
+}
+
+

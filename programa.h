@@ -12,7 +12,7 @@ using namespace std;
 
 const string MSJ_OPCION = "\n\tIngrese la opcion que desea: ";
 const string MSJ_PELICULAS = "\t******** Aeropuertos ********  ";
-const string MSJ_FIN_PROGRAMA = "Fin del programa";
+const string MSJ_FIN_PROGRAMA = "\t---- Fin del programa ---";
 
 
 
@@ -107,6 +107,10 @@ class Programa
         //PRE: arbol bien formado
         //Post: muestra los aeropuertos (formato abb)
         void mostrarAeropuertosAbb(ABB<Aeropuerto*>* arbol) ;
+
+        void mostrarMenuVuelos();
+
+        void abrirMenuInternoVuelos(Grafo grafo);
 };
 
 
