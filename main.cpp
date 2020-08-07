@@ -47,8 +47,8 @@ int main(int argc, char *argv []){
             cout <<MSJ_CARGA_GRAFO << endl;
             archivoVuelos.cargar(grafo);
 
-            Programa programa;
-            programa.eleccionMenu(&arbol, grafo);
+            Programa menuPrincipal;
+            menuPrincipal.manejoMenuPrincipal(&arbol, grafo);
 
         }
     }

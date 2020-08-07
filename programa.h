@@ -54,6 +54,8 @@ class Programa
         void menuAeropuerto(ABB<Aeropuerto*>* arbol);
         void menuVuelos (Grafo grafo);
 
+
+
         //Descripcion: Muestra aeropuerto
         //PRE: arbol bien formado
         //Post: Muestra el aeropuerto seleccionado
@@ -111,6 +113,18 @@ class Programa
         void mostrarMenuVuelos();
 
         void abrirMenuInternoVuelos(Grafo grafo);
+
+        void mostrarMenuPrincipal ();
+        void  consultarVuelos();
+        void  abrirMenu2InternoVuelos(Grafo grafo);
+        void  menorCostoVuelos(Grafo grafo);
+        void  menuInternoCostoVuelos() ;
+        void  menorDuracionVuelos();
+        void  menuInternoDuracionVuelos() ;
+        void iataOrigenDestino(string &iataOrigen, string &iataDestino);
+
+        void manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo grafo);
+        bool validacionExisteIATA(ABB<Aeropuerto*>* arbol, string iataIngresado);
 };
 
 
