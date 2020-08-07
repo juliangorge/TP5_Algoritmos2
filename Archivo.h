@@ -25,17 +25,9 @@ class Archivo{
         //Destructor
         ~Archivo();
 
-        // PRE: Archivo abierto
-        // POST: Cierra archivo, y estado de archivoAbierto
-        //void cerrarArchivo();
-
         // PRE: -
         // POST: Retorna true si el archivo esta abierto
         bool estadoDeArchivo();
-
-        // PRE: El archivo se encuentra abierto
-        // POST: Retorna true si el archivo llega al final
-        //bool finalArchivo();
 
         // PRE: Ingresa string valido
         // POST: Retorna true si el archivo existe
