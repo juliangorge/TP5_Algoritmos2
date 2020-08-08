@@ -14,7 +14,7 @@ const int ALTA_AEROPUERTO = 2 ;
 const int BAJA_AEROPUERTO = 3 ;
 const int MOSTRAR_AEROPUERTO_INORDEN = 4  ;
 const int MOSTRAR_AEROPUERTO_ABB = 5 ;
-const string MSJ_IATA= "\n\tIngresar IATA: " ;
+const string MSJ_IATA= "\tIngresar IATA: " ;
 const int TAMANIO_IATA = 3 ;
 const string MSJ_NOMBRE= "\tNombre: " ;
 const string MSJ_CIUDAD= "\tCiudad: " ;
@@ -29,6 +29,9 @@ const string MSJ_REMOCION_INCORRECTA = "\tERROR: IATA INEXISTENTE";
 const string MSJ_AEROPUERTO_INEXISTENTE = "\n\tATENCION: El aeropuerto no es valido";
 const string  MSJ_MENOR_COSTO= "\n\t  -------- VUELOS MENOR COSTO -------" ;
 const string  MSJ_MENOR_DURACION ="\n\t  --------  VUELOS MENOR DURACION  -------" ;
+const string  MSJ_ORIGEN_IATA= "\tORIGEN  ";
+const string  MSJ_DESTINO_IATA= "\tDESTINO  ";
+
 const int AEROPUERTO= 1;
 const int VUELOS= 2 ;
 const int MENOR_COSTO = 1;
@@ -133,14 +136,12 @@ void Programa::pasarAMayuscula(string &palabra, int tamanioPalabra){
 }
 
 bool Programa:: validacionExisteIATA(ABB<Aeropuerto*>* arbol, string iataIngresado){
-// string iataIngresado ;
-// iataIngresado = iata();
 
    if (existeIATA(arbol, iataIngresado)){
        cout <<MSJ_IATA_EXISTE<< endl;
-       return true;
-}
-return false;
+           return true;
+    }
+    return false;
 }
 
 void Programa:: altaAeropuerto( ABB<Aeropuerto*>* arbol){
@@ -148,11 +149,7 @@ void Programa:: altaAeropuerto( ABB<Aeropuerto*>* arbol){
    string iataIngresado ;
    iataIngresado = iata();
 
-  /* if (existeIATA(arbol, iataIngresado)){
-       cout <<MSJ_IATA_EXISTE<< endl;
-       altaAeropuerto(arbol);
 
-   }*/
   if ( validacionExisteIATA( arbol,iataIngresado)==false){
         Aeropuerto* aeropuerto = new Aeropuerto;
        cout<<endl <<endl;
@@ -246,7 +243,7 @@ void Programa::eleccionMenu( ABB<Aeropuerto*>* arbol, Grafo grafo){
                 case SALIR:  return ;
                 default : break;
    }
- //  eleccionMenu(arbol, grafo);
+
 }
 
 
@@ -358,8 +355,13 @@ void Programa:: menorCostoVuelos(Grafo grafo){
 
 void Programa:: iataOrigenDestino(string &iataOrigen, string &iataDestino){
 
-    iataDestino=iata();
+
+    cout<< MSJ_ORIGEN_IATA<<endl;
     iataOrigen=iata();
+
+    cout << endl;
+    cout<< MSJ_DESTINO_IATA << endl;
+    iataDestino=iata();
 
 }
 
