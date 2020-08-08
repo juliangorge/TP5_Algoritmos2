@@ -338,7 +338,21 @@ void Programa:: menorCostoVuelos(Grafo grafo){
     iataOrigenDestino(iataOrigen, iataDestino);
 
     cout << MSJ_MENOR_COSTO << endl << endl;
-    grafo.caminoMasBarato(iataOrigen,iataDestino);
+    Vuelo** corto = grafo.caminoMasBarato(iataOrigen,iataDestino);
+
+    int i = 0;
+    bool termino = false;
+    while(!termino)
+    {
+    	if (corto[i]->getDestino() == iataDestino)
+    		{
+    			termino = true;
+    		}
+    	corto[i]->mostrar();
+    	cout << endl;
+    	i++;
+    }
+    delete[] corto;
 
 }
 
@@ -363,15 +377,19 @@ void Programa:: menorDuracionVuelos(Grafo grafo){
     cout << MSJ_MENOR_DURACION << endl << endl;
 
     Vuelo**camino = grafo.caminoMasCorto(iataOrigen,iataDestino);
-
-  /*  do{
-    cout << camino[i]->getHoras () <<endl;
-    i++;
+    cerr << "llego hasta aca" << endl;
+    bool termino = false;
+    while(!termino)
+    {
+    	if (camino [i]->getDestino() == iataDestino)
+    		{
+    			termino = true;
+    		}
+    	camino [i]->mostrar();
+    	cout << endl;
+    	i++;
     }
-    while (camino[i]!=NULL);
-*/
-    cout << grafo.caminoMasCorto(iataOrigen, iataDestino)[0]->getHoras() << endl;
-    // en construccion
+    //delete[] camino;
 }
 
 void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo grafo){
