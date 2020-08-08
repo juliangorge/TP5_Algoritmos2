@@ -331,22 +331,19 @@ void Programa:: abrirMenu2InternoVuelos(Grafo* grafo){
 void Programa:: menorCostoVuelos(Grafo* grafo){
 
     /*
-    Se debe imprimir el detalle del vuelo, el costo de cada tramo (o el tiempo de vuelo) y el total del viaje.
     Si hubiera más de una combinación óptima, deberá listarlas todas.
-    Puede suceder que no haya ninguna combinación, en ese caso se informa que no hay conexiones posible
     */
     string iataOrigen;// = "EZE";
     string iataDestino;// = "MIA";
 
     cout << MSJ_MENOR_COSTO << endl << endl;
 
-    if(existeIATA(arbol, iataOrigen) && existeIATA(arbol, iataDestino)){
+    if(grafo->hayVertice(iataOrigen) && grafo->hayVertice(iataDestino)){
+        Vuelo** corto = grafo->caminoMasBarato(iataOrigen, iataDestino);
 
-        if(grafo->getVertice(iataDestino) && grafo->getVertice(iataDestino)){
-            Vuelo** corto = grafo->caminoMasBarato(iataOrigen, iataDestino);
+        cout << grafo->caminoMasBarato(iataOrigen, iataDestino)[0]->getCosto() << endl;
+        cout << grafo->caminoMasBarato(iataOrigen, iataDestino)[1]->getCosto() << endl;
 
-            cout << grafo->caminoMasBarato(iataOrigen, iataDestino)[0]->getCosto() << endl;
-            //cout << grafo->caminoMasBarato(iataOrigen, iataDestino)[1]->getCosto() << endl;
             /*
             int i = 0;
             bool termino = false;
@@ -365,9 +362,6 @@ void Programa:: menorCostoVuelos(Grafo* grafo){
 
             delete[] corto;
 
-        }else{
-            cout << MSJ_VUELO_INEXISTENTE << endl << endl;
-        }
     }else{
         cout << MSJ_VUELO_INEXISTENTE << endl << endl;
     }
