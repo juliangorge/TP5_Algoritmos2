@@ -27,7 +27,8 @@ const string MSJ_REMOCION_CORRECTA = "\tIATA removido con Exito";
 const string MSJ_IATA_EXISTE= "\n\tERROR: IATA Existente" ;
 const string MSJ_REMOCION_INCORRECTA = "\tERROR: IATA INEXISTENTE";
 const string MSJ_AEROPUERTO_INEXISTENTE = "\n\tATENCION: El aeropuerto no es valido";
-//const string MSJ_MENU="\n\n\n\t-----*-*-*-*-*-*----  M E N U    P R I N C I P A L  -----*-*-*-*-*---\n\n\t(1) MENU AEROPUERTO\n\t(2) MENU VUELOS\n" ;
+const string  MSJ_MENOR_COSTO= "\n\t  -------- VUELOS MENOR COSTO -------" ;
+const string  MSJ_MENOR_DURACION ="\n\t  --------  VUELOS MENOR DURACION  -------" ;
 const int AEROPUERTO= 1;
 const int VUELOS= 2 ;
 const int MENOR_COSTO = 1;
@@ -312,12 +313,12 @@ void  Programa:: consultarVuelos(){
 
 void Programa:: abrirMenu2InternoVuelos(Grafo grafo){
 
-        switch(opcion){
+    switch(opcion){
                 case MENOR_COSTO:    menorCostoVuelos(grafo);
 
                                      break;
 
-                case MENOR_DURACION: menorDuracionVuelos();
+                case MENOR_DURACION: menorDuracionVuelos(grafo);
 
                                      break;
 
@@ -336,46 +337,60 @@ void Programa:: menorCostoVuelos(Grafo grafo){
 
     iataOrigenDestino(iataOrigen, iataDestino);
 
-    cout << "\n\t  -------- VUELOS MENOR COSTO -------"<< endl << endl;
+    cout << MSJ_MENOR_COSTO << endl << endl;
     grafo.caminoMasBarato(iataOrigen,iataDestino);
 
 }
 
 void Programa:: iataOrigenDestino(string &iataOrigen, string &iataDestino){
 
+    iataDestino=iata();
+    iataOrigen=iata();
+
 }
 
-void Programa:: menuInternoCostoVuelos() {
 
-}
+void Programa:: menorDuracionVuelos(Grafo grafo){
 
-void Programa:: menorDuracionVuelos(){
+    string iataOrigen;
+    string iataDestino;
+    Vuelo* v[];
+    int i=0;
+    iataOrigenDestino(iataOrigen, iataDestino);
 
-cout << "\n\t  --------  VUELOS MENOR DURACION  -------"<< endl << endl;
-}
+    cout << MSJ_MENOR_DURACION << endl << endl;
 
-void Programa:: menuInternoDuracionVuelos() {
-
+    cout << grafo.caminoMasCorto(iataOrigen, iataDestino)->v[i] << endl;
+    //  Vuelo**en construccion
 }
 
 void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo grafo){
 
 
-            Programa programa;
-            bool volverAMenu=false;
+    Programa programa;
+    bool volverAMenu=false;
 
-           do{ programa.mostrarMenuPrincipal();
-               programa.elegirOpcion();
-               if( programa.obtenerOpcion()== SALIR)
-                    {volverAMenu=false;
-                      cout<<"QUIERE SALIR"<<endl;}
-               else{
+    do{ programa.mostrarMenuPrincipal();
+        programa.elegirOpcion();
+        if( programa.obtenerOpcion()== SALIR)
+                volverAMenu=false;
 
+        else{
                 programa.eleccionMenu(arbol, grafo);
                 if( programa.obtenerOpcion()== SALIR)
                     {volverAMenu=true;
-                      cout<<"quiere volver al menu"<<endl;}
                       }
+               }
            }
-           while(volverAMenu==true );
+     while(volverAMenu==true );
+}
+
+
+
+
+void Programa:: menuInternoCostoVuelos() {
+
+}
+void Programa:: menuInternoDuracionVuelos() {
+
 }

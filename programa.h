@@ -117,11 +117,14 @@ class Programa
         void mostrarMenuPrincipal ();
         void  consultarVuelos();
         void  abrirMenu2InternoVuelos(Grafo grafo);
-        void  menorCostoVuelos(Grafo grafo);
-        void  menuInternoCostoVuelos() ;
-        void  menorDuracionVuelos();
-        void  menuInternoDuracionVuelos() ;
         void iataOrigenDestino(string &iataOrigen, string &iataDestino);
+
+        void  menorCostoVuelos(Grafo grafo);
+        void  menorDuracionVuelos(Grafo grafo);
+
+        void  menuInternoDuracionVuelos() ;
+         void  menuInternoCostoVuelos() ;
+
 
         void manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo grafo);
         bool validacionExisteIATA(ABB<Aeropuerto*>* arbol, string iataIngresado);
