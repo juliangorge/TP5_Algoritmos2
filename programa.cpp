@@ -354,14 +354,24 @@ void Programa:: menorDuracionVuelos(Grafo grafo){
 
     string iataOrigen;
     string iataDestino;
-    Vuelo* v[];
+
     int i=0;
+
+
     iataOrigenDestino(iataOrigen, iataDestino);
 
     cout << MSJ_MENOR_DURACION << endl << endl;
 
-    cout << grafo.caminoMasCorto(iataOrigen, iataDestino)->v[i] << endl;
-    //  Vuelo**en construccion
+    Vuelo**camino = grafo.caminoMasCorto(iataOrigen,iataDestino);
+
+  /*  do{
+    cout << camino[i]->getHoras () <<endl;
+    i++;
+    }
+    while (camino[i]!=NULL);
+*/
+    cout << grafo.caminoMasCorto(iataOrigen, iataDestino)[0]->getHoras() << endl;
+    // en construccion
 }
 
 void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo grafo){
