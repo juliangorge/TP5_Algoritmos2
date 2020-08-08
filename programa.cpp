@@ -27,10 +27,11 @@ const string MSJ_REMOCION_CORRECTA = "\tIATA removido con Exito";
 const string MSJ_IATA_EXISTE= "\n\tERROR: IATA Existente" ;
 const string MSJ_REMOCION_INCORRECTA = "\tERROR: IATA INEXISTENTE";
 const string MSJ_AEROPUERTO_INEXISTENTE = "\n\tATENCION: El aeropuerto no es valido";
-const string  MSJ_MENOR_COSTO= "\n\t  -------- VUELOS MENOR COSTO -------" ;
-const string  MSJ_MENOR_DURACION ="\n\t  --------  VUELOS MENOR DURACION  -------" ;
-const string  MSJ_ORIGEN_IATA= "\tORIGEN  ";
-const string  MSJ_DESTINO_IATA= "\tDESTINO  ";
+const string MSJ_MENOR_COSTO= "\n\t  -------- VUELOS MENOR COSTO -------" ;
+const string MSJ_MENOR_DURACION ="\n\t  --------  VUELOS MENOR DURACION  -------" ;
+const string MSJ_ORIGEN_IATA= "\tORIGEN  ";
+const string MSJ_DESTINO_IATA= "\tDESTINO  ";
+const string MSJ_VUELO_INEXISTENTE= "\tERROR: No hay conexion posible"; 
 
 const int AEROPUERTO= 1;
 const int VUELOS= 2 ;
@@ -329,28 +330,47 @@ void Programa:: abrirMenu2InternoVuelos(Grafo* grafo){
 
 void Programa:: menorCostoVuelos(Grafo* grafo){
 
-    string iataOrigen;
-    string iataDestino;
-
-    iataOrigenDestino(iataOrigen, iataDestino);
+    /*
+    Se debe imprimir el detalle del vuelo, el costo de cada tramo (o el tiempo de vuelo) y el total del viaje.
+    Si hubiera más de una combinación óptima, deberá listarlas todas.
+    Puede suceder que no haya ninguna combinación, en ese caso se informa que no hay conexiones posible
+    */
+    string iataOrigen;// = "EZE";
+    string iataDestino;// = "MIA";
 
     cout << MSJ_MENOR_COSTO << endl << endl;
-    Vuelo** corto = grafo->caminoMasBarato(iataOrigen,iataDestino);
 
-    int i = 0;
-    bool termino = false;
-    while(!termino)
-    {
-    	if (corto[i]->getDestino() == iataDestino)
-    		{
-    			termino = true;
-    		}
-    	corto[i]->mostrar();
-    	cout << endl;
-    	i++;
+    if(existeIATA(arbol, iataOrigen) && existeIATA(arbol, iataDestino)){
+
+        if(grafo->getVertice(iataDestino) && grafo->getVertice(iataDestino)){
+            Vuelo** corto = grafo->caminoMasBarato(iataOrigen, iataDestino);
+
+            cout << grafo->caminoMasBarato(iataOrigen, iataDestino)[0]->getCosto() << endl;
+            //cout << grafo->caminoMasBarato(iataOrigen, iataDestino)[1]->getCosto() << endl;
+            /*
+            int i = 0;
+            bool termino = false;
+
+            while(!termino)
+            {
+                if(corto[i]->getDestino() == iataDestino){
+                    termino = true;
+                }
+
+                corto[i]->mostrar();
+
+                cout << endl;
+                i++;
+            }*/
+
+            delete[] corto;
+
+        }else{
+            cout << MSJ_VUELO_INEXISTENTE << endl << endl;
+        }
+    }else{
+        cout << MSJ_VUELO_INEXISTENTE << endl << endl;
     }
-    delete[] corto;
-
 }
 
 void Programa:: iataOrigenDestino(string &iataOrigen, string &iataDestino){

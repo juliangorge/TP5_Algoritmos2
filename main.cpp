@@ -30,8 +30,8 @@ int main(int argc, char *argv []){
             throw ExcepcionEnArchivo();
         }
         else{
+            cout << MSJ_CARGA_ARBOL<< endl;
             archivoAeropuertos.cargar(&arbol);
-             cout << MSJ_CARGA_ARBOL<< endl;
         }
     }
     catch(ExcepcionEnArchivo& e){
@@ -44,12 +44,11 @@ int main(int argc, char *argv []){
             throw ExcepcionEnArchivo();
         }
         else{
-            archivoVuelos.cargar(&grafo);
             cout <<MSJ_CARGA_GRAFO << endl;
+            archivoVuelos.cargar(&grafo);
 
             Programa menuPrincipal;
             menuPrincipal.manejoMenuPrincipal(&arbol, &grafo);
-
         }
     }
     catch(ExcepcionEnArchivo& l){
