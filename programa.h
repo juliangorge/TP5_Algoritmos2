@@ -50,9 +50,9 @@ class Programa
         //Post: devuelve opcion ingresada
         int obtenerOpcion();
 
-        void eleccionMenu( ABB<Aeropuerto*>* arbol, Grafo grafo);
+        void eleccionMenu( ABB<Aeropuerto*>* arbol, Grafo* grafo);
         void menuAeropuerto(ABB<Aeropuerto*>* arbol);
-        void menuVuelos (Grafo grafo);
+        void menuVuelos (Grafo* grafo);
 
 
 
@@ -112,21 +112,21 @@ class Programa
 
         void mostrarMenuVuelos();
 
-        void abrirMenuInternoVuelos(Grafo grafo);
+        void abrirMenuInternoVuelos(Grafo* grafo);
 
         void mostrarMenuPrincipal ();
         void  consultarVuelos();
-        void  abrirMenu2InternoVuelos(Grafo grafo);
+        void  abrirMenu2InternoVuelos(Grafo* grafo);
         void iataOrigenDestino(string &iataOrigen, string &iataDestino);
 
-        void  menorCostoVuelos(Grafo grafo);
-        void  menorDuracionVuelos(Grafo grafo);
+        void  menorCostoVuelos(Grafo* grafo);
+        void  menorDuracionVuelos(Grafo* grafo);
 
         void  menuInternoDuracionVuelos() ;
          void  menuInternoCostoVuelos() ;
 
 
-        void manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo grafo);
+        void manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo);
         bool validacionExisteIATA(ABB<Aeropuerto*>* arbol, string iataIngresado);
 };
 

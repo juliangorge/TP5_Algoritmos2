@@ -64,7 +64,7 @@ void Archivo::cargar(ABB<Aeropuerto*>* arbol){
     }
 }
 
-void Archivo::cargar(Grafo& grafo){
+void Archivo::cargar(Grafo* grafo){
     if(archivoAbierto){
     	string iataPartida;
     	string iataDestino;
@@ -79,7 +79,7 @@ void Archivo::cargar(Grafo& grafo){
 
             // Se crea el grafo y se insertan los datos del archivo
     		Vuelo* vuelo = new Vuelo(iataPartida, iataDestino, stoul(costo), stof(horas));
-            grafo.agregarVuelo(vuelo);
+            grafo->agregarVuelo(vuelo);
     	}
         cout << "\tCarga de grafo correcta" << endl;
     }

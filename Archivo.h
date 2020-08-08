@@ -47,7 +47,7 @@ class Archivo{
 
         // PRE: -
         // POST: Carga los datos del archivo en el grafo
-        void cargar(Grafo& grafo);
+        void cargar(Grafo* grafo);
 };
 
 #endif // ARCHIVO_H

@@ -230,7 +230,7 @@ void Programa:: mostrarMenuPrincipal (){
     cout <<"\t(2) MENU VUELOS" << endl;
 }
 
-void Programa::eleccionMenu( ABB<Aeropuerto*>* arbol, Grafo grafo){
+void Programa::eleccionMenu( ABB<Aeropuerto*>* arbol, Grafo* grafo){
 
     switch(opcion){
 
@@ -257,7 +257,7 @@ void Programa::menuAeropuerto(ABB<Aeropuerto*>* arbol){
 
 }
 
-void Programa:: menuVuelos (Grafo grafo){
+void Programa:: menuVuelos (Grafo* grafo){
 
     do{
             mostrarMenuVuelos();
@@ -279,7 +279,7 @@ void Programa:: mostrarMenuVuelos(){
 
 
 
-void Programa:: abrirMenuInternoVuelos(Grafo grafo){
+void Programa:: abrirMenuInternoVuelos(Grafo* grafo){
 
        switch(opcion){
 
@@ -308,7 +308,7 @@ void  Programa:: consultarVuelos(){
 
 }
 
-void Programa:: abrirMenu2InternoVuelos(Grafo grafo){
+void Programa:: abrirMenu2InternoVuelos(Grafo* grafo){
 
     switch(opcion){
                 case MENOR_COSTO:    menorCostoVuelos(grafo);
@@ -327,7 +327,7 @@ void Programa:: abrirMenu2InternoVuelos(Grafo grafo){
 
 }
 
-void Programa:: menorCostoVuelos(Grafo grafo){
+void Programa:: menorCostoVuelos(Grafo* grafo){
 
     string iataOrigen;
     string iataDestino;
@@ -335,7 +335,7 @@ void Programa:: menorCostoVuelos(Grafo grafo){
     iataOrigenDestino(iataOrigen, iataDestino);
 
     cout << MSJ_MENOR_COSTO << endl << endl;
-    Vuelo** corto = grafo.caminoMasBarato(iataOrigen,iataDestino);
+    Vuelo** corto = grafo->caminoMasBarato(iataOrigen,iataDestino);
 
     int i = 0;
     bool termino = false;
@@ -366,7 +366,7 @@ void Programa:: iataOrigenDestino(string &iataOrigen, string &iataDestino){
 }
 
 
-void Programa:: menorDuracionVuelos(Grafo grafo){
+void Programa:: menorDuracionVuelos(Grafo* grafo){
 
     string iataOrigen;
     string iataDestino;
@@ -378,23 +378,25 @@ void Programa:: menorDuracionVuelos(Grafo grafo){
 
     cout << MSJ_MENOR_DURACION << endl << endl;
 
-    Vuelo**camino = grafo.caminoMasCorto(iataOrigen,iataDestino);
+    Vuelo**camino = grafo->caminoMasCorto(iataOrigen,iataDestino);
     cerr << "llego hasta aca" << endl;
     bool termino = false;
-    while(!termino)
+    do
     {
     	if (camino [i]->getDestino() == iataDestino)
     		{
     			termino = true;
+    			camino [i]->mostrar();
+                cout << endl;
     		}
-    	camino [i]->mostrar();
-    	cout << endl;
+
     	i++;
     }
+    while(!termino);
     //delete[] camino;
 }
 
-void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo grafo){
+void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo){
 
 
     Programa programa;
