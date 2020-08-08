@@ -16,11 +16,14 @@ void Grafo::agregarVertice(string iata){
 		vertices.insertar(nuevo);
 	}
 }
- 
+
 bool Grafo::agregarVuelo(Vuelo* vuelo){
+
 	Vertice* aux;
 	unsigned i = 1;
 	bool agregado = false;
+	agregarVertice(vuelo->getPartida());
+	agregarVertice(vuelo->getDestino());
 
 	while (i <= vertices.getTam() && !agregado){
 		aux = vertices.getDato(i);
@@ -30,6 +33,7 @@ bool Grafo::agregarVuelo(Vuelo* vuelo){
 		}
 		i++;
 	}
+
 	return agregado;
 }
 
@@ -48,7 +52,7 @@ Vertice* Grafo::getVertice(string iata){
 		return aux;
 	return 0;
 }
- 
+
 bool Grafo::hayVertice(string iata){
 	Vertice* vertice = getVertice(iata);
 
@@ -60,12 +64,12 @@ bool Grafo::hayVertice(string iata){
 Vuelo** Grafo::caminoMasBarato(string partida, string destino){
 
 }
- 
+
 Vuelo** Grafo::caminoMasCorto(string partida, string destino){ //MODULARIZAR
 	int n = vertices.getTam() + 1;
 	Vertice* raiz = getVertice(partida);
 	int posRaiz = vertices.getPos(raiz);
- 
+
 	float distancia [n]; //guarda la distancia desde la raiz al vertice de la posicion
 	bool visitado [n]; //guarda si el vertice de la posicion ya fue visitado
 	string predecesor [n]; //guarda para cada posicion el codigo iata del vertice que lo precede en el camino mas corto
@@ -85,8 +89,8 @@ Vuelo** Grafo::caminoMasCorto(string partida, string destino){ //MODULARIZAR
 		visitado[i] = false;
 	}
 	distancia[posRaiz] = 0;
-	visitado[posRaiz] = true; 
-	
+	visitado[posRaiz] = true;
+
 	int pos;
 	Vertice* actual = raiz;
 	while (actual->getIata() != destino){
@@ -106,18 +110,18 @@ Vuelo** Grafo::caminoMasCorto(string partida, string destino){ //MODULARIZAR
 			}
 		}
 	}
-	return cargarVuelos(predecesor, partida, destino); //se cargan los vuelos buscando cada uno segun el vector predecesores. Devuelve un vector q se lee hasta llegar al destino 
+	return cargarVuelos(predecesor, partida, destino); //se cargan los vuelos buscando cada uno segun el vector predecesores. Devuelve un vector q se lee hasta llegar al destino
 } //usar una lista podria traer problemas con el destructor, destruye la direccion de memoria original?
-	
+
 Vuelo** Grafo::cargarVuelos(string* predecesor, string raiz, string final){
 	int n = vertices.getTam() + 1;
 	Vuelo** vuelos = new Vuelo*[n - 1];
 
 	Vertice* partida;
 	string destino = final;
-	int i = vertices.getPos( getVertice(final) ); 
+	int i = vertices.getPos( getVertice(final) );
 	int tope = 0; //tamano logico del vector
-	
+
 	while (destino != raiz){
 		partida = getVertice(predecesor[i]);
 		vuelos[tope] = partida->getVuelo(destino);
@@ -159,5 +163,5 @@ int Grafo::minimoDistancia(float* distancia, bool* visitado){
 	 		}
 	 	}
 	}
-	return pos; 
+	return pos;
 }
