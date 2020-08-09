@@ -11,22 +11,18 @@ Caminos::~Caminos(){
 	vuelos.vaciarLista(true);
 }
 
-// POST: setea el atributo iataPartida
 void Caminos::setPartida(string iataPartida){
 	this->iataPartida = iataPartida;
 }
 
-// GET: setea el atributo iataPartida
 string Caminos::getPartida(){
 	return iataPartida;
 }
 
-// POST: setea el atributo iataDestino
 void Caminos::setDestino(string iataDestino){
 	this->iataDestino = iataDestino;
 }
 
-// GET: setea el atributo iataDestino
 string Caminos::getDestino(){
 	return iataDestino;
 }
@@ -35,8 +31,6 @@ void Caminos::agregarVuelo(Vuelo* vuelo){
 	vuelos.insertar(vuelo);
 }
 
-// PRE:
-// POST: imprime un objeto Vuelo
 void Caminos::mostrar(){
 	cout << "Partida: " << iataPartida << endl;
 	cout << "Destino: " << iataDestino << endl;
