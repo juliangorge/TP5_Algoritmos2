@@ -51,17 +51,11 @@ public:
 
 private:
 
-	int* dijkstra(string partida, string destino, float costo[], bool visitado[], int predecesores[]);
+	int* dijkstra(string partida, string destino, float costo[], bool visitado[], int predecesores[], char tipoDato);
 	
-	int* dijkstra(string partida, string destino, int costo[], bool visitado[], int predecesores[]);
+	void inicializarEtiquetas(float costo[], bool visitado[], int predecesores[], int n);
 
-	void inicializar(int vector[], int valor, int tope);
-
-	void inicializar(float vector[], float valor, int tope);
-
-	void inicializar(bool vector[], bool valor, int tope);
-
-	int minimoCosto(int distancia[], bool visitado[]);
+	void actualizarCosto(float costo[], int predecesores[], int posDestino, int posActual, Vuelo* vueloAux, char tipoDato);
 
 	// PRE: recibe un vector de distancias y de visitados.
 	// POST: devuelve la posicion del elemento no visitado con menor costo.
