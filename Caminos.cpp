@@ -42,7 +42,7 @@ unsigned Caminos::getCostoTotal(){
 	return costoTotal;		
 }
 
-unsigned Caminos::setCostoTotal(unsigned costoTotal){
+void Caminos::setCostoTotal(unsigned costoTotal){
 	this->costoTotal = costoTotal;
 }
 
@@ -50,6 +50,6 @@ float Caminos::getHorasTotal(){
 	return horasTotal;
 }
 
-float Caminos::setHorasTotal(float horasTotal){
+void Caminos::setHorasTotal(float horasTotal){
 	this->horasTotal = horasTotal;
 }

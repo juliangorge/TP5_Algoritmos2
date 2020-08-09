@@ -194,7 +194,7 @@ Vuelo** Grafo::cargarVuelos(int predecesores[], string raiz, string final){
 	for (int i = 0; i <= tope; ++i){ //libero el vector vuelos y creo otro dinamico con el tamanio justo.
 		resultado[i] = vuelos[i];
 	}
-	delete vuelos;
+	delete[] vuelos;
 
 	invertirVector(resultado, tope); //invierto el vector para que se pueda leer desde la salida hasta la llegada
 	return resultado;

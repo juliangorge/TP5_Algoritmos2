@@ -48,11 +48,11 @@ public:
 
 	unsigned getCostoTotal();
 
-	unsigned setCostoTotal(unsigned costoTotal);
+	void setCostoTotal(unsigned costoTotal);
 
 	float getHorasTotal();
 
-	float setHorasTotal(float horasTotal);
+	void setHorasTotal(float horasTotal);
 
 };
 
