@@ -39,23 +39,41 @@ public:
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
 	// POST: devuelve un vector dinamico de punteros a los vuelos que forman el camino mas barato. 
+	//		 Si no existen los vertices, o no hay un camino posible, devuelve un puntero nulo.
 	//		 Debe liberarse la memoria del vector luego de usarlo.
 	Vuelo** caminoMasBarato(string partida, string destino);
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
 	// POST: devuelve un vector dinamico de punteros a los vuelos que forman el camino mas corto.
+	//		 Si no existen los vertices, o no hay un camino posible, devuelve un puntero nulo.
 	//		 Debe liberarse la memoria del vector luego de usarlo.
 	Vuelo** caminoMasCorto(string partida, string destino);
 
 private:
 
-	// PRE: recibe un puntero a la primera posicion del vector de distancias y de visitados.
-	// POST: devuelve la posicion del elemento no visitado con menor distancia.
-	int minimoDistancia(float* distancia, bool* visitado);
-
-	Vuelo** cargarVuelos(string* predecesor, string raiz, string final);
+	int* dijkstra(string partida, string destino, float costo[], bool visitado[], int predecesores[]);
 	
-	void invertirVector(Vuelo** resultado, int tam);
+	int* dijkstra(string partida, string destino, int costo[], bool visitado[], int predecesores[]);
+
+	void inicializar(int vector[], int valor, int tope);
+
+	void inicializar(float vector[], float valor, int tope);
+
+	void inicializar(bool vector[], bool valor, int tope);
+
+	int minimoCosto(int distancia[], bool visitado[]);
+
+	// PRE: recibe un vector de distancias y de visitados.
+	// POST: devuelve la posicion del elemento no visitado con menor costo.
+	int minimoCosto(float distancia[], bool visitado[]);
+
+	// PRE: recibe un vector de distancias y de visitados.
+	// POST: devuelve la posicion del elemento no visitado con menor distancia.
+	Vuelo** cargarVuelos(int predecesor[], string raiz, string final);
+	
+	// PRE: recibe un vector de distancias y de visitados.
+	// POST: devuelve la posicion del elemento no visitado con menor distancia.
+	void invertirVector(Vuelo* resultado[], int tam);
 };
 
 #endif /* TP5_ALGORITMOS2_GRAFO_H_ */
