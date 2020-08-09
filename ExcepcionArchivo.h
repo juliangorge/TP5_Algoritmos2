@@ -1,28 +1,17 @@
-#ifndef EXCEPCIONARCHIVO_H
-#define EXCEPCIONARCHIVO_H
+#ifndef EXCEPCIONARCHIVO_H_INCLUDED
+#define EXCEPCIONARCHIVO_H_INCLUDED
 
-#include <iostream>
+#include <cstdlib>
 #include <exception>
 
 using namespace std;
 
-class ExcepcionArchivo: public exception {
+class ExcepcionArchivo: public exception{
 
-private:
-	string mensaje;
-
-public:
-
-    // Constructor
-	ExcepcionArchivo(string archivo) throw();
-
-    //Destructor
-    virtual ~ExcepcionArchivo() throw();
-
-    //PRE: -
-    //POST: Retorna un mensaje de la excepcion
-    virtual const char* what() const throw();
+    public:
+        const char* excepcionAeropuertos() const throw() ;
+        const char* excepcionVuelos() const throw() ;
 
 };
 
-#endif
+#endif // EXCEPCIONARCHIVO_H_INCLUDED

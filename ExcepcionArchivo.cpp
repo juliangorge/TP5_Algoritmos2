@@ -1,13 +1,12 @@
 #include "ExcepcionArchivo.h"
 
-ExcepcionArchivo::ExcepcionArchivo(string archivo) throw()
-{
-    this->mensaje = "Error al leer el archivo: " + archivo;
+const char * ExcepcionArchivo::excepcionAeropuertos() const throw()  {
+    return "\tError: El archivo AEROPUERTOS no se pudo abrir correctamente";
 }
 
-ExcepcionArchivo::~ExcepcionArchivo() throw() {}
-
-const char* ExcepcionArchivo::what() const throw()
-{
-	return mensaje.c_str();
+const char * ExcepcionArchivo::excepcionVuelos() const throw() {
+    return "\tError: El archivo VUELOS no se pudo abrir correctamente. Fin del programa";
 }
+
+
+
