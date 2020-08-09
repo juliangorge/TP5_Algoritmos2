@@ -6,22 +6,16 @@
 #include "Aeropuerto.h"
 #include "Grafo.h"
 
-
-using namespace std;
-
-
 const string MSJ_OPCION = "\n\tIngrese la opcion que desea: ";
 const string MSJ_PELICULAS = "\t******** Aeropuertos ********  ";
 const string MSJ_FIN_PROGRAMA = "\t---- Fin del programa ---";
 
-
-
+using namespace std;
 class Programa
 {
 
     private:
         int opcion;
-
 
     public:
 
@@ -50,7 +44,7 @@ class Programa
         //Post: devuelve opcion ingresada
         int obtenerOpcion();
 
-        void eleccionMenu( ABB<Aeropuerto*>* arbol, Grafo* grafo);
+        void eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo);
         void menuAeropuerto(ABB<Aeropuerto*>* arbol);
         void menuVuelos (Grafo* grafo);
 
@@ -59,7 +53,7 @@ class Programa
         //Descripcion: Muestra aeropuerto
         //PRE: arbol bien formado
         //Post: Muestra el aeropuerto seleccionado
-        void menuMostrarAeropuerto(ABB<Aeropuerto*>* arbol) ;
+        void menuMostrarAeropuerto(ABB<Aeropuerto*>* arbol);
 
         //Descripcion: Devuelve el codigo IATA ingresado
         //PRE: -
@@ -73,60 +67,59 @@ class Programa
         //Descripcion: Da de alta un aeropuerto
         //PRE: arbol bien formado
         //Post: Da de alta un aeropuerto
-        void altaAeropuerto(ABB<Aeropuerto*>* arbol) ;
+        void altaAeropuerto(ABB<Aeropuerto*>* arbol);
 
         //PRE: arbol bien formado
         //Post: Me devuelve un true si el codigo IATA ya existe, forma contraria devuelve false
-        bool existeIATA( ABB<Aeropuerto*> *arbol, string iata) ;
+        bool existeIATA(ABB<Aeropuerto*> *arbol, string iata);
 
         //PRE:
         //Post: Metodo encargado de cargar todos los atributos de la clase aeropuerto
-        void cargarAeropuerto( Aeropuerto* aeropuerto);
+        void cargarAeropuerto(Aeropuerto* aeropuerto);
 
         //PRE:
         //Post: Devuelve el string ingresado
-        string cargarString( string mensaje);
+        string cargarString(string mensaje);
 
         //PRE:
         //Post: Devuelve el valor unsigned ingresado
-        unsigned cargarUnsigned( string mensaje);
+        unsigned cargarUnsigned(string mensaje);
 
         //PRE:
         //Post: Devuelve el valor float ingresado
-        float cargarFloat( string mensaje) ;
+        float cargarFloat(string mensaje);
 
         //Descripcion: Da de baja un aeropuerto
         //PRE: arbol bien formado
         //Post: Da de baja un aeropuerto
-        void bajaAeropuerto(ABB<Aeropuerto*>* arbol) ;
+        void bajaAeropuerto(ABB<Aeropuerto*>* arbol);
 
         //Descripcion: muestra los aeropuertos con recorrido in orden
         //PRE: arbol bien formado
         //Post: muestra los aeropuertos  (recorrido in orden)
-        void mostrarAeropuertosInorden(ABB<Aeropuerto*>* arbol) ;
+        void mostrarAeropuertosInorden(ABB<Aeropuerto*>* arbol);
 
         //Descripcion: muestra los aeropuertos (formato abb)
         //PRE: arbol bien formado
         //Post: muestra los aeropuertos (formato abb)
-        void mostrarAeropuertosAbb(ABB<Aeropuerto*>* arbol) ;
+        void mostrarAeropuertosAbb(ABB<Aeropuerto*>* arbol);
 
         void mostrarMenuVuelos();
 
         void abrirMenuInternoVuelos(Grafo* grafo);
 
         void mostrarMenuPrincipal ();
-        void  consultarVuelos();
-        void  abrirMenu2InternoVuelos(Grafo* grafo);
+        void consultarVuelos();
+        void abrirMenu2InternoVuelos(Grafo* grafo);
         void iataOrigenDestino(string &iataOrigen, string &iataDestino);
 
-        void  menorCostoVuelos(Grafo* grafo);
-        void  menorDuracionVuelos(Grafo* grafo);
+        void menorCostoVuelos(Grafo* grafo);
+        void menorDuracionVuelos(Grafo* grafo);
 
-        void  menuInternoDuracionVuelos() ;
-         void  menuInternoCostoVuelos() ;
+        void menuInternoDuracionVuelos();
+        void menuInternoCostoVuelos();
 
-
-        void manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo);
+        void manejoMenuPrincipal(ABB<Aeropuerto*>* arbol, Grafo* grafo);
         bool validacionExisteIATA(ABB<Aeropuerto*>* arbol, string iataIngresado);
 };
 
