@@ -2,6 +2,9 @@
 #include <limits>
 
 const float INFINITO = numeric_limits<float>::max();
+const char NO_ASIGNADO = -1;
+const char COSTO = 'C';
+const char HORAS = 'H';
 
 Grafo::Grafo(){
 }
@@ -64,14 +67,12 @@ bool Grafo::hayVertice(string iata){
 Vuelo** Grafo::caminoMasBarato(string partida, string destino){
 	int n = vertices.getTam() + 1;
 	
-	int costo[n];
+	float costo[n];
 	bool visitado[n]; 
 	int predecesores[n];
-	inicializar(costo, INFINITO_INT, n);
-	inicializar(visitado, false, n);
-	inicializar(predecesores, NO_ASIGNADO, n);
+	inicializarEtiquetas(costo, visitado, predecesores, n);
 
-	int* camino = dijkstra(partida, destino, costo, visitado, predecesores);
+	int* camino = dijkstra(partida, destino, costo, visitado, predecesores, COSTO);
 	return cargarVuelos(camino, partida, destino);
 }
 
@@ -81,15 +82,13 @@ Vuelo** Grafo::caminoMasCorto(string partida, string destino){
 	float costo[n];
 	bool visitado[n]; 
 	int predecesores[n];
-	inicializar(costo, INFINITO_FLOAT, n);
-	inicializar(visitado, false, n);
-	inicializar(predecesores, NO_ASIGNADO, n);
+	inicializarEtiquetas(costo, visitado, predecesores, n);
 
-	int* camino = dijkstra(partida, destino, costo, visitado, predecesores);
+	int* camino = dijkstra(partida, destino, costo, visitado, predecesores, HORAS);
 	return cargarVuelos(camino, partida, destino);
 }
 
-int* Grafo::dijkstra(string partida, string destino, float costo[], bool visitado[], int predecesores[]){
+int* Grafo::dijkstra(string partida, string destino, float costo[], bool visitado[], int predecesores[], char tipoDato){
 	Vertice* raiz = getVertice(partida);
 	if (raiz == 0){ //si no existe el vertice de salida
 		return 0;
@@ -110,86 +109,43 @@ int* Grafo::dijkstra(string partida, string destino, float costo[], bool visitad
 		if (actual->getIata() != destino){
 			for (int i = 1; i < vertices.getTam() + 1; ++i){
 				verticeAux = vertices.getDato(i);
-				if (actual->hayVuelo( verticeAux->getIata() )){
-					vueloAux = actual->getVuelo( verticeAux->getIata() );
-					if (costo[i] > costo[pos] + vueloAux->getHoras()){
-						costo[i] = costo[pos] + vueloAux->getHoras();
-						predecesores[i] = pos;
-					}
-				}
+				vueloAux = actual->getVuelo( verticeAux->getIata() );	
+				if (vueloAux != 0)
+					actualizarCosto(costo, predecesores, i, pos, vueloAux, tipoDato);
 			}
 		}
 	}
 	return predecesores;
 }
 
-int* Grafo::dijkstra(string partida, string destino, int costo[], bool visitado[], int predecesores[]){
-	Vertice* raiz = getVertice(partida);
-	if (raiz == 0){ //si no existe el vertice de salida
-		return 0;
-	}
+void Grafo::actualizarCosto(float costo[], int predecesores[], int posDestino, int posActual, Vuelo* vueloAux, char tipoDato){
+	if (tipoDato == HORAS){
+		if (costo[posDestino] > costo[posActual] + vueloAux->getHoras()){
+			costo[posDestino] = costo[posActual] + vueloAux->getHoras();
+			predecesores[posDestino] = posActual;
+		} else if (costo[posDestino] == costo[posActual] + vueloAux->getHoras()){
 
- 	int posRaiz = vertices.getPos(raiz);
-	
-	costo[posRaiz] = 0;
-	
-	Vuelo* vueloAux;
-	Vertice* verticeAux;
-	Vertice* actual = raiz;
-	int pos = 0;
-	while (actual->getIata() != destino && pos != -1){ 
-		pos = minimoCosto(costo, visitado);
-		visitado[pos] = true;
-		actual = vertices.getDato(pos);
-		if (actual->getIata() != destino){
-			for (int i = 1; i < vertices.getTam() + 1; ++i){
-				verticeAux = vertices.getDato(i);
-				if (actual->hayVuelo( verticeAux->getIata() )){
-					vueloAux = actual->getVuelo( verticeAux->getIata() );
-					if (costo[i] > costo[pos] + vueloAux->getCosto()){
-						costo[i] = costo[pos] + vueloAux->getCosto();
-						predecesores[i] = pos;
-					}
-				}
-			}
 		}
-	}
-	return predecesores;
+	} else if (tipoDato == COSTO){
+		if (costo[posDestino] > costo[posActual] + (float)vueloAux->getCosto()){
+			costo[posDestino] = costo[posActual] + (float)vueloAux->getCosto();
+			predecesores[posDestino] = posActual;
+		} else if (costo[posDestino] == costo[posActual] + (float)vueloAux->getCosto()){
+
+		}
+	}	
 }
 
-void Grafo::inicializar(float vector[], float valor, int tope){
-	for (int i = 1; i < tope; ++i){
-		vector[i] = valor;
-	}
-}
-void Grafo::inicializar(int vector[], int valor, int tope){
-	for (int i = 1; i < tope; ++i){
-		vector[i] = valor;
-	}
-}
-void Grafo::inicializar(bool vector[], bool valor, int tope){
-	for (int i = 1; i < tope; ++i){
-		vector[i] = valor;
+void Grafo::inicializarEtiquetas(float costo[], bool visitado[], int predecesores[], int n){
+	for (int i = 1; i < n; ++i){
+		costo[i] = INFINITO;
+		visitado[i] = false;
+		predecesores[i] = NO_ASIGNADO;
 	}
 }
 
 int Grafo::minimoCosto(float costo[], bool visitado[]){
-	float minimo = INFINITO_FLOAT;
-	int pos = -1;
-
-	for (unsigned i = 1; (i < vertices.getTam() + 1); ++i){
-	 	if (!visitado[i]){
-	 		if(costo[i] < minimo){
-	 			minimo = costo[i];
-	 			pos = i;
-	 		}
-	 	}
-	}
-	return pos; 
-}
-
-int Grafo::minimoCosto(int costo[], bool visitado[]){
-	int minimo = INFINITO_INT;
+	float minimo = INFINITO;
 	int pos = -1;
 
 	for (unsigned i = 1; (i < vertices.getTam() + 1); ++i){
