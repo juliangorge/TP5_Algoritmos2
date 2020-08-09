@@ -1,7 +1,6 @@
 #include "Programa.h"
 #include <cctype>
 #include <string>
-#include "ExcepcionEnArchivo.h"
 #include <exception>
 
 const int VOLVER_MENU = 2;

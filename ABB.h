@@ -393,10 +393,12 @@ ABBNodo<Dato>* ABB<Dato>::remover(ABBNodo<Dato>* nodo, Clave clave)
             // Find successor or predecessor to avoid quarrel
             Clave claveSucesor = this->sucesor(clave);
             Dato datoSucesor = obtenerDato(claveSucesor);
+            Dato datoActual = nodo->getDato();
             // cambio el valor para evitar borrar el valor del nodo
-            cambiarDato(claveSucesor, 0);
+            cambiarDato(claveSucesor, datoActual);
 
             // Replace node's key with successor's key
+
             nodo->setClave(claveSucesor);
             nodo->setDato(datoSucesor);
 
