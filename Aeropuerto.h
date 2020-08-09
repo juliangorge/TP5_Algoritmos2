@@ -18,20 +18,27 @@ private:
 
 public:
 
+	// PRE:
 	// POST: crea un objeto Aeropuerto
 	Aeropuerto();
 
+	// PRE: el valor de superficie debe ser mayor a 0
+	// POST: crea un objeto Aeropuerto inicializando los atributos.
 	Aeropuerto(string nombre, string ciudad, string pais, float superficie, unsigned cantidadTerminales, unsigned destinosNacionales, unsigned destinosInternacionales);
 
+	// PRE:
 	// POST: destruye un objeto Aeropuerto
 	virtual ~Aeropuerto();
 
+	// PRE:
 	// POST: setea el atributo nombre
 	void setNombre(string nombre);
 
+	// PRE:
 	// POST: setea el atributo ciudad
 	void setCiudad(string ciudad);
 
+	// PRE:
 	// POST: setea el atributo pais
 	void setPais(string pais);
 

@@ -15,16 +15,55 @@ private:
 	ABBNodo<Dato>* raiz;
 
     // METODOS
+
+	// PRE: Clave valida
+	// POST: Verifica si nodo = 0 y en caso afirmativo crea un nodo y setea insercionExitosa en true.
+	// En caso contrario compara la clave del nodo con clave para ver donde insertar el dato.
+	// Si la clave del nodo es igual a clave pone insercionExitosa en false y no inserta el dato.
     ABBNodo<Dato>* insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato, bool* insercionExitosa);
+
+    // POST: Imprime la rama izquierda del nodo, despues el nodo y la rama derecha.
     void imprimirInOrder(ABBNodo<Dato> * nodo);
+
+    // POST: Inserta los datos del nodo en una cola en pla prioridad introducida. Applica el método
+    // para los hijos con la prioridad siguiente.
     void armarColaPrioritaria(ABBNodo<Dato> * nodo, Cola<string*> colaDePrioridad[], unsigned prioridad);
+
+    // POST: Si la clave del nodo es clave o si nodo = 0 devulde nodo.
+    // Si la clave del nodo es menor a clave aplica buscar al hijo derecho.
+    // Si la clave del nodo es mayor a clave aplica buscar al hijo izquierdo.
     ABBNodo<Dato>* buscar(ABBNodo<Dato>* nodo, Clave clave);
+
+    // POST: Si nodo en 0 devuelve CLAVE_INVALIDA.
+    // Si el nodo no tiene hijo izquierdo devuleve la clave del nodo.
+    // En otro caso aplica encontrarMinimo al hijo izquierdo.
     Clave encontrarMinimo(ABBNodo<Dato>* nodo);
+
+    // POST: Si nodo en 0 devuelve CLAVE_INVALIDA.
+    // Si el nodo no tiene hijo derecho devuleve la clave del nodo.
+    // En otro caso aplica encontrarMaximo al hijo derecho..+
     Clave encontrarMaximo(ABBNodo<Dato>* nodo);
+
+    // POST: dado un nodo devuelve la clave sucesora a la del mimo.
+    // Si no existe devuelve CLAVE_INVALIDA
     Clave sucesor(ABBNodo<Dato>* nodo);
+
+    // POST: dado un nodo devuelve la clave predecesora a la del mimo.
+    // Si no existe devuelve CLAVE_INVALIDA
     Clave predecesor(ABBNodo<Dato>* nodo);
+
+    // POST: Dado un nodo devuelve su altura.
     unsigned altura(ABBNodo<Dato>* nodo);
+
+    // POST: Si la clave del nodo es clave remueve el nodo. Si no tiene 2 hijo devuelve alguno de los hijos
+    // Si tiene 2 hijos cambia el dato con el del sucesor y adquiere la clave del mismo.
+    // Devuelve nodo y aplica ramover al sucesor.
+    // Si la clave del nodo es mayor a clave aplica remover al hijo izquierdo.
+    // Si la clave del nodo es menor a clave aplica remover al hijo derecho.
+    // En Estos 2 casos devuelve nodo.
     ABBNodo<Dato>* remover(ABBNodo<Dato>* nodo, Clave clave);
+
+    // POST: Dado un nodo borra lo datos del mismo y la de sus ramas
     void borrarTodo(ABBNodo<Dato>* nodo);
 
 public:
@@ -55,41 +94,46 @@ public:
     bool buscar(Clave clave);
 
     // PRE:
-    // POST:
+    // POST: Devuelve el dato asociado a una clave. Devuelve 0 si la clave no es valida
     Dato obtenerDato(Clave clave);
 
     // PRE:
-    // POST:
+    // POST: Cabia el dato asociado a una clave si la clave se encuentra en al arbol
     void cambiarDato(Clave clave, Dato dato);
 
     // PRE: -
     // POST: Encuentra el minimo valor que existe en el ABB.
+    // Devuelve CLAVE_INVALIDA si el arbol esta vacio
     Clave encontrarMinimo();
 
+    // PRE: -
     // POST: Encuentra el maximo valor que existe en el ABB.
+    // Devuelve CLAVE_INVALIDA si el arbol esta vacio
     Clave encontrarMaximo();
 
-    // PRE: clave bien formada
-    // Finds the successor of a given data value.
+    // PRE:
+    // POST: Encuentra el sucesor de un valor dado.
+    // Devuelve CLAVE_INVALIDA si no existe un sucesor o la clave ingresada no se encuentra.
     Clave sucesor(Clave clave);
 
-    // PRE: clave bien formada
+    // PRE:
     // POST: Encuentra el predecesor de un valor dado.
+    // Devuelve CLAVE_INVALIDA si no existe un predecesor o la clave ingresada no se encuentra.
     Clave predecesor(Clave clave);
 
     // POST: devuelve la altura del arbol
     unsigned altura();
 
-    // PRE: clave bien formada
-    // POST: Remueve la data dada del ABB
+    // PRE:
+    // POST: Remueve la clave y el dato asociado a la misma
     void remover(Clave clave);
 
     // PRE:
-    // POST:
+    // POST: el atributo raiz.
     ABBNodo<Dato>* getRaiz();
 
     // PRE:
-    // POST:
+    // POST: devuleve true si el ABB esta vacio
     bool vacio();
 
     // POST: Borra todos los nodos del ABB
@@ -133,8 +177,11 @@ ABBNodo<Dato>* ABB<Dato>::insertar(ABBNodo<Dato>* nodo, Clave clave, Dato dato, 
 template <class Dato>
 bool ABB<Dato>::insertar(Clave clave, Dato dato)
 {
-	bool insercionExitosa = true;
-    this->raiz = insertar(this->raiz, clave, dato,&insercionExitosa );
+	bool insercionExitosa = false;
+	if (clave == CLAVE_INVALIDA)
+		cout << "clave invalida, no se pued eusar en el ABB" <<endl;
+	else
+		this->raiz = insertar(this->raiz, clave, dato,&insercionExitosa );
     return insercionExitosa;
 }
 
@@ -295,10 +342,10 @@ template <class Dato>
 Clave ABB<Dato>::sucesor(Clave clave)
 {
     ABBNodo<Dato>* claveNodo = this->buscar(this->raiz, clave);
-    // Return the key. If the key is not found or successor is not found, return -1
     if(claveNodo == NULL)
         return CLAVE_INVALIDA;
-    else return sucesor(claveNodo);
+    else
+    	return sucesor(claveNodo);
 }
 
 template <class Dato>
@@ -357,7 +404,7 @@ unsigned ABB<Dato>::altura()
 template <class Dato>
 ABBNodo<Dato>* ABB<Dato>::remover(ABBNodo<Dato>* nodo, Clave clave)
 {
-    // The given node is not found in BST
+    // El nodo buscado no se encuentra
     if (nodo == 0)
         return 0;
 
@@ -370,39 +417,40 @@ ABBNodo<Dato>* ABB<Dato>::remover(ABBNodo<Dato>* nodo, Clave clave)
         }
         else if (nodo->soloHijoDerecho())
         {
-            // The only child will be connected to the parent's of node directly
+            // El hijo unico se conecta directamenta con el padre del nodo a borrar
             nodo->getHijoDerecho()->setPadre(nodo->getPadre());
-            // Bypass node
+            // Bypass del nodo
             ABBNodo<Dato>* aux = nodo;
             nodo = nodo->getHijoDerecho();
             delete aux;
         }
         else if (nodo->soloHijoIzquierdo())
         {
-            // The only child will be connected to the parent's of node directly
+        	// El hijo unico se conecta directamenta con el padre del nodo a borrar
             nodo->getHijoIzquierdo()->setPadre(nodo->getPadre());
-            // Bypass node
+            // Bypass del nodo
             ABBNodo<Dato>* aux = nodo;
             nodo = nodo->getHijoIzquierdo();
             delete aux;
         }
 
-        // The node has two children (left and right)
+        // El modo tiene 2 hijos (derecho e izquierdo)
         else
         {
-            // Find successor or predecessor to avoid quarrel
+            // Busco el sucesor para evitar conflictos
+
             Clave claveSucesor = this->sucesor(clave);
             Dato datoSucesor = obtenerDato(claveSucesor);
             Dato datoActual = nodo->getDato();
-            // cambio el valor para evitar borrar el valor del nodo
+            // intercambio el valor de la clave a borrar y la clave sucesora
             cambiarDato(claveSucesor, datoActual);
 
-            // Replace node's key with successor's key
+            // Reemplazo la clave del nodo por la clave sucesora.
 
             nodo->setClave(claveSucesor);
             nodo->setDato(datoSucesor);
 
-            // Delete the old successor's key
+            // borro la clave sucesora vieja
             nodo->setHijoDerecho(remover(nodo->getHijoDerecho(), claveSucesor));
         }
     }
