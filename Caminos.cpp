@@ -5,8 +5,6 @@ using namespace std;
 Caminos::Caminos(){
 	this->iataPartida = "";
 	this->iataDestino = "";
-	Lista<Vuelo*> aux;
-	vuelos.insertar(&aux);
 }
 
 Caminos::~Caminos(){
@@ -44,22 +42,13 @@ float Caminos::getHorasTotal(){
 	return horasTotal;
 }
 
-void Caminos::agregarVuelo(Vuelo* vuelo){
-	unsigned i = 0;
-	while(i <= vuelos.getTam()){
-		vuelos.getDato(i + 1)->insertar(vuelo);
-		i++;
-	}
-}
-void Caminos::agregarVuelo(Vuelo* vuelo, int pos){ //pos es el nuevo tamanio de la lista de listas
-	if (pos == 1){
-		vuelos.getDato(1)->insertar(vuelo); //CORREGIR SEGMENTATION FAULT. getDato(1) da error porque todavia no existe la lista
-	} else {
-		vuelos.insertar( vuelos.getDato(pos - 1) ); //inserta una lista igual. 
-		
-		Lista<Vuelo*>* aux = vuelos.getDato(pos);
-		aux->delDato( aux->getTam() ); //borra el ultimo elemento de la nueva lista
-		vuelos.getDato(pos)->insertar(vuelo); //inserta el vuelo a la nueva lista
+void Caminos::agregarVuelo(Vuelo* vuelo, int j, bool esPrimero){ //pos es el nuevo tamanio de la lista de listas
+	if (!esPrimero)
+		vuelos.getDato(j)->insertar(vuelo);
+	else{
+		Lista<Vuelo*>* aux = new Lista<Vuelo*>;
+		aux->insertar(vuelo);
+		vuelos.insertar(aux);
 	}
 }
 

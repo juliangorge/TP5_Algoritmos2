@@ -50,10 +50,7 @@ public:
 
 	// PRE: recibe un puntero a un vuelo creado
 	// POST: lo agrega a la lista del vertice
-	void agregarVuelo(Vuelo* vuelo);
-
-	// agrega un vuelo 
-	void agregarVuelo(Vuelo* vuelo, int pos);
+	void agregarVuelo(Vuelo* vuelo, int j, bool esPrimero);
 
 	// PRE:
 	// POST: imprime

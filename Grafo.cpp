@@ -172,30 +172,31 @@ Caminos* Grafo::cargarVuelos(Lista<int*> predecesores[], string raiz, string fin
 		return camino;
 	}
 
-	Lista<Vertice*> previos;
 	Vertice* previo;
 	string actual = final;
 	Vuelo* vuelo;
-	unsigned j;
+	unsigned bifurcaciones;
+	unsigned j = 1;
 
-	do {
+	do { //tengo que recorrer los predecesores y si hay una bifurcacion cuando los agrego al camino borro el nodo. Vuelve a iterar hasta que no halla bifurcaciones.
+		bifurcaciones = 1;
 		while (actual != raiz){ //recorro el vector de predecesores desde el destino hasta llegar a la partida
-			j = 1;
+			if (predecesores[i].getTam() > bifurcaciones)
+				bifurcaciones = predecesores[i].getTam();
 
-			while( j <= predecesores[i].getTam() ){ //si hay varios predecesores hay mas de un camino posible 
-				previo = vertices.getDato( *predecesores[i].getDato(j) );
-				previos.insertar(previo);
-				vuelo = previo->getVuelo(actual);
+			previo = vertices.getDato( *predecesores[i].getDato(j) );
+			if (predecesores[i].getTam() > 1)
+				predecesores[i].delDato(1);
 
-				camino->agregarVuelo(vuelo, j); //j es el numero de iteracion sobre la misma posicion, asi que corresponde a la cant de caminos posibles.
-				j++;
-			}
+			vuelo = previo->getVuelo(actual);
+			camino->agregarVuelo(vuelo, j, final == vuelo->getDestino());
+
 			actual = previo->getIata();
-			previos.delDato( previos.getPos(previo) );
 			i = vertices.getPos( getVertice(actual) );
-
 		}
-	} while(!previos.listaVacia());
+		j++;
+
+	} while (bifurcaciones > 1);
 
 	return camino;
 }
