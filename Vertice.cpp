@@ -12,7 +12,6 @@ Vertice::Vertice(string iata){
 }
 
 Vertice::~Vertice(){
-	vuelos.vaciarLista(true);
 }
 
 void Vertice::setIata(string iata){
