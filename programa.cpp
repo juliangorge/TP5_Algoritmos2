@@ -299,15 +299,15 @@ void Programa:: abrirMenu2InternoVuelos(Grafo* grafo){
 }
 
 void Programa:: menorCostoVuelos(Grafo* grafo){
-    string iataOrigen = "EZE";
-    string iataDestino = "MIA";
+    string iataOrigen;
+    string iataDestino;
 
-    //iataOrigenDestino(iataOrigen, iataDestino);
+    iataOrigenDestino(iataOrigen, iataDestino);
 
     cout << MSJ_MENOR_COSTO << endl << endl;
 
-    if(grafo->hayVertice(iataOrigen) && grafo->hayVertice(iataDestino)){
-        Vuelo** corto = grafo->caminoMasBarato(iataOrigen, iataDestino);
+    Vuelo** corto = grafo->caminoMasBarato(iataOrigen, iataDestino);
+    if(corto != 0){
 
         int i = 0;
         bool termino = false;
@@ -349,8 +349,8 @@ void Programa:: menorDuracionVuelos(Grafo* grafo){
 
     cout << MSJ_MENOR_DURACION << endl << endl;
 
-    if(grafo->hayVertice(iataOrigen) && grafo->hayVertice(iataDestino)){
-        Vuelo** corto = grafo->caminoMasCorto(iataOrigen, iataDestino);
+    Vuelo** corto = grafo->caminoMasCorto(iataOrigen, iataDestino);
+    if(corto != 0){
 
         int i = 0;
         bool termino = false;
