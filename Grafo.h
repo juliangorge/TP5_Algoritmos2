@@ -51,11 +51,11 @@ public:
 
 private:
 
-	int* dijkstra(string partida, string destino, float costo[], bool visitado[], int predecesores[], char tipoDato);
+	int* dijkstra(string partida, string destino, float* costo, bool* visitado, int* predecesores, char tipoDato);
 	
-	void inicializarEtiquetas(float costo[], bool visitado[], int predecesores[], int n);
+	void inicializarEtiquetas(float* costo, bool* visitado, int* predecesores, int n);
 
-	void actualizarCosto(float costo[], int predecesores[], int posDestino, int posActual, Vuelo* vueloAux, char tipoDato);
+	void actualizarCosto(float* costo, int* predecesores, int posDestino, int posActual, Vuelo* vueloAux, char tipoDato);
 
 	// PRE: recibe un vector de distancias y de visitados.
 	// POST: devuelve la posicion del elemento no visitado con menor costo.
@@ -65,9 +65,11 @@ private:
 	// POST: devuelve la posicion del elemento no visitado con menor distancia.
 	Vuelo** cargarVuelos(int predecesor[], string raiz, string final);
 	
+	/*
 	// PRE: recibe un vector de distancias y de visitados.
 	// POST: devuelve la posicion del elemento no visitado con menor distancia.
-	void invertirVector(Vuelo* resultado[], int tam);
+	void invertirVector(Vuelo** resultado, int tam);
+	*/
 };
 
 #endif /* TP5_ALGORITMOS2_GRAFO_H_ */
