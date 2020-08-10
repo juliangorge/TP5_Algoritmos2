@@ -1,4 +1,5 @@
 #include "Grafo.h"
+#include "Iterador.h"
 #include <limits>
 
 const float INFINITO = numeric_limits<float>::max();
@@ -23,33 +24,37 @@ void Grafo::agregarVertice(string iata){
 bool Grafo::agregarVuelo(Vuelo* vuelo){
 
 	Vertice* aux;
-	unsigned i = 1;
 	bool agregado = false;
 	agregarVertice(vuelo->getPartida());
 	agregarVertice(vuelo->getDestino());
 
-	while (i <= vertices.getTam() && !agregado){
-		aux = vertices.getDato(i);
+	Iterador<Vertice*> itLista;
+	vertices.iniciarIterador(itLista);
+	while(!itLista.finalIterador() && !agregado)
+	{
+		aux = itLista.obtenerDato();
 		if (vuelo->getPartida() == aux->getIata()){
 			aux->agregarVuelo(vuelo);
 			agregado = true;
 		}
-		i++;
+		itLista.siguiente();
 	}
-
 	return agregado;
 }
 
 Vertice* Grafo::getVertice(string iata){
 	Vertice* aux;
-	unsigned i = 1;
 	bool encontrado = false;
 
-	while (i <= vertices.getTam() && !encontrado){
-		aux = vertices.getDato(i);
+	Iterador<Vertice*> itLista;
+	vertices.iniciarIterador(itLista);
+
+	while(!itLista.finalIterador() && !encontrado)
+	{
+		aux = itLista.obtenerDato();
 		if (aux->getIata() == iata)
 			encontrado = true;
-		i++;
+		itLista.siguiente();
 	}
 	if (encontrado)
 		return aux;
@@ -107,7 +112,7 @@ int* Grafo::dijkstra(string partida, string destino, float costo[], bool visitad
 		visitado[pos] = true;
 		actual = vertices.getDato(pos);
 		if (actual->getIata() != destino){
-			for (int i = 1; i < vertices.getTam() + 1; ++i){
+			for (unsigned i = 1; i < vertices.getTam() + 1; ++i){
 				verticeAux = vertices.getDato(i);
 				vueloAux = actual->getVuelo( verticeAux->getIata() );	
 				if (vueloAux != 0)
