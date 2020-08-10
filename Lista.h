@@ -47,6 +47,11 @@ class Lista
         // POST: agrega un dato (dentro de un nodo) al final
         void insertar(Dato d);
 
+        // PRE: lista creada.
+        // POST: agrega un dato (dentro de un nodo) en la posicion pos.
+        // Si pos es mayor al tamano de la lista lo agrega al final y si es menor a 1 lo agrega al principio.
+        void insertar(Dato d, unsigned pos);
+
         // PRE: - lista creada y no vacia
         // POST: devuelve el dato que esta en la posicion pos
         Dato getDato(unsigned pos);
@@ -110,16 +115,24 @@ bool Lista<Dato>::listaVacia()
 
 template<class Dato>
 void Lista<Dato>::insertar(Dato d)
- {
+{
+	insertar( d, tam);
+}
+
+template<class Dato>
+void Lista<Dato>::insertar(Dato d, unsigned pos)
+{
     Nodo<Dato>* pnodo = new Nodo<Dato>(d);
     Nodo<Dato>* paux = primero;
     if (this->listaVacia()){
         primero = pnodo;
     }
     else{
-        while (paux->getSiguiente() != 0){
+    	unsigned i = 1;
+        while (paux->getSiguiente() != 0 && i < pos){
             paux = paux->getSiguiente();
         }
+        pnodo->setSiguiente(paux->getSiguiente());
         paux->setSiguiente(pnodo);
  }
  tam++;
