@@ -1,15 +1,17 @@
 #include "Archivo.h"
+#include "ExcepcionArchivo.h"
 
 using namespace std;
 
 Archivo::Archivo(string ruta){
     if(existenciaDeArchivo(ruta)){
-        archivo.open(ruta, ios::out);
+        archivo.open(ruta, ifstream::in);
         archivoAbierto = true;
         cout << "\tArchivo " << ruta << " abierto" << endl;
     }
     else {
         archivoAbierto = false;
+        throw ExcepcionArchivo();
     }
 }
 
