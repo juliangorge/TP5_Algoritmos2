@@ -1,5 +1,6 @@
-#include"Vertice.h"
-#include<iostream>
+#include "Vertice.h"
+#include "iterador.h"
+#include <iostream>
 
 using namespace std;
 
@@ -29,15 +30,18 @@ string Vertice::getIata(){
 
 Vuelo* Vertice::getVuelo(string destino){
 	Vuelo* aux;
-	unsigned i = 1;
 	bool encontrado = false;
+	Iterador<Vuelo*> itLista;
+	vuelos.iniciarIterador(itLista);
 
-	while (i <= vuelos.getTam() && !encontrado){
-		aux = vuelos.getDato(i);
+	while(!itLista.finalIterador() && !encontrado)
+	{
+		aux = itLista.obtenerDato();
 		if (aux->getDestino() == destino)
 			encontrado = true;
-		i++;
+		itLista.siguiente();
 	}
+
 	if (encontrado)
 		return aux;
 	return 0;
@@ -52,9 +56,12 @@ bool Vertice::hayVuelo(string destino){
 }
 
 void Vertice::listarVuelos(){
-	unsigned i = 1;
-	while (i <= vuelos.getTam()){
-		vuelos.getDato(i)->mostrar();
-		i++;
+	Iterador<Vuelo*> itLista;
+	vuelos.iniciarIterador(itLista);
+
+	while(!itLista.finalIterador())
+	{
+		itLista.obtenerDato()->mostrar();
+		itLista.siguiente();
 	}
 }
