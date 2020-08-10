@@ -1,4 +1,5 @@
 #include "Caminos.h"
+#include "Iterador.h"
 
 using namespace std;
 
@@ -10,6 +11,15 @@ Caminos::Caminos(){
 }
 
 Caminos::~Caminos(){
+	Iterador<Lista<Vuelo*>*> it_lista;
+	vuelos.iniciarIterador(it_lista);
+	Lista<Vuelo*>* aux;
+	while(!it_lista.finalIterador())
+	{
+		aux = it_lista.obtenerDato();
+		aux->vaciarLista(false);
+		it_lista.siguiente();
+	}
 }
 
 void Caminos::setPartida(string iataPartida){
