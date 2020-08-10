@@ -94,18 +94,18 @@ Vuelo** Grafo::caminoMasCorto(string partida, string destino){
 }
 
 int* Grafo::dijkstra(string partida, string destino, float costo[], bool visitado[], int predecesores[], char tipoDato){
-	Vertice* raiz = getVertice(partida);
-	if (raiz == 0){ //si no existe el vertice de salida
+	Vertice* actual = getVertice(partida);
+	Vertice* verticeAux = getVertice(destino);
+	if (actual == 0 || verticeAux == 0)//si no existe el vertice de salida
 		return 0;
-	}
 
- 	int posRaiz = vertices.getPos(raiz);
+
+ 	int posRaiz = vertices.getPos(actual);
 	
 	costo[posRaiz] = 0;
 
 	Vuelo* vueloAux;
-	Vertice* verticeAux;
-	Vertice* actual = raiz;
+	verticeAux = 0;
 	int pos = 0;
 	while (actual->getIata() != destino && pos != -1){ 
 		pos = minimoCosto(costo, visitado);
@@ -174,6 +174,11 @@ Vuelo** Grafo::cargarVuelos(int predecesores[], string raiz, string final){
 	if (i == 0){ //si no existe el vertice final
 		return 0;
 	}
+	if (predecesores[i] == NO_ASIGNADO)
+	{
+		delete[] vuelos;
+		return 0;
+	}
 
 	bool existeVuelo = true;
 	int tope = 0; //tamanio logico del vector
@@ -192,6 +197,7 @@ Vuelo** Grafo::cargarVuelos(int predecesores[], string raiz, string final){
 	tope --;
 
 	if(!existeVuelo){
+		delete[] vuelos;
 		return 0;
 	}
 
