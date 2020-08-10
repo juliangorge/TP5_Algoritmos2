@@ -172,6 +172,7 @@ Vuelo** Grafo::cargarVuelos(int predecesores[], string raiz, string final){
 	string destino = final;
 	int i = vertices.getPos( getVertice(final) ); 
 	if (i == 0){ //si no existe el vertice final
+		delete[] vuelos;
 		return 0;
 	}
 	if (predecesores[i] == NO_ASIGNADO)
