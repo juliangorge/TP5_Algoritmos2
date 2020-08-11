@@ -2,36 +2,18 @@
 #include"Vuelo.h"
 #include"Vertice.h"
 #include"Grafo.h"
+#include "Archivo.h"
 #include"Caminos.h"
 
-void setvuelo(Vuelo* pvuelo, string salida, string destino, float horas, int costo){
-	pvuelo->setPartida(salida);
-	pvuelo->setDestino(destino);
-	pvuelo->setHoras(horas);
-	pvuelo->setCosto(costo);
-}
-
 int main(){
-	Grafo grafo;
+	const string RUTA_VUELOS = "vuelos.txt";
+	const string RUTA_AEROPUERTOS = "aeropuertos.txt";
+    Archivo archivoVuelos(RUTA_VUELOS);
+    Grafo grafo;
+	archivoVuelos.cargar(&grafo);
 
-	grafo.agregarVertice("EZE");
-	grafo.agregarVertice("MAD");
-	grafo.agregarVertice("SCH");
-	grafo.agregarVertice("SPA");
-	
-	Vuelo* pvuelo1 = new Vuelo;
-	setvuelo(pvuelo1, "EZE", "SCH", 1, 2);
-	Vuelo* pvuelo2 = new Vuelo;
-	setvuelo(pvuelo2, "EZE", "SPA", 5, 5);
-	Vuelo* pvuelo3 = new Vuelo;
-	setvuelo(pvuelo3, "SCH", "MAD", 10 ,7);
-	Vuelo* pvuelo4 = new Vuelo;
-	setvuelo(pvuelo4, "SPA", "MAD", 6, 9);
-
-	grafo.agregarVuelo(pvuelo1);
-	grafo.agregarVuelo(pvuelo2);
-	grafo.agregarVuelo(pvuelo3);
-	grafo.agregarVuelo(pvuelo4);
+	string origen = "EZE";
+	string destino = "MIA";
 
 	Caminos* corto = grafo.caminoMasCorto("EZE","MAD");
 	corto->mostrarDetalle();
