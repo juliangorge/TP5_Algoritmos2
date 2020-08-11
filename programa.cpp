@@ -47,7 +47,6 @@ int Programa::obtenerOpcion(){
 }
 
 void Programa::mostrarMenu() {
-    cout << endl << endl;
     cout << "\n\t**********************  M E N U  A E R O P U E R T O    *****************"<< endl << endl;
     cout << "\t1. Consultar Aeropuerto" << endl;
     cout << "\t2. Dar de Alta Aeropuerto" << endl;
@@ -299,32 +298,17 @@ void Programa:: abrirMenu2InternoVuelos(Grafo* grafo){
 }
 
 void Programa:: menorCostoVuelos(Grafo* grafo){
-    string iataOrigen = "EZE";
-    string iataDestino = "MIA";
+    string iataOrigen;
+    string iataDestino;
 
-    //iataOrigenDestino(iataOrigen, iataDestino);
+    iataOrigenDestino(iataOrigen, iataDestino);
 
     cout << MSJ_MENOR_COSTO << endl << endl;
 
-    if(grafo->hayVertice(iataOrigen) && grafo->hayVertice(iataDestino)){
-        Vuelo** corto = grafo->caminoMasBarato(iataOrigen, iataDestino);
-
-        int i = 0;
-        bool termino = false;
-
-        while(!termino)
-        {
-            cout << corto[i]->getCosto() << endl;
-            if(corto[i]->getDestino() == iataDestino){
-                termino = true;
-            }
-
-            corto[i]->mostrar();
-
-            cout << endl;
-            i++;
-        }
-        delete[] corto;
+    Caminos* corto = grafo->caminoMasBarato(iataOrigen, iataDestino);
+    if(corto != 0){
+        corto->mostrarDetalle();
+        delete corto;
     }else{
         cout << MSJ_VUELO_INEXISTENTE << endl << endl;
     }
@@ -349,25 +333,10 @@ void Programa:: menorDuracionVuelos(Grafo* grafo){
 
     cout << MSJ_MENOR_DURACION << endl << endl;
 
-    if(grafo->hayVertice(iataOrigen) && grafo->hayVertice(iataDestino)){
-        Vuelo** corto = grafo->caminoMasCorto(iataOrigen, iataDestino);
-
-        int i = 0;
-        bool termino = false;
-
-        while(!termino)
-        {
-            cout << corto[i]->getCosto() << endl;
-            if(corto[i]->getDestino() == iataDestino){
-                termino = true;
-            }
-
-            corto[i]->mostrar();
-
-            cout << endl;
-            i++;
-        }
-        delete[] corto;
+    Caminos* corto = grafo->caminoMasCorto(iataOrigen, iataDestino);
+    if(corto != 0){
+        corto->mostrarDetalle();
+        delete corto;
     }else{
         cout << MSJ_VUELO_INEXISTENTE << endl << endl;
     }
@@ -392,14 +361,4 @@ void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo){
                }
            }
      while(volverAMenu==true );
-}
-
-
-
-
-void Programa:: menuInternoCostoVuelos() {
-
-}
-void Programa:: menuInternoDuracionVuelos() {
-
 }

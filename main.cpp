@@ -16,48 +16,29 @@ const int SALIR = 0;
 
 int main(int argc, char *argv []){
 
-    Archivo archivoAeropuertos(RUTA_AEROPUERTOS);
     ABB<Aeropuerto*> arbol;
-
-    Archivo archivoVuelos(RUTA_VUELOS);
     Grafo grafo;
 
-    try
-    {
-        if(!archivoAeropuertos.estadoDeArchivo()){
-            throw ExcepcionArchivo();
-        }
-        else{
-            //cout << MSJ_CARGA_ARBOL<< endl;
-            archivoAeropuertos.cargar(&arbol);
-        }
+    try{
+    	Archivo archivoAeropuertos(RUTA_AEROPUERTOS);
+    	//cout << MSJ_CARGA_ARBOL<< endl;
+    	archivoAeropuertos.cargar(&arbol);
     }
     catch(ExcepcionArchivo& e){
         cout << e.excepcionAeropuertos() << endl;
     }
-
-    try
-    {
-        if(!archivoVuelos.estadoDeArchivo()){
-            throw ExcepcionArchivo();
-        }
-        else{
-            //cout <<MSJ_CARGA_GRAFO << endl;
-            archivoVuelos.cargar(&grafo);
-
-            Programa menuPrincipal;
-            menuPrincipal.manejoMenuPrincipal(&arbol, &grafo);
-        }
+    try{
+    	Archivo archivoVuelos(RUTA_VUELOS);
+    	//cout <<MSJ_CARGA_GRAFO << endl;
+    	archivoVuelos.cargar(&grafo);
     }
     catch(ExcepcionArchivo& l){
         cout << l.excepcionVuelos() << endl;
+        return 1;
     }
+
+    Programa menuPrincipal;
+    menuPrincipal.manejoMenuPrincipal(&arbol, &grafo);
 
     return 0;
 }
-
-/*
-    for ( int i = 0 ; i < listaAeropuertos.obtener_tam() ; ++i ) {
-      delete listaAeropuertos.obtener_dato(i) ;
-    }
-*/

@@ -5,6 +5,7 @@
 #include "ABB.h"
 #include "Aeropuerto.h"
 #include "Grafo.h"
+#include "Caminos.h"
 
 const string MSJ_OPCION = "\n\tIngrese la opcion que desea: ";
 const string MSJ_PELICULAS = "\t******** Aeropuertos ********  ";
@@ -115,9 +116,6 @@ class Programa
 
         void menorCostoVuelos(Grafo* grafo);
         void menorDuracionVuelos(Grafo* grafo);
-
-        void menuInternoDuracionVuelos();
-        void menuInternoCostoVuelos();
 
         void manejoMenuPrincipal(ABB<Aeropuerto*>* arbol, Grafo* grafo);
         bool validacionExisteIATA(ABB<Aeropuerto*>* arbol, string iataIngresado);
