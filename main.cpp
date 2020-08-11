@@ -38,7 +38,7 @@ int main(int argc, char *argv []){
     }
 
     Programa menuPrincipal;
-    menuPrincipal.menuPrincipal(&arbol, &grafo);
+    menuPrincipal.manejoMenuPrincipal(&arbol, &grafo);
 
     return 0;
 }

@@ -5,9 +5,10 @@
 #include "ABB.h"
 #include "Aeropuerto.h"
 #include "Grafo.h"
-#include <cctype>
-#include <string>
-#include <exception>
+
+const string MSJ_OPCION = "\n\tIngrese la opcion que desea: ";
+const string MSJ_PELICULAS = "\t******** Aeropuertos ********  ";
+const string MSJ_FIN_PROGRAMA = "\t---- Fin del programa ---";
 
 using namespace std;
 class Programa
@@ -24,6 +25,11 @@ class Programa
         Programa();
 
         //Descripcion:
+        //PRE: -
+        //Post: Muestra las opciones del menu
+        void mostrarMenu();
+
+        //Descripcion:
         //PRE:
         //Post: Se ingresa por teclado una opcion del menu
         void elegirOpcion();
@@ -31,7 +37,7 @@ class Programa
         //Descripcion:
         //PRE: arbol bien formado
         //Post: Accede a las diferentes partes del menu
-        void abrirMenuInternoAeropuerto(ABB<Aeropuerto*>* arbol);
+        void abrirMenuInterno(ABB<Aeropuerto*>* arbol);
 
         //Descripcion: devuelve opcion ingresada
         //PRE: -
@@ -88,13 +94,32 @@ class Programa
         //Post: Da de baja un aeropuerto
         void bajaAeropuerto(ABB<Aeropuerto*>* arbol);
 
+        //Descripcion: muestra los aeropuertos con recorrido in orden
+        //PRE: arbol bien formado
+        //Post: muestra los aeropuertos  (recorrido in orden)
+        void mostrarAeropuertosInorden(ABB<Aeropuerto*>* arbol);
+
+        //Descripcion: muestra los aeropuertos (formato abb)
+        //PRE: arbol bien formado
+        //Post: muestra los aeropuertos (formato abb)
+        void mostrarAeropuertosAbb(ABB<Aeropuerto*>* arbol);
+
+        void mostrarMenuVuelos();
+
+        void abrirMenuInternoVuelos(Grafo* grafo);
+
+        void mostrarMenuPrincipal ();
+        void consultarVuelos();
         void abrirMenu2InternoVuelos(Grafo* grafo);
         void iataOrigenDestino(string &iataOrigen, string &iataDestino);
 
         void menorCostoVuelos(Grafo* grafo);
         void menorDuracionVuelos(Grafo* grafo);
 
-        void menuPrincipal(ABB<Aeropuerto*>* arbol, Grafo* grafo);
+        void menuInternoDuracionVuelos();
+        void menuInternoCostoVuelos();
+
+        void manejoMenuPrincipal(ABB<Aeropuerto*>* arbol, Grafo* grafo);
         bool validacionExisteIATA(ABB<Aeropuerto*>* arbol, string iataIngresado);
 };
 

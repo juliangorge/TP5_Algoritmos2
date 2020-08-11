@@ -1,5 +1,5 @@
 #include "Vertice.h"
-#include "Iterador.h"
+#include "iterador.h"
 #include <iostream>
 
 using namespace std;
