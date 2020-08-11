@@ -71,10 +71,15 @@ void Caminos::mostrarResumen(){
 
 void Caminos::mostrarDetalle(){ //completar segunda iteracion anidada
 	cout << "Vuelos: " << endl << endl;
-	unsigned i = 0;
-	while(i < vuelos.getTam()){
-		vuelos.getDato(i)->getDato(1)->mostrar();
-		cout << endl;
-		i++;
+	unsigned i = vuelos.getTam();
+	unsigned j;
+	while(i > 0){
+		j = vuelos.getDato(i)->getTam();
+		while( j > 0 ){
+			vuelos.getDato(i)->getDato(j)->mostrar();
+			cout << endl;
+			j--;
+		}
+		i--;
 	}
 }

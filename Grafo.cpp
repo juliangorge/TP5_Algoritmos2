@@ -133,7 +133,7 @@ void Grafo::actualizarCosto(float costo[], Lista<int*> predecesores[], int posDe
 		}
 	} else if (tipoDato == COSTO){
 
-		if (costo[posDestino] > costo[posActual] + (float)vueloAux->getCosto()) {
+		if (costo[posDestino] >= costo[posActual] + (float)vueloAux->getCosto()) {
 			costo[posDestino] = costo[posActual] + (float)vueloAux->getCosto();
 			int* pvalor = new int(posActual);
 			predecesores[posDestino].insertar(pvalor);
