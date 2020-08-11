@@ -1,7 +1,4 @@
 #include "Programa.h"
-#include <cctype>
-#include <string>
-#include <exception>
 
 const int VOLVER_MENU = 2;
 const int CONSULTA_VUELOS = 1;
@@ -31,6 +28,8 @@ const string MSJ_MENOR_DURACION = "\n\t  --------  VUELOS MENOR DURACION  ------
 const string MSJ_ORIGEN_IATA = "\tORIGEN  ";
 const string MSJ_DESTINO_IATA = "\tDESTINO  ";
 const string MSJ_VUELO_INEXISTENTE = "\tERROR: No hay conexion posible"; 
+const string MSJ_OPCION = "\n\tIngrese la opcion que desea: ";
+const string MSJ_FIN_PROGRAMA = "\t---- Fin del programa ---";
 
 const int AEROPUERTO= 1;
 const int VUELOS= 2;
@@ -46,24 +45,13 @@ int Programa::obtenerOpcion(){
     return opcion;
 }
 
-void Programa::mostrarMenu() {
-    cout << endl << endl;
-    cout << "\n\t**********************  M E N U  A E R O P U E R T O    *****************"<< endl << endl;
-    cout << "\t1. Consultar Aeropuerto" << endl;
-    cout << "\t2. Dar de Alta Aeropuerto" << endl;
-    cout << "\t3. Dar de Baja Aeropuerto" << endl;
-    cout << "\t4. Mostrar Aeropuertos (Recorrido In Orden)" << endl;
-    cout << "\t5. Mostrar Aeropuertos (Formato ABB)" << endl;
-    cout << "\t0. Salir del programa" << endl;
-}
-
 void Programa::elegirOpcion(){
     cout << MSJ_OPCION;
     cin >> opcion;
     cout <<endl << endl << endl;
 }
 
-void Programa::abrirMenuInterno(ABB<Aeropuerto*>* arbol){
+void Programa::abrirMenuInternoAeropuerto(ABB<Aeropuerto*>* arbol){
     switch(opcion){
         case CONSULTAR_AEROPUERTO:{
             menuMostrarAeropuerto(arbol);
@@ -78,15 +66,14 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*>* arbol){
             break;
         }
         case MOSTRAR_AEROPUERTO_INORDEN:{
-            mostrarAeropuertosInorden( arbol );  //mostrar in orden
+            arbol->imprimirInOrder();
             break;
         }
         case MOSTRAR_AEROPUERTO_ABB:{
-            mostrarAeropuertosAbb(arbol);  //mostrar abb
+            arbol->imprimirEnAnchura();
             break;
         }
         case SALIR: {
-            //  cout << MSJ_FIN_PROGRAMA << endl;
             return;
         }
         default:
@@ -195,25 +182,6 @@ void Programa:: bajaAeropuerto( ABB<Aeropuerto*>* arbol){
     }
 }
 
-
-
-void Programa:: mostrarAeropuertosInorden( ABB<Aeropuerto*>* arbol){
-    arbol->imprimirInOrder();
-}
-
-
-void Programa:: mostrarAeropuertosAbb( ABB<Aeropuerto*>* arbol){
-    arbol->imprimirEnAnchura();
-}
-
-
-void Programa:: mostrarMenuPrincipal (){
-    cout << endl << endl << endl;
-    cout <<"\t-----*-*-*-*-*-*----  M E N U    P R I N C I P A L  -----*-*-*-*-*---"<< endl<< endl;
-    cout <<"\t(1) MENU AEROPUERTO"<< endl;
-    cout <<"\t(2) MENU VUELOS" << endl;
-}
-
 void Programa::eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo){
     switch(opcion){
         case AEROPUERTO: 
@@ -223,6 +191,7 @@ void Programa::eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo){
             menuVuelos(grafo);
             break;
         case SALIR:
+            cout << MSJ_FIN_PROGRAMA << endl;
             return;
         default:
             break;
@@ -232,9 +201,16 @@ void Programa::eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo){
 
 void Programa::menuAeropuerto(ABB<Aeropuerto*>* arbol){
     do{
-        mostrarMenu();
+        cout << "\n\t**********************  M E N U  A E R O P U E R T O    *****************"<< endl << endl;
+        cout << "\t1. Consultar Aeropuerto" << endl;
+        cout << "\t2. Dar de Alta Aeropuerto" << endl;
+        cout << "\t3. Dar de Baja Aeropuerto" << endl;
+        cout << "\t4. Mostrar Aeropuertos (Recorrido In Orden)" << endl;
+        cout << "\t5. Mostrar Aeropuertos (Formato ABB)" << endl;
+        cout << "\t0. Volver al Menu" << endl;
+
         elegirOpcion();
-        abrirMenuInterno(arbol);
+        abrirMenuInternoAeropuerto(arbol);
     }
     while(obtenerOpcion() != SALIR);
 
@@ -242,45 +218,15 @@ void Programa::menuAeropuerto(ABB<Aeropuerto*>* arbol){
 
 void Programa:: menuVuelos (Grafo* grafo){
     do{
-        mostrarMenuVuelos();
+        cout << "\n\t *********************   M E N U    V U E L O S    ******************** " << endl << endl;
+        cout << "\t1. Menor Costo" << endl;
+        cout << "\t2. Menor Duracion" << endl;
+        cout << "\t0. Volver al Menu" << endl;
+
         elegirOpcion();
-        abrirMenuInternoVuelos(grafo);
+        abrirMenu2InternoVuelos(grafo);
     }
     while(obtenerOpcion() != SALIR);
-}
-
-void Programa:: mostrarMenuVuelos(){
-    cout << endl << endl;
-    cout << "\n\t *********************   M E N U    V U E L O S    ******************** " << endl << endl;
-    cout << "\t1. Consultar Vuelos" << endl;
-    cout << "\t0. Salir del programa" << endl;
-
-}
-
-void Programa:: abrirMenuInternoVuelos(Grafo* grafo){
-    switch(opcion){
-        case CONSULTA_VUELOS:
-            consultarVuelos();
-            elegirOpcion();
-            abrirMenu2InternoVuelos(grafo);
-            break;
-
-        case SALIR:
-            return;
-
-        default:
-            cout << MSJ_RANGO << endl;
-            break;
-    }
-}
-
-void  Programa:: consultarVuelos(){
-    cout << endl << endl;
-    cout << "\n\t  --------  CONSULTAR VUELOS  -------"<< endl << endl;
-    cout << "\t1. Menor Costo" << endl;
-    cout << "\t2. Menor Duracion" << endl;
-    cout << "\t0. Volver menu" << endl;
-
 }
 
 void Programa:: abrirMenu2InternoVuelos(Grafo* grafo){
@@ -373,33 +319,25 @@ void Programa:: menorDuracionVuelos(Grafo* grafo){
     }
 }
 
-void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo){
-
-
+void Programa:: menuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo){
     Programa programa;
-    bool volverAMenu=false;
+    bool volverAMenu = false;
 
-    do{ programa.mostrarMenuPrincipal();
+    do {
+        cout << endl << endl << "\t-----*-*-*-*-*-*----  M E N U    P R I N C I P A L  -----*-*-*-*-*---" << endl << endl;
+        cout << "\t(1) MENU AEROPUERTO"<< endl;
+        cout << "\t(2) MENU VUELOS" << endl;
+        cout << "\t(0) SALIR DEL PROGRAMA" << endl;
+
         programa.elegirOpcion();
-        if( programa.obtenerOpcion()== SALIR)
-                volverAMenu=false;
-
+        if(programa.obtenerOpcion() == SALIR)
+            volverAMenu = false;
         else{
-                programa.eleccionMenu(arbol, grafo);
-                if( programa.obtenerOpcion()== SALIR)
-                    {volverAMenu=true;
-                      }
-               }
-           }
-     while(volverAMenu==true );
-}
-
-
-
-
-void Programa:: menuInternoCostoVuelos() {
-
-}
-void Programa:: menuInternoDuracionVuelos() {
-
+            programa.eleccionMenu(arbol, grafo);
+            if(programa.obtenerOpcion() == SALIR){
+                volverAMenu = true;
+            }
+       }
+    }
+    while(volverAMenu == true);
 }
