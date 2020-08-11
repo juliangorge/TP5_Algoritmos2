@@ -77,14 +77,17 @@ Caminos* Grafo::menorCamino(string partida, string destino, char tipoDato){
 	Caminos* resultado;
 	if (hayVertice(partida) && hayVertice(destino) && partida != destino){
 
-		float costo[n];
-		bool visitado[n]; 
-		Lista<int*> predecesores[n];
+		float* costo = new float[n];
+		bool* visitado = new bool[n]; 
+		Lista<int*>* predecesores = new Lista<int*>[n];
 		inicializarEtiquetas(costo, visitado, n);
 
 		Lista<int*>* camino = dijkstra(partida, destino, costo, visitado, predecesores, tipoDato);
 		resultado = cargarVuelos(camino, partida, destino);
 
+		delete[] costo;
+		delete[] visitado;
+		delete[] predecesores;
 	}
 
 	return resultado;
