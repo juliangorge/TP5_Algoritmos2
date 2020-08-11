@@ -54,6 +54,7 @@ private:
 
 	Caminos* menorCamino(string partida, string destino, char tipoDato);
 
+	// PRE: recibe dos codigos de vertices pertenecientes al grafo.
 	Lista<int*>* dijkstra(string partida, string destino, float costo[], bool visitado[], Lista<int*> predecesores[], char tipoDato);
 	
 	void inicializarEtiquetas(float costo[], bool visitado[], int n);

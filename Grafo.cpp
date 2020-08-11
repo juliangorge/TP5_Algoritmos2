@@ -92,7 +92,6 @@ Caminos* Grafo::menorCamino(string partida, string destino, char tipoDato){
 	} else { 
 		resultado = new Caminos;
 	}
-
 	return resultado;
 }
 
@@ -100,9 +99,6 @@ Caminos* Grafo::menorCamino(string partida, string destino, char tipoDato){
 Lista<int*>* Grafo::dijkstra(string partida, string destino, float costo[], bool visitado[], Lista<int*> predecesores[], char tipoDato){
 
 	Vertice* raiz = getVertice(partida);
-	if (raiz == 0){ //si no existe el vertice de salida
-		return 0;
-	}
 	costo[vertices.getPos(raiz)] = 0;	
 
 	Vuelo* vueloAux;
@@ -117,7 +113,7 @@ Lista<int*>* Grafo::dijkstra(string partida, string destino, float costo[], bool
 		actual = vertices.getDato(pos);
 
 		if (actual->getIata() != destino && pos != -1){
-			
+
 			for (unsigned i = 1; i < vertices.getTam() + 1; ++i){
 				verticeAux = vertices.getDato(i);
 				vueloAux = actual->getVuelo( verticeAux->getIata() );	
@@ -175,10 +171,9 @@ int Grafo::minimoCosto(float costo[], bool visitado[]){
 
 Caminos* Grafo::cargarVuelos(Lista<int*> predecesores[], string raiz, string final){ 
 	int i = vertices.getPos( getVertice(final) ); 
-	bool noHayCamino = predecesores[i].listaVacia();
-	Caminos* camino = new Caminos; //me tiraba error de compilacion de 'cant set a lvalue constant type rvalue...'
+	Caminos* camino = new Caminos;
 
-	if (noHayCamino){
+	if (predecesores[i].listaVacia()){ //si no tiene predecesores, no hay camino posible
 		return camino;
 	}
 

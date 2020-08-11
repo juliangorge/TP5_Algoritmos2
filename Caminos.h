@@ -47,18 +47,19 @@ public:
 
 	float getHorasTotal();
 
-
 	// PRE: recibe un puntero a un vuelo creado
 	// POST: lo agrega a la lista del vertice
 	void agregarVuelo(Vuelo* vuelo, int j, bool esPrimero);
+
+	// PRE: los vuelos estan cargados correctamente.
+	// POST: setea los atributos de la clase segun el camino cargado.
+	void setCamino();
 
 	// PRE:
 	// POST: imprime
 	void mostrarResumen();
 
 	void mostrarDetalle();	
-
-	//int cantCaminos(); que devuelva el tamanio de la lista de caminos
 
 };
 

@@ -6,6 +6,8 @@ using namespace std;
 Caminos::Caminos(){
 	this->iataPartida = "";
 	this->iataDestino = "";
+	costoTotal = 0;
+	horasTotal = 0;
 }
 
 Caminos::~Caminos(){
@@ -62,25 +64,45 @@ void Caminos::agregarVuelo(Vuelo* vuelo, int j, bool esPrimero){ //pos es el nue
 	}
 }
 
+void Caminos::setCamino(){
+	Lista<Vuelo*>* camino = vuelos.getDato(1);
+	iataPartida = camino->getDato(1)->getPartida();
+	iataDestino = camino->getDato( camino->getTam() )->getDestino();
+	unsigned i = 1;
+	while(i <= camino->getTam()){
+		Vuelo* vuelo = camino->getDato(i); 
+		horasTotal += vuelo->getHoras();
+		costoTotal += vuelo->getCosto();
+		i++;
+	}
+}
+
 void Caminos::mostrarResumen(){
-	cout << "Partida: " << iataPartida << endl;
-	cout << "Destino: " << iataDestino << endl;
-	cout << "Duracion total: "<< horasTotal <<  " horas" <<endl;
-	cout << "Costo total: $" << costoTotal << endl;
+	if (vuelos.getTam() == 0){
+		cout << "\nNo existe camino posible.\n";
+		return;
+	}	
+
+	setCamino();
+	cout << "Resumen del camino: \n";
+	cout << "\tPartida: " << iataPartida << endl;
+	cout << "\tDestino: " << iataDestino << endl;
+	cout << "\tDuracion total: "<< horasTotal <<  " horas" <<endl;
+	cout << "\tCosto total: $" << costoTotal << endl;
 }
 
 void Caminos::mostrarDetalle(){ //completar segunda iteracion anidada
 	unsigned i = vuelos.getTam();
 	unsigned j;
-	if (vuelos.getTam() == 0){
+
+	if (i == 0){
 		cout << "\nNo existe camino posible.\n";
 		return;
-	}
-	if (i > 1){
+	} else {
 		cout << "\nHay " << i << " caminos posibles. \n";
 	}
 	while(i > 0){
-		cout << endl << vuelos.getTam() - i + 1 << "ra opcion: \n\n";
+		cout << vuelos.getTam() - i + 1 << "ra opcion: \n";
 		j = vuelos.getDato(i)->getTam();
 		while( j > 0 ){
 			vuelos.getDato(i)->getDato(j)->mostrar();

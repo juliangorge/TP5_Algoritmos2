@@ -62,10 +62,10 @@ float Vuelo::getHoras()
 
 void Vuelo::mostrar()
 {
-	cout << "Partida: " << iataPartida << endl;
-	cout << "Destino: " << iataDestino << endl;
-	cout << "Duracion: "<< horas <<  " horas" <<endl;
-	cout << "Costo: " << "$" << costo << endl;
+	cout << "\tPartida: " << iataPartida << endl;
+	cout << "\tDestino: " << iataDestino << endl;
+	cout << "\tDuracion: "<< horas <<  " horas" <<endl;
+	cout << "\tCosto: " << "$" << costo << endl;
 }
 
 ostream& operator<<(ostream& salida, Vuelo& vuelo)
