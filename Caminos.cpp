@@ -72,7 +72,10 @@ void Caminos::mostrarResumen(){
 void Caminos::mostrarDetalle(){ //completar segunda iteracion anidada
 	unsigned i = vuelos.getTam();
 	unsigned j;
-
+	if (vuelos.getTam() == 0){
+		cout << "\nNo existe camino posible.\n";
+		return;
+	}
 	if (i > 1){
 		cout << "\nHay " << i << " caminos posibles. \n";
 	}

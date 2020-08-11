@@ -74,7 +74,7 @@ Caminos* Grafo::caminoMasCorto(string partida, string destino){
 Caminos* Grafo::menorCamino(string partida, string destino, char tipoDato){
 	int n = vertices.getTam() + 1;
 
-	Caminos* resultado;
+	Caminos* resultado = new Caminos;
 	if (hayVertice(partida) && hayVertice(destino) && partida != destino){
 
 		float* costo = new float[n];
