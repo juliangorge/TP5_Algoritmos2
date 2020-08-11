@@ -207,5 +207,7 @@ Caminos* Grafo::cargarVuelos(Lista<int*> predecesores[], string raiz, string fin
 
 	} while (bifurcaciones > 1);
 
+	delete camino;
+
 	return camino;
 }
