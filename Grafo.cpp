@@ -178,13 +178,15 @@ Caminos* Grafo::cargarVuelos(Lista<int*> predecesores[], string raiz, string fin
 	unsigned bifurcaciones;
 	unsigned j = 1;
 
-	do { //tengo que recorrer los predecesores y si hay una bifurcacion cuando los agrego al camino borro el nodo. Vuelve a iterar hasta que no halla bifurcaciones.
+	do { //tengo que recorrer los predecesores y si hay una bifurcacion cuando los agrego al camino borro el nodo. Vuelve a iterar hasta que no haya bifurcaciones.
 		bifurcaciones = 1;
+		actual = final;
+		i = vertices.getPos( getVertice(final) );
 		while (actual != raiz){ //recorro el vector de predecesores desde el destino hasta llegar a la partida
-			if (predecesores[i].getTam() > bifurcaciones)
+			if (bifurcaciones < predecesores[i].getTam())
 				bifurcaciones = predecesores[i].getTam();
 
-			previo = vertices.getDato( *predecesores[i].getDato(j) );
+			previo = vertices.getDato( *predecesores[i].getDato(1) );
 			if (predecesores[i].getTam() > 1)
 				predecesores[i].delDato(1);
 
