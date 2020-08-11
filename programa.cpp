@@ -42,10 +42,6 @@ const int MENOR_DURACION = 2;
 Programa::Programa(){
 }
 
-int Programa::obtenerOpcion(){
-    return opcion;
-}
-
 void Programa::mostrarMenu() {
     cout << endl << endl;
     cout << "\n\t**********************  M E N U  A E R O P U E R T O    *****************"<< endl << endl;
@@ -236,7 +232,7 @@ void Programa::menuAeropuerto(ABB<Aeropuerto*>* arbol){
         elegirOpcion();
         abrirMenuInterno(arbol);
     }
-    while(obtenerOpcion() != SALIR);
+    while(opcion != SALIR);
 
 }
 
@@ -246,7 +242,7 @@ void Programa:: menuVuelos (Grafo* grafo){
         elegirOpcion();
         abrirMenuInternoVuelos(grafo);
     }
-    while(obtenerOpcion() != SALIR);
+    while(opcion != SALIR);
 }
 
 void Programa:: mostrarMenuVuelos(){
@@ -314,7 +310,7 @@ void Programa:: menorCostoVuelos(Grafo* grafo){
 
         while(!termino)
         {
-            cout << corto[i]->getCosto() << endl;
+            //cout << corto[i]->getCosto() << endl;
             if(corto[i]->getDestino() == iataDestino){
                 termino = true;
             }
@@ -357,7 +353,7 @@ void Programa:: menorDuracionVuelos(Grafo* grafo){
 
         while(!termino)
         {
-            cout << corto[i]->getCosto() << endl;
+            //cout << corto[i]->getCosto() << endl;
             if(corto[i]->getDestino() == iataDestino){
                 termino = true;
             }
@@ -381,12 +377,12 @@ void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo){
 
     do{ programa.mostrarMenuPrincipal();
         programa.elegirOpcion();
-        if( programa.obtenerOpcion()== SALIR)
+        if( programa.opcion== SALIR)
                 volverAMenu=false;
 
         else{
                 programa.eleccionMenu(arbol, grafo);
-                if( programa.obtenerOpcion()== SALIR)
+                if( programa.opcion== SALIR)
                     {volverAMenu=true;
                       }
                }

@@ -39,10 +39,6 @@ class Programa
         //Post: Accede a las diferentes partes del menu
         void abrirMenuInterno(ABB<Aeropuerto*>* arbol);
 
-        //Descripcion: devuelve opcion ingresada
-        //PRE: -
-        //Post: devuelve opcion ingresada
-        int obtenerOpcion();
 
         void eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo);
         void menuAeropuerto(ABB<Aeropuerto*>* arbol);
