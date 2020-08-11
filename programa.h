@@ -28,11 +28,17 @@ class Programa
         //Post: Se ingresa por teclado una opcion del menu
         void elegirOpcion();
 
+        //Descripcion:
+        //PRE: arbol bien formado
+        //Post: Accede a las diferentes partes del menu
+        void abrirMenuInternoAeropuerto(ABB<Aeropuerto*>* arbol);
+
         //Descripcion: devuelve opcion ingresada
         //PRE: -
         //Post: devuelve opcion ingresada
         int obtenerOpcion();
 
+        void eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo);
         void menuAeropuerto(ABB<Aeropuerto*>* arbol);
         void menuVuelos (Grafo* grafo);
 
@@ -41,7 +47,7 @@ class Programa
         //Descripcion: Muestra aeropuerto
         //PRE: arbol bien formado
         //Post: Muestra el aeropuerto seleccionado
-        void consultaAeropuerto(ABB<Aeropuerto*>* arbol);
+        void menuMostrarAeropuerto(ABB<Aeropuerto*>* arbol);
 
         //Descripcion: Devuelve el codigo IATA ingresado
         //PRE: -
@@ -82,6 +88,7 @@ class Programa
         //Post: Da de baja un aeropuerto
         void bajaAeropuerto(ABB<Aeropuerto*>* arbol);
 
+        void abrirMenu2InternoVuelos(Grafo* grafo);
         void iataOrigenDestino(string &iataOrigen, string &iataDestino);
 
         void menorCostoVuelos(Grafo* grafo);
