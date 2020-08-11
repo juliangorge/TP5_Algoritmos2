@@ -9,14 +9,14 @@ Caminos::Caminos(){
 }
 
 Caminos::~Caminos(){
-	Iterador<Lista<Vuelo*>*> it_lista;
-	vuelos.iniciarIterador(it_lista);
+	Iterador<Lista<Vuelo*>*> itLista;
+	vuelos.iniciarIterador(itLista);
 	Lista<Vuelo*>* aux;
-	while(!it_lista.finalIterador())
+	while(!itLista.finalIterador())
 	{
-		aux = it_lista.obtenerDato();
+		aux = itLista.obtenerDato();
 		aux->vaciarLista(false);
-		it_lista.siguiente();
+		itLista.siguiente();
 	}
 }
 
