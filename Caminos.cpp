@@ -32,10 +32,11 @@ void Caminos::agregarVuelo(Vuelo* vuelo){
 }
 
 void Caminos::mostrar(){
-	cout << "Partida: " << iataPartida << endl;
-	cout << "Destino: " << iataDestino << endl;
-	cout << "Duracion: "<< horasTotal <<  " horas" <<endl;
+	cout << iataPartida << " -> " << iataDestino << endl;
+	//cout << "Partida: " << iataPartida << endl;
+	//cout << "Destino: " << iataDestino << endl;
 	cout << "Costo: " << "$" << costoTotal << endl;
+	cout << "Duracion: "<< horasTotal <<  " horas" <<endl;
 }
 
 unsigned Caminos::getCostoTotal(){
