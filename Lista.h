@@ -74,7 +74,7 @@ class Lista
 
         // PRE: - lista creada y no vacia
         // POST: devuelve el dato que esta en la posicion pos y li quita de la lista
-        Dato BajaDato(unsigned pos);
+        Dato bajaDato(unsigned pos);
 
         // PRE: Lista creada
         // POST: Devuelve tam (cantidad de nodos de la lista)
@@ -206,7 +206,7 @@ void Lista<Dato>::delDato(unsigned pos)
 }
 
 template<class Dato>
-Dato Lista<Dato>::BajaDato(unsigned pos)
+Dato Lista<Dato>::bajaDato(unsigned pos)
 {
 	Nodo<Dato>* paux = extraerNodo(pos);
 	Dato datoAux = paux->getDato();
