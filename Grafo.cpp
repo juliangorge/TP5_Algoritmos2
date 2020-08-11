@@ -128,6 +128,8 @@ void Grafo::actualizarCosto(float costo[], Lista<int*> predecesores[], int posDe
 
 		if (costo[posDestino] >= costo[posActual] + vueloAux->getHoras()) {
 			costo[posDestino] = costo[posActual] + vueloAux->getHoras();
+			if(costo[posDestino] > costo[posActual] + vueloAux->getHoras())
+				predecesores[posDestino].vaciarLista(true);
 			int* pvalor = new int(posActual);
 			predecesores[posDestino].insertar(pvalor);
 		}
@@ -135,6 +137,8 @@ void Grafo::actualizarCosto(float costo[], Lista<int*> predecesores[], int posDe
 
 		if (costo[posDestino] >= costo[posActual] + (float)vueloAux->getCosto()) {
 			costo[posDestino] = costo[posActual] + (float)vueloAux->getCosto();
+			if(costo[posDestino] > costo[posActual] + (float)vueloAux->getCosto())
+				predecesores[posDestino].vaciarLista(true);
 			int* pvalor = new int(posActual);
 			predecesores[posDestino].insertar(pvalor);
 		}
