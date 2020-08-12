@@ -106,10 +106,13 @@ Nodo<Dato>* Lista<Dato>::buscarNodo(unsigned posicion)
 {
 	 Nodo<Dato>* paux = primero;
 	 unsigned i = 1;
-	 while (i < posicion && paux->getSiguiente())
+	 if(!listaVacia())
 	 {
-		 paux = paux->getSiguiente();
-		 i++;
+		 while (i < posicion && paux->getSiguiente())
+		 {
+			 paux = paux->getSiguiente();
+			 i++;
+		 }
 	 }
 	 return paux;
 }
@@ -118,6 +121,8 @@ template<class Dato>
 Nodo<Dato>* Lista<Dato>::extraerNodo(unsigned posicion)
 {
 	 Nodo<Dato>* paux = primero;
+	 if(tam == 0)
+		 return 0;
 	 if (posicion == 1 || !(primero->getSiguiente()))
 	 {
 		 primero = paux->getSiguiente();
@@ -168,7 +173,7 @@ bool Lista<Dato>::listaVacia()
 template<class Dato>
 void Lista<Dato>::insertar(Dato d)
 {
-	insertar( d, tam);
+	insertar( d, tam+1);
 }
 
 template<class Dato>
@@ -179,7 +184,7 @@ void Lista<Dato>::insertar(Dato d, unsigned pos)
 	if (this->listaVacia() || pos < 2)
 	{
 		if(!listaVacia())
-			pnodo->setSiguiente(primero->getSiguiente());
+			pnodo->setSiguiente(primero);
 		 primero = pnodo;
 	}
 	else
@@ -194,26 +199,35 @@ template<class Dato>
 Dato Lista<Dato>::getDato(unsigned pos)
 {
 	Nodo<Dato>* paux = buscarNodo(pos);
-    return paux->getDato();
+	if(paux != 0)
+		return paux->getDato();
+	return 0;
 }
 
 template<class Dato>
 void Lista<Dato>::delDato(unsigned pos)
 {
 	Nodo<Dato>* paux = extraerNodo(pos);
-	delete paux;
-	tam--;
+	if (paux != 0)
+	{
+		delete paux;
+		tam--;
+	}
 }
 
 template<class Dato>
 Dato Lista<Dato>::bajaDato(unsigned pos)
 {
 	Nodo<Dato>* paux = extraerNodo(pos);
-	Dato datoAux = paux->getDato();
-	paux->setDato(0);
-    delete paux;
-    tam--;
-    return datoAux;
+	if (paux != 0)
+	{
+		Dato datoAux = paux->getDato();
+		paux->setDato(0);
+		delete paux;
+		tam--;
+		return datoAux;
+	}
+	return 0;
 }
 
 template<class Dato>
