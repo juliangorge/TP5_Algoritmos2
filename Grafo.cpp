@@ -104,7 +104,7 @@ Lista<int*>* Grafo::dijkstra(string partida, string destino, float costo[], bool
 	Vuelo* vueloAux;
 	Vertice* verticeAux;
 	Vertice* actual = raiz;
-	int pos = 0;
+	int pos = 1;
 
 	while (actual->getIata() != destino && pos != 0){ 
 
