@@ -8,15 +8,20 @@
 
 using namespace std;
 
+// representa el camino o caminos para ir de un vertice del grafo a otro. Es un conjunto de vuelos
 class Caminos
 {
 
 private:
+	Lista < Lista<Vuelo*>* > vuelos; //una lista de caminos 
 	string iataPartida;
 	string iataDestino;
-	Lista<Vuelo*> vuelos;
 	unsigned costoTotal;
 	float horasTotal;
+
+	void mostrarRecorrido(Lista<Vuelo*>* recorrido, unsigned* cantidadVuelos, float* horasTotales, unsigned* costosTotales);
+
+	void mostrarResumenRecorrido(unsigned* cantidadVuelo, float* horasTotale,unsigned* costosTotales);
 
 public:
 
@@ -29,30 +34,36 @@ public:
 	// POST: setea el atributo partida
 	void setPartida(string iataPartida);
 
-	// GET: setea el atributo partida
-	string getPartida();
-
 	// POST: setea el atributo destino
 	void setDestino(string iataDestino);
+
+	void setCostoTotal(unsigned costoTotal);
+
+	void setHorasTotal(float horasTotal);
+
+	// GET: setea el atributo partida
+	string getPartida();
 
 	// GET: setea el atributo destino
 	string getDestino();
 
-	// PRE: recibe un puntero a un vuelo creado
-	// POST: lo agrega a la lista del vertice
-	void agregarVuelo(Vuelo* vuelo);
-
-	// PRE:
-	// POST: imprime
-	void mostrar();
-
 	unsigned getCostoTotal();
-
-	void setCostoTotal(unsigned costoTotal);
 
 	float getHorasTotal();
 
-	void setHorasTotal(float horasTotal);
+	void agregarRecorrido(Lista<Vuelo*>* recorrido);
+
+	// PRE: los vuelos estan cargados correctamente.
+	// POST: setea los atributos de la clase segun el camino cargado.
+	void setCamino();
+
+	// PRE:
+	// POST: imprime
+	void mostrarResumen();
+
+	void mostrarDetalle();	
+
+
 
 };
 

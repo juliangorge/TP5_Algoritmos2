@@ -1,5 +1,6 @@
 #include "Grafo.h"
 #include "Iterador.h"
+#include "Lista.h"
 #include <limits>
 
 const float INFINITO = numeric_limits<float>::max();
@@ -69,39 +70,39 @@ bool Grafo::hayVertice(string iata){
 	return true;
 }
 
-Vuelo** Grafo::caminoMasBarato(string partida, string destino){
-	int n = vertices.getTam() + 1;
-	
-	float* costo = new float[n];
-	bool* visitado= new bool[n];
-	int* predecesores= new int[n];
-	inicializarEtiquetas(costo, visitado, predecesores, n);
-
-	int* camino = dijkstra(partida, destino, costo, visitado, predecesores, COSTO);
-	Vuelo** aux =cargarVuelos(camino, partida, destino);
-	delete[] costo;
-	delete[] visitado;
-	delete[] predecesores;
-	return aux;
+Caminos* Grafo::caminoMasBarato(string partida, string destino){
+	return menorCamino(partida, destino, COSTO);
 }
 
-Vuelo** Grafo::caminoMasCorto(string partida, string destino){
-	int n = vertices.getTam() + 1;
-
-	float* costo = new float[n];
-	bool* visitado= new bool[n];
-	int* predecesores= new int[n];
-	inicializarEtiquetas(costo, visitado, predecesores, n);
-
-	int* camino = dijkstra(partida, destino, costo, visitado, predecesores, HORAS);
-	Vuelo** aux =cargarVuelos(camino, partida, destino);
-	delete[] costo;
-	delete[] visitado;
-	delete[] predecesores;
-	return aux;
+Caminos* Grafo::caminoMasCorto(string partida, string destino){
+	return menorCamino(partida, destino, HORAS);
 }
 
-int* Grafo::dijkstra(string partida, string destino, float* costo, bool* visitado, int* predecesores, char tipoDato){
+Caminos* Grafo::menorCamino(string partida, string destino, char tipoDato){
+	unsigned n = vertices.getTam() + 1;
+
+	Caminos* resultado;
+	if (hayVertice(partida) && hayVertice(destino) && partida != destino){
+
+		float* costo = new float[n];
+		bool* visitado = new bool[n];
+		Lista<int*>* predecesores = new Lista<int*>[n];
+		inicializarEtiquetas(costo, visitado, n);
+
+		Lista<int*>* camino = dijkstra(partida, destino, costo, visitado, predecesores, tipoDato);
+		resultado = cargarVuelos(camino, partida, destino);
+
+		delete[] costo;
+		delete[] visitado;
+		delete[] predecesores;
+
+	} else {
+		resultado = new Caminos;
+	}
+	return resultado;
+}
+
+Lista<int*>* Grafo::dijkstra(string partida, string destino, float* costo, bool* visitado, Lista<int*>* predecesores, char tipoDato){
 	Vertice* actual = getVertice(partida);
 	Vertice* verticeAux = getVertice(destino);
 	if (actual == 0 || verticeAux == 0)//si no existe el vertice de salida
@@ -114,58 +115,66 @@ int* Grafo::dijkstra(string partida, string destino, float* costo, bool* visitad
 
 	Vuelo* vueloAux;
 	verticeAux = 0;
-	int pos = 0;
-	while (actual->getIata() != destino && pos != -1){ 
+	int pos = posRaiz;
+	while (actual->getIata() != destino && pos != 0){
 		pos = minimoCosto(costo, visitado);
 		visitado[pos] = true;
 		actual = vertices.getDato(pos);
-		if (actual->getIata() != destino){
-			for (unsigned i = 1; i < vertices.getTam() + 1; ++i){
-				verticeAux = vertices.getDato(i);
+		if (actual->getIata() != destino && pos != 0){
+			Iterador<Vertice*> itVertices;
+			vertices.iniciarIterador(itVertices);
+			unsigned i = 1;
+			while(!itVertices.finalIterador())
+			{
+				verticeAux = itVertices.obtenerDato();
 				vueloAux = actual->getVuelo( verticeAux->getIata() );	
 				if (vueloAux != 0)
 					actualizarCosto(costo, predecesores, i, pos, vueloAux, tipoDato);
+				i++;
+				itVertices.siguiente();
 			}
 		}
 	}
 	return predecesores;
 }
 
-void Grafo::actualizarCosto(float* costo, int* predecesores, int posDestino, int posActual, Vuelo* vueloAux, char tipoDato){
+void Grafo::actualizarCosto(float costo[], Lista<int*> predecesores[], int posDestino, int posActual, Vuelo* vueloAux, char tipoDato){
 	if (tipoDato == HORAS){
-		if (costo[posDestino] > costo[posActual] + vueloAux->getHoras()){
-			costo[posDestino] = costo[posActual] + vueloAux->getHoras();
-			predecesores[posDestino] = posActual;
-		} else if (costo[posDestino] == costo[posActual] + vueloAux->getHoras()){
 
+		if (costo[posDestino] >= costo[posActual] + vueloAux->getHoras()) {
+			if(costo[posDestino] > costo[posActual] + vueloAux->getHoras())
+				predecesores[posDestino].vaciarLista(true);
+			costo[posDestino] = costo[posActual] + vueloAux->getHoras();
+			int* pvalor = new int(posActual);
+			predecesores[posDestino].insertar(pvalor);
 		}
 	} else if (tipoDato == COSTO){
-		if (costo[posDestino] > costo[posActual] + (float)vueloAux->getCosto()){
-			costo[posDestino] = costo[posActual] + (float)vueloAux->getCosto();
-			predecesores[posDestino] = posActual;
-		} else if (costo[posDestino] == costo[posActual] + (float)vueloAux->getCosto()){
 
+		if (costo[posDestino] >= costo[posActual] + (float)vueloAux->getCosto()) {
+			if(costo[posDestino] > costo[posActual] + (float)vueloAux->getCosto())
+				predecesores[posDestino].vaciarLista(true);
+			costo[posDestino] = costo[posActual] + (float)vueloAux->getCosto();
+			int* pvalor = new int(posActual);
+			predecesores[posDestino].insertar(pvalor);
 		}
 	}	
 }
 
-void Grafo::inicializarEtiquetas(float* costo, bool* visitado, int* predecesores, int n){
+void Grafo::inicializarEtiquetas(float* costo, bool* visitado, int n){
 	for (int i = 1; i < n; ++i){
 		costo[i] = INFINITO;
 		visitado[i] = false;
-		predecesores[i] = NO_ASIGNADO;
+		//predecesores[i] = NO_ASIGNADO;
 	}
 }
 
 int Grafo::minimoCosto(float costo[], bool visitado[]){
 	float minimo = INFINITO;
-	int pos;
-	unsigned i = 1;
-	while(i < vertices.getTam() + 1 && visitado[i])
-		i++;
-	pos = i;
+	int pos = 0;
 
-	for (; (i < vertices.getTam() + 1); ++i){
+
+
+	for (unsigned i = 1; (i < vertices.getTam() + 1); ++i){
 	 	if (!visitado[i]){
 	 		if(costo[i] < minimo){
 	 			minimo = costo[i];
@@ -176,56 +185,45 @@ int Grafo::minimoCosto(float costo[], bool visitado[]){
 	return pos; 
 }
 
-Vuelo** Grafo::cargarVuelos(int* predecesores, string raiz, string final){
-	int n = vertices.getTam() + 1;
-	Vuelo** vuelos = new Vuelo*[n - 1];
+Caminos* Grafo::cargarVuelos(Lista<int*>* predecesor, string raiz, string final)
+{
+	Caminos* ListaVuelos = new Caminos;
+	Lista<Vuelo*> listaAux;
+	int pos = vertices.getPos(getVertice(final));
+	cargarListaRecorridos(ListaVuelos, &listaAux, predecesor, pos);
+	listaAux.vaciarLista(false);
+	return ListaVuelos;
+}
 
-	Vertice* partida;
-	string destino = final;
-	int i = vertices.getPos( getVertice(final) ); 
-	if (i == 0 || predecesores[i] == NO_ASIGNADO){ //si no existe el vertice final
-		delete[] vuelos;
-		return 0;
+void Grafo::cargarListaRecorridos(Caminos* listaReccorridos,Lista<Vuelo*>*vuelos, Lista<int*>* predecesor, int pos)
+{
+	if(predecesor[pos].listaVacia())
+	{
+		Lista<Vuelo*>*ListaAAgregar = new Lista<Vuelo*>;
+		*ListaAAgregar = *vuelos;
+		listaReccorridos->agregarRecorrido(ListaAAgregar);
 	}
-
-	bool existeVuelo = true;
-	int tope = 0; //tamanio logico del vector
-	
-	while (destino != raiz && existeVuelo){
-		partida = vertices.getDato(predecesores[i]);
-		vuelos[tope] = partida->getVuelo(destino);
-
-		if (vuelos[tope] == 0){
-			existeVuelo = false;
+	else
+	{
+		int* posAux;
+		Vuelo* vueloAux;
+		Vertice* verticeAux;
+		string stringAux;
+		Iterador<int*> itPredecesores;
+		predecesor[pos].iniciarIterador(itPredecesores);
+		while(!itPredecesores.finalIterador())
+		{
+			posAux = itPredecesores.obtenerDato();
+			verticeAux = vertices.getDato(*posAux);
+			stringAux = vertices.getDato(pos)->getIata();
+			vueloAux = verticeAux->getVuelo(stringAux);
+			vuelos->insertar(vueloAux,1);
+			cargarListaRecorridos(listaReccorridos, vuelos, predecesor, *posAux);
+			vuelos->bajaDato(1);
+			itPredecesores.siguiente();
 		}
-		destino = partida->getIata();
-		i = vertices.getPos( getVertice(destino) );
-		tope ++;		
 	}
 
-	if(!existeVuelo){
-		delete[] vuelos;
-		return 0;
-	}
-
-	Vuelo** resultado = new Vuelo*[tope];
-	for (int i = 0; i < tope; ++i){ //libero el vector vuelos y creo otro dinamico con el tamanio justo.
-		resultado[tope-1-i] = vuelos[i];
-	}
-	delete[] vuelos;
-
-	//invertirVector(resultado, tope); //invierto el vector para que se pueda leer desde la salida hasta la llegada
-	return resultado;
 }
 
-/*
-void Grafo::invertirVector(Vuelo** resultado, int tope){
-	Vuelo* aux;
-	for (int i = 0; i < (tope + 1)/ 2; ++i){
-		aux = resultado[i];
-		resultado[i] = resultado[tope - i];
-		resultado[tope - i] = aux;
-	}
-}
-*/
 
