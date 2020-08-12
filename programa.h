@@ -26,8 +26,8 @@ class Programa
 
 
         //PRE: -
-        //Post: Muestra las opciones del menu
-        void mostrarMenu();
+        //Post: Muestra las opciones del menu aeropuerto
+        void mostrarMenuAeropuerto();
 
 
         //PRE:
@@ -37,7 +37,7 @@ class Programa
         //Descripcion:
         //PRE: arbol bien formado
         //Post: Accede a las diferentes partes del menu
-        void abrirMenuInterno(ABB<Aeropuerto*>* arbol);
+        void abrirMenuInternoAeropuerto(ABB<Aeropuerto*>* arbol);
 
 
         // POST: permite seleccionar entre dos menues, accesando a los mismos
@@ -52,7 +52,7 @@ class Programa
 
         //PRE: arbol bien formado
         //Post: Muestra el aeropuerto seleccionado
-        void menuMostrarAeropuerto(ABB<Aeropuerto*>* arbol);
+        void consultarAeropuerto(ABB<Aeropuerto*>* arbol);
 
         //Descripcion: Devuelve el codigo IATA ingresado
         //PRE: -
@@ -112,11 +112,11 @@ class Programa
         //POST: Muestra menu principal, donde se selecciona, menu aeropuerto o vuelo
         void mostrarMenuPrincipal ();
 
-        //POST: Consulta por vuelos
-        void consultarVuelos();
+        //POST: Muestra menu de consultas de vuelos
+        void mostrarConsultaVuelos();
 
         //POST: Muestra opciones del menu vuelos
-        void abrirMenu2InternoVuelos(Grafo* grafo);
+        void menuConsultaCostoDuracionVuelos(Grafo* grafo);
 
         //PRE: Ingresan dos string el Iata de origen y el de destino para ser seteados
         //POST: Quedan seteados los valores iataOrigen y iataDestino
