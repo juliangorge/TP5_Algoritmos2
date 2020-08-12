@@ -22,7 +22,7 @@ const string MSJ_SUPERFICIE = "\tSuperficie: ";
 const string MSJ_TERMINALES = "\tTerminales: ";
 const string MSJ_NACIONALES = "\tCantidad Destinos Nacionales: ";
 const string MSJ_INTERNACIONALES = "\tCantidad Destinos Internacionales: ";
-const string MSJ_REMOCION_CORRECTA = "\tIATA removido con Exito";
+const string MSJ_REMOCION_CORRECTA = "\t-- IATA removido con Exito --";
 const string MSJ_IATA_EXISTE = "\n\tERROR: IATA Existente";
 const string MSJ_REMOCION_INCORRECTA  = "\tERROR: IATA INEXISTENTE";
 const string MSJ_AEROPUERTO_INEXISTENTE = "\n\tATENCION: El aeropuerto no es valido";
@@ -31,6 +31,7 @@ const string MSJ_MENOR_DURACION = "\n\t  --------  VUELOS MENOR DURACION  ------
 const string MSJ_ORIGEN_IATA = "\tORIGEN  ";
 const string MSJ_DESTINO_IATA = "\tDESTINO  ";
 const string MSJ_VUELO_INEXISTENTE = "\tERROR: No hay conexion posible";
+const string MSJ_CARGA_AEROPUERTO= "\n\t-- Ha cargado exitosamente el Aeropuerto --";
 
 const int AEROPUERTO= 1;
 const int VUELOS= 2;
@@ -42,7 +43,7 @@ const int MENOR_DURACION = 2;
 Programa::Programa(){
 }
 
-void Programa::mostrarMenu() {
+void Programa::mostrarMenuAeropuerto() {
     cout << endl << endl;
     cout << "\n\t**********************  M E N U  A E R O P U E R T O    *****************"<< endl << endl;
     cout << "\t1. Consultar Aeropuerto" << endl;
@@ -50,7 +51,7 @@ void Programa::mostrarMenu() {
     cout << "\t3. Dar de Baja Aeropuerto" << endl;
     cout << "\t4. Mostrar Aeropuertos (Recorrido In Orden)" << endl;
     cout << "\t5. Mostrar Aeropuertos (Formato ABB)" << endl;
-    cout << "\t0. Salir del programa" << endl;
+    cout << "\t0. Volver al MENU PRINCIPAL" << endl;
 }
 
 void Programa::elegirOpcion(){
@@ -59,10 +60,10 @@ void Programa::elegirOpcion(){
     cout <<endl << endl << endl;
 }
 
-void Programa::abrirMenuInterno(ABB<Aeropuerto*>* arbol){
+void Programa::abrirMenuInternoAeropuerto(ABB<Aeropuerto*>* arbol){
     switch(opcion){
         case CONSULTAR_AEROPUERTO:{
-            menuMostrarAeropuerto(arbol);
+            consultarAeropuerto(arbol);
             break;
         }
         case ALTA_AEROPUERTO:{
@@ -90,7 +91,7 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*>* arbol){
 
 }
 
-void Programa:: menuMostrarAeropuerto(ABB<Aeropuerto*> *arbol){
+void Programa:: consultarAeropuerto(ABB<Aeropuerto*> *arbol){
     string iataIngresado = iata();
 
     if (existeIATA(arbol, iataIngresado))
@@ -136,7 +137,7 @@ void Programa:: altaAeropuerto( ABB<Aeropuerto*>* arbol){
         Aeropuerto* aeropuerto = new Aeropuerto;
         cout << endl << endl;
         cargarAeropuerto(aeropuerto);
-        cout << "cargado" << endl;
+        cout << MSJ_CARGA_AEROPUERTO << endl;
         arbol->insertar(iataIngresado, aeropuerto);
     }
     else altaAeropuerto(arbol);
@@ -207,6 +208,7 @@ void Programa:: mostrarMenuPrincipal (){
     cout <<"\t-----*-*-*-*-*-*----  M E N U    P R I N C I P A L  -----*-*-*-*-*---"<< endl<< endl;
     cout <<"\t(1) MENU AEROPUERTO"<< endl;
     cout <<"\t(2) MENU VUELOS" << endl;
+    cout <<"\t(0) SALIR" << endl;
 }
 
 void Programa::eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo){
@@ -227,9 +229,9 @@ void Programa::eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo){
 
 void Programa::menuAeropuerto(ABB<Aeropuerto*>* arbol){
     do{
-        mostrarMenu();
+        mostrarMenuAeropuerto();
         elegirOpcion();
-        abrirMenuInterno(arbol);
+        abrirMenuInternoAeropuerto(arbol);
     }
     while(opcion != SALIR);
 
@@ -248,16 +250,16 @@ void Programa:: mostrarMenuVuelos(){
     cout << endl << endl;
     cout << "\n\t *********************   M E N U    V U E L O S    ******************** " << endl << endl;
     cout << "\t1. Consultar Vuelos" << endl;
-    cout << "\t0. Salir del programa" << endl;
+    cout << "\t0. Volver al MENU PRINCIPAL" << endl;
 
 }
 
 void Programa:: abrirMenuInternoVuelos(Grafo* grafo){
     switch(opcion){
         case CONSULTA_VUELOS:
-            consultarVuelos();
+            mostrarConsultaVuelos();
             elegirOpcion();
-            abrirMenu2InternoVuelos(grafo);
+            menuConsultaCostoDuracionVuelos(grafo);
             break;
 
         case SALIR:
@@ -269,7 +271,7 @@ void Programa:: abrirMenuInternoVuelos(Grafo* grafo){
     }
 }
 
-void  Programa:: consultarVuelos(){
+void  Programa:: mostrarConsultaVuelos(){
     cout << endl << endl;
     cout << "\n\t  --------  CONSULTAR VUELOS  -------"<< endl << endl;
     cout << "\t1. Menor Costo" << endl;
@@ -278,7 +280,7 @@ void  Programa:: consultarVuelos(){
 
 }
 
-void Programa:: abrirMenu2InternoVuelos(Grafo* grafo){
+void Programa:: menuConsultaCostoDuracionVuelos(Grafo* grafo){
     switch(opcion){
         case MENOR_COSTO:
             menorCostoVuelos(grafo);
@@ -372,20 +374,20 @@ void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo){
 
 
     Programa programa;
-    bool volverAMenu=false;
+    bool volverAMenu = false;
 
     do{ programa.mostrarMenuPrincipal();
         programa.elegirOpcion();
-        if( programa.opcion== SALIR)
-                volverAMenu=false;
 
+        if( programa.opcion == SALIR)
+                volverAMenu = false ;
         else{
                 programa.eleccionMenu(arbol, grafo);
-                if( programa.opcion== SALIR)
-                    {volverAMenu=true;
+                if( programa.opcion == SALIR)
+                    {volverAMenu = true ;
                       }
                }
            }
-     while(volverAMenu==true );
+     while(volverAMenu == true );
 }
 
