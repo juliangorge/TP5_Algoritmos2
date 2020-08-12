@@ -100,22 +100,40 @@ class Programa
         //Post: muestra los aeropuertos (formato abb)
         void mostrarAeropuertosAbb(ABB<Aeropuerto*>* arbol);
 
+        //POST: Despliega el menu de vuelos
         void mostrarMenuVuelos();
 
+        //POST: Permite seleccionar opcion del menu vuelos
         void abrirMenuInternoVuelos(Grafo* grafo);
 
+        //POST: Muestra menu principal, donde se selecciona, menu aeropuerto o vuelo
         void mostrarMenuPrincipal ();
+
+        //POST: Consulta por vuelos
         void consultarVuelos();
+
+        //POST: Muestra opciones del menu vuelos
         void abrirMenu2InternoVuelos(Grafo* grafo);
+
+        //PRE: Ingresan dos string el Iata de origen y el de destino para ser seteados
+        //POST: Quedan seteados los valores iataOrigen y iataDestino
         void iataOrigenDestino(string &iataOrigen, string &iataDestino);
 
+        //PRE: Grafo bien formado
+        // POST: Muestra los caminos mas cortos segun punto de partida y destino
         void menorCostoVuelos(Grafo* grafo);
+
+        //PRE: Grafo bien formado
+        //POST: Muestra los caminos mas cortos segun punto de partida y destino
         void menorDuracionVuelos(Grafo* grafo);
 
-        void menuInternoDuracionVuelos();
-        void menuInternoCostoVuelos();
-
+        //PRE: Grafo bien formado, arbol bien formado
+        //POST: Permite seleccionar menu aeropuerto o vuelos , regresa al menu principal a menos que quiera salir y el valor
+        //devuelto sea un false indicando que sale del menu
         void manejoMenuPrincipal(ABB<Aeropuerto*>* arbol, Grafo* grafo);
+
+        //PRE: Arbol bien formado, iata que se desea buscar
+        //POST: Devuelve true si existe el iata ingresado, forma contraria devuelve false
         bool validacionExisteIATA(ABB<Aeropuerto*>* arbol, string iataIngresado);
 };
 

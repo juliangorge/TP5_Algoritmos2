@@ -30,7 +30,7 @@ const string MSJ_MENOR_COSTO = "\n\t  -------- VUELOS MENOR COSTO -------";
 const string MSJ_MENOR_DURACION = "\n\t  --------  VUELOS MENOR DURACION  -------";
 const string MSJ_ORIGEN_IATA = "\tORIGEN  ";
 const string MSJ_DESTINO_IATA = "\tDESTINO  ";
-const string MSJ_VUELO_INEXISTENTE = "\tERROR: No hay conexion posible"; 
+const string MSJ_VUELO_INEXISTENTE = "\tERROR: No hay conexion posible";
 
 const int AEROPUERTO= 1;
 const int VUELOS= 2;
@@ -74,15 +74,14 @@ void Programa::abrirMenuInterno(ABB<Aeropuerto*>* arbol){
             break;
         }
         case MOSTRAR_AEROPUERTO_INORDEN:{
-            mostrarAeropuertosInorden( arbol );  //mostrar in orden
+            mostrarAeropuertosInorden( arbol );
             break;
         }
         case MOSTRAR_AEROPUERTO_ABB:{
-            mostrarAeropuertosAbb(arbol);  //mostrar abb
+            mostrarAeropuertosAbb(arbol);
             break;
         }
         case SALIR: {
-            //  cout << MSJ_FIN_PROGRAMA << endl;
             return;
         }
         default:
@@ -212,7 +211,7 @@ void Programa:: mostrarMenuPrincipal (){
 
 void Programa::eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo){
     switch(opcion){
-        case AEROPUERTO: 
+        case AEROPUERTO:
             menuAeropuerto(arbol);
             break;
         case VUELOS:
@@ -390,12 +389,3 @@ void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo){
      while(volverAMenu==true );
 }
 
-
-
-
-void Programa:: menuInternoCostoVuelos() {
-
-}
-void Programa:: menuInternoDuracionVuelos() {
-
-}
