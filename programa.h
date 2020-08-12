@@ -24,12 +24,12 @@ class Programa
         //Post:  -
         Programa();
 
-        //Descripcion:
+
         //PRE: -
         //Post: Muestra las opciones del menu
         void mostrarMenu();
 
-        //Descripcion:
+
         //PRE:
         //Post: Se ingresa por teclado una opcion del menu
         void elegirOpcion();
@@ -40,13 +40,16 @@ class Programa
         void abrirMenuInterno(ABB<Aeropuerto*>* arbol);
 
 
+        // POST: permite seleccionar entre dos menues, accesando a los mismos
         void eleccionMenu(ABB<Aeropuerto*>* arbol, Grafo* grafo);
+
+        //PRE: arbol bien formado
+        //POST: Manipula la interfaz con el menu aeropuerto
         void menuAeropuerto(ABB<Aeropuerto*>* arbol);
+
+        //POST: Manipula la interfaz con el menu vuelos
         void menuVuelos (Grafo* grafo);
 
-
-
-        //Descripcion: Muestra aeropuerto
         //PRE: arbol bien formado
         //Post: Muestra el aeropuerto seleccionado
         void menuMostrarAeropuerto(ABB<Aeropuerto*>* arbol);
