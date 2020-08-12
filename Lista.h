@@ -180,7 +180,7 @@ template<class Dato>
 void Lista<Dato>::insertar(Dato d, unsigned pos)
 {
     Nodo<Dato>* pnodo = new Nodo<Dato>(d);
-	Nodo<Dato>* paux = buscarNodo(pos);
+
 	if (this->listaVacia() || pos < 2)
 	{
 		if(!listaVacia())
@@ -189,6 +189,7 @@ void Lista<Dato>::insertar(Dato d, unsigned pos)
 	}
 	else
 	{
+		Nodo<Dato>* paux = buscarNodo(pos-1);
         pnodo->setSiguiente(paux->getSiguiente());
         paux->setSiguiente(pnodo);
 	}
