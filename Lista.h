@@ -18,6 +18,18 @@ class Lista
         // Tamaño de la lista
         unsigned tam;
 
+    	//PRE: valor introducido tiene que ser mayor a 0.
+    	//POST: Devuelve un puntero al nodo de la posicion buscada.
+    	//Si el valor introducido es mayor al tamaño de la lista devuelve un puntero al último nodo
+    	Nodo<Dato>* buscarNodo(unsigned);
+
+    	//PRE: debe haber al menos 1 nodo.
+    	//-Valor introducido tiene que ser mayor a 0.
+    	//POST: Extrae y devuelve un puntero al nodo de la posicion buscada.
+    	//Si el valor introducido es mayor al tamaño de la lista devuelve un puntero al último nodo.
+    	Nodo<Dato>* extraerNodo(unsigned);
+
+
     public:
     
         // Constructor
@@ -47,6 +59,11 @@ class Lista
         // POST: agrega un dato (dentro de un nodo) al final
         void insertar(Dato d);
 
+        // PRE: lista creada.
+        // POST: agrega un dato (dentro de un nodo) en la posicion pos.
+        // Si pos es mayor al tamano de la lista lo agrega al final y si es menor a 1 lo agrega al principio.
+        void insertar(Dato d, unsigned pos);
+
         // PRE: - lista creada y no vacia
         // POST: devuelve el dato que esta en la posicion pos
         Dato getDato(unsigned pos);
@@ -54,6 +71,10 @@ class Lista
         // PRE: - lista creada y no vacia
         // POST: libera el nodo que esta en la posición pos
         void delDato(unsigned pos);
+
+        // PRE: - lista creada y no vacia
+        // POST: devuelve el dato que esta en la posicion pos y li quita de la lista
+        Dato bajaDato(unsigned pos);
 
         // PRE: Lista creada
         // POST: Devuelve tam (cantidad de nodos de la lista)
@@ -79,6 +100,47 @@ class Lista
         Lista<Dato>& operator=(Lista<Dato>& listaACopiar);
 
 };
+
+template<class Dato>
+Nodo<Dato>* Lista<Dato>::buscarNodo(unsigned posicion)
+{
+	 Nodo<Dato>* paux = primero;
+	 unsigned i = 1;
+	 if(!listaVacia())
+	 {
+		 while (i < posicion && paux->getSiguiente())
+		 {
+			 paux = paux->getSiguiente();
+			 i++;
+		 }
+	 }
+	 return paux;
+}
+
+template<class Dato>
+Nodo<Dato>* Lista<Dato>::extraerNodo(unsigned posicion)
+{
+	 Nodo<Dato>* paux = primero;
+	 if(tam == 0)
+		 return 0;
+	 if (posicion == 1 || !(primero->getSiguiente()))
+	 {
+		 primero = paux->getSiguiente();
+	 }
+	 else
+	 {
+		 unsigned i = 1;
+		 Nodo<Dato>* pant;
+		 while (i < posicion && paux->getSiguiente())
+		 {
+			 pant = paux;
+			 paux = paux->getSiguiente();
+			 i++;
+		 }
+		 pant->setSiguiente(paux->getSiguiente());
+	 }
+	 return paux;
+}
 
 template<class Dato>
 Lista<Dato>::Lista()
@@ -110,58 +172,63 @@ bool Lista<Dato>::listaVacia()
 
 template<class Dato>
 void Lista<Dato>::insertar(Dato d)
- {
+{
+	insertar( d, tam+1);
+}
+
+template<class Dato>
+void Lista<Dato>::insertar(Dato d, unsigned pos)
+{
     Nodo<Dato>* pnodo = new Nodo<Dato>(d);
-    Nodo<Dato>* paux = primero;
-    if (this->listaVacia()){
-        primero = pnodo;
-    }
-    else{
-        while (paux->getSiguiente() != 0){
-            paux = paux->getSiguiente();
-        }
+
+	if (this->listaVacia() || pos < 2)
+	{
+		if(!listaVacia())
+			pnodo->setSiguiente(primero);
+		 primero = pnodo;
+	}
+	else
+	{
+		Nodo<Dato>* paux = buscarNodo(pos-1);
+        pnodo->setSiguiente(paux->getSiguiente());
         paux->setSiguiente(pnodo);
- }
- tam++;
+	}
+	tam++;
 }
 
 template<class Dato>
 Dato Lista<Dato>::getDato(unsigned pos)
 {
-    Nodo<Dato>* paux = primero;
-
-    unsigned i = 1;
-    while (i < pos && paux->getSiguiente())
-    {
-        paux = paux->getSiguiente();
-        i++;
-    }
-
-    return paux->getDato();
+	Nodo<Dato>* paux = buscarNodo(pos);
+	if(paux != 0)
+		return paux->getDato();
+	return 0;
 }
 
 template<class Dato>
 void Lista<Dato>::delDato(unsigned pos)
 {
-   Nodo<Dato>* paux = primero;
-    if (pos == 1 || !(primero->getSiguiente()))
-    {
-        primero = paux->getSiguiente();
-    }
-    else
-    {
-        unsigned i = 1;
-        Nodo<Dato>* pant;
-        while (i < pos && paux->getSiguiente())
-        {
-            pant = paux;
-            paux = paux->getSiguiente();
-            i++;
-        }
-        pant->setSiguiente(paux->getSiguiente());
-    }
-    delete paux;
-    tam--;
+	Nodo<Dato>* paux = extraerNodo(pos);
+	if (paux != 0)
+	{
+		delete paux;
+		tam--;
+	}
+}
+
+template<class Dato>
+Dato Lista<Dato>::bajaDato(unsigned pos)
+{
+	Nodo<Dato>* paux = extraerNodo(pos);
+	if (paux != 0)
+	{
+		Dato datoAux = paux->getDato();
+		paux->setDato(0);
+		delete paux;
+		tam--;
+		return datoAux;
+	}
+	return 0;
 }
 
 template<class Dato>
