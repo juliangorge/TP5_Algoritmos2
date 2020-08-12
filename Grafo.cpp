@@ -106,13 +106,13 @@ Lista<int*>* Grafo::dijkstra(string partida, string destino, float costo[], bool
 	Vertice* actual = raiz;
 	int pos = 0;
 
-	while (actual->getIata() != destino && pos != -1){ 
+	while (actual->getIata() != destino && pos != 0){ 
 
 		pos = minimoCosto(costo, visitado);
 		visitado[pos] = true;
 		actual = vertices.getDato(pos);
 
-		if (actual->getIata() != destino && pos != -1){
+		if (actual->getIata() != destino && pos != 0){
 
 			for (unsigned i = 1; i < vertices.getTam() + 1; ++i){
 				verticeAux = vertices.getDato(i);
@@ -156,7 +156,7 @@ void Grafo::inicializarEtiquetas(float costo[], bool visitado[], int n){
 
 int Grafo::minimoCosto(float costo[], bool visitado[]){
 	float minimo = INFINITO;
-	int pos = -1;
+	int pos = 0;
 
 	for (unsigned i = 1; (i < vertices.getTam() + 1); ++i){
 	 	if (!visitado[i]){
