@@ -98,11 +98,12 @@ void Caminos::mostrarDetalle(){ //completar segunda iteracion anidada
 	if (i == 0){
 		cout << "\nNo existe camino posible.\n";
 		return;
-	} else {
+	} else if (i > 1){
 		cout << "\nHay " << i << " caminos posibles. \n";
 	}
 	while(i > 0){
-		cout << vuelos.getTam() - i + 1 << "ra opcion: \n";
+		if (vuelos.getTam() > 1)
+			cout << vuelos.getTam() - i + 1 << "ra opcion: \n";
 		j = vuelos.getDato(i)->getTam();
 		while( j > 0 ){
 			vuelos.getDato(i)->getDato(j)->mostrar();
