@@ -45,6 +45,8 @@ public:
 	// POST: devuelve true si existe un vuelo a ese destino
 	bool hayVuelo(string destino);
 
+	// PRE: -
+	// POST: imprime el detalle de cada vuelo cargado a la lista
 	void listarVuelos();
 };
 

@@ -12,3 +12,5 @@ Integrantes:
   
 *UML*
  [Acá](https://github.com/juliangorge/TP5_Algoritmos2/blob/master/UML%20TP5.png)
+
+ [Minified acá](https://github.com/juliangorge/TP5_Algoritmos2/blob/master/UML%20TP5%20minified.png)

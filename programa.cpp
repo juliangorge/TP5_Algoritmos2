@@ -2,6 +2,7 @@
 #include <cctype>
 #include <string>
 #include <exception>
+#include "Caminos.h"
 
 const int VOLVER_MENU = 2;
 const int CONSULTA_VUELOS = 1;
@@ -303,28 +304,10 @@ void Programa:: menorCostoVuelos(Grafo* grafo){
 
     cout << MSJ_MENOR_COSTO << endl << endl;
 
-    Vuelo** corto = grafo->caminoMasBarato(iataOrigen, iataDestino);
-    if(corto != 0){
+	Caminos* corto = grafo->caminoMasBarato(iataOrigen,iataDestino);
 
-        int i = 0;
-        bool termino = false;
-
-        while(!termino)
-        {
-            //cout << corto[i]->getCosto() << endl;
-            if(corto[i]->getDestino() == iataDestino){
-                termino = true;
-            }
-
-            corto[i]->mostrar();
-
-            cout << endl;
-            i++;
-        }
-        delete[] corto;
-    }else{
-        cout << MSJ_VUELO_INEXISTENTE << endl << endl;
-    }
+	corto->mostrarDetalle();
+	delete corto;
 }
 
 void Programa:: iataOrigenDestino(string &iataOrigen, string &iataDestino){
@@ -346,28 +329,10 @@ void Programa:: menorDuracionVuelos(Grafo* grafo){
 
     cout << MSJ_MENOR_DURACION << endl << endl;
 
-    Vuelo** corto = grafo->caminoMasCorto(iataOrigen, iataDestino);
-    if(corto != 0){
+	Caminos* corto = grafo->caminoMasCorto(iataOrigen,iataDestino);
 
-        int i = 0;
-        bool termino = false;
-
-        while(!termino)
-        {
-            //cout << corto[i]->getCosto() << endl;
-            if(corto[i]->getDestino() == iataDestino){
-                termino = true;
-            }
-
-            corto[i]->mostrar();
-
-            cout << endl;
-            i++;
-        }
-        delete[] corto;
-    }else{
-        cout << MSJ_VUELO_INEXISTENTE << endl << endl;
-    }
+	corto->mostrarDetalle();
+	delete corto;
 }
 
 void Programa:: manejoMenuPrincipal( ABB<Aeropuerto*>* arbol, Grafo* grafo){
