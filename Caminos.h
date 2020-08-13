@@ -19,9 +19,13 @@ private:
 	unsigned costoTotal;
 	float horasTotal;
 
+	// PRE: los punteros deben apuntar a variables
+	// POST: imprime un recorrido y en cantidadVuelos, horasTotales y costosTotales se guardan
+	// cantidad de vuelos, la cantidad de horas totales y el costo total respectivamente del recorrido.
 	void mostrarRecorrido(Lista<Vuelo*>* recorrido, unsigned* cantidadVuelos, float* horasTotales, unsigned* costosTotales);
 
-	void mostrarResumenRecorrido(unsigned* cantidadVuelo, float* horasTotale,unsigned* costosTotales);
+	// POST: imprime los parametros por pantalla.
+	void mostrarResumenRecorrido(unsigned cantidadVuelo, float horasTotales,unsigned costosTotales);
 
 public:
 
@@ -83,7 +87,5 @@ public:
 
 
 };
-
-ostream& operator<<(ostream& salida, Vuelo& vuelo);
 
 #endif /* CAMINOS_H */

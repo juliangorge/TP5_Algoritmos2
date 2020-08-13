@@ -108,7 +108,7 @@ void Caminos::mostrarDetalle(){
 		if (vuelos.getTam() > 1)
 			cout << "Opcion " << i << ":" << endl;
 		mostrarRecorrido(itCaminos.obtenerDato(), &cantidadVuelos, &horasTotales, &costosTotales);
-		mostrarResumenRecorrido(&cantidadVuelos, &horasTotales, &costosTotales);
+		mostrarResumenRecorrido(cantidadVuelos, horasTotales, costosTotales);
 		itCaminos.siguiente();
 		i++;
 	}
@@ -131,10 +131,10 @@ void Caminos::mostrarRecorrido(Lista<Vuelo*>* recorrido, unsigned* cantidadVuelo
 	}
 }
 
-void Caminos::mostrarResumenRecorrido(unsigned* cantidadVuelos, float* horasTotales, unsigned* costosTotales)
+void Caminos::mostrarResumenRecorrido(unsigned cantidadVuelos, float horasTotales, unsigned costosTotales)
 {
 	cout << "\tResumen del camino: \n";
-	cout << "\tCantidad de vuelos: "<< *cantidadVuelos <<endl;
-	cout << "\tDuracion total: "<< *horasTotales <<  " horas" <<endl;
-	cout << "\tCosto total: $" << *costosTotales << endl;
+	cout << "\tCantidad de vuelos: "<< cantidadVuelos <<endl;
+	cout << "\tDuracion total: "<< horasTotales <<  " horas" <<endl;
+	cout << "\tCosto total: $" << costosTotales << endl;
 }

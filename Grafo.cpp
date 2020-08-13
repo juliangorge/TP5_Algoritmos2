@@ -6,6 +6,7 @@
 const float INFINITO = numeric_limits<float>::max();
 const char COSTO = 'C';
 const char HORAS = 'H';
+const float LIMITE_RESOLUCION = 0.00001526;
 
 Grafo::Grafo(){
 }
@@ -137,8 +138,8 @@ Lista<int*>* Grafo::dijkstra(string partida, string destino, float* costo, bool*
 void Grafo::actualizarCosto(float costo[], Lista<int*> predecesores[], int posDestino, int posActual, Vuelo* vueloAux, char tipoDato){
 	if (tipoDato == HORAS){
 
-		if (costo[posDestino] >= costo[posActual] + vueloAux->getHoras()) {
-			if(costo[posDestino] > costo[posActual] + vueloAux->getHoras())
+		if (costo[posDestino] - costo[posActual] - vueloAux->getHoras() >= - LIMITE_RESOLUCION) {
+			if(costo[posDestino] - costo[posActual] - vueloAux->getHoras() > LIMITE_RESOLUCION)
 				predecesores[posDestino].vaciarLista(true);
 			costo[posDestino] = costo[posActual] + vueloAux->getHoras();
 			int* pvalor = new int(posActual);
@@ -146,8 +147,8 @@ void Grafo::actualizarCosto(float costo[], Lista<int*> predecesores[], int posDe
 		}
 	} else if (tipoDato == COSTO){
 
-		if (costo[posDestino] >= costo[posActual] + (float)vueloAux->getCosto()) {
-			if(costo[posDestino] > costo[posActual] + (float)vueloAux->getCosto())
+		if (costo[posDestino] - costo[posActual] - (float)vueloAux->getCosto() >= - LIMITE_RESOLUCION) {
+			if(costo[posDestino] - costo[posActual] - (float)vueloAux->getCosto() > LIMITE_RESOLUCION)
 				predecesores[posDestino].vaciarLista(true);
 			costo[posDestino] = costo[posActual] + (float)vueloAux->getCosto();
 			int* pvalor = new int(posActual);
