@@ -11,8 +11,7 @@ const string RUTA_AEROPUERTOS = "aeropuertos.txt";
 const string RUTA_VUELOS = "vuelos.txt";
 const int SALIR = 0;
 
-//const string MSJ_CARGA_GRAFO = "# En esta seccion cargamos el grafo!!" ;
-//const string MSJ_CARGA_ARBOL = "# En esta seccion cargamos arbol!!" ;
+
 
 int main(int argc, char *argv []){
 
@@ -21,16 +20,14 @@ int main(int argc, char *argv []){
 
     try{
     	Archivo archivoAeropuertos(RUTA_AEROPUERTOS);
-    	//cout << MSJ_CARGA_ARBOL<< endl;
-    	archivoAeropuertos.cargar(&arbol);
+      	archivoAeropuertos.cargar(&arbol);
     }
     catch(ExcepcionArchivo& e){
         cout << e.excepcionAeropuertos() << endl;
     }
     try{
     	Archivo archivoVuelos(RUTA_VUELOS);
-    	//cout <<MSJ_CARGA_GRAFO << endl;
-    	archivoVuelos.cargar(&grafo);
+       	archivoVuelos.cargar(&grafo);
     }
     catch(ExcepcionArchivo& l){
         cout << l.excepcionVuelos() << endl;
