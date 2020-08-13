@@ -39,12 +39,12 @@ public:
 	bool hayVertice(string iata);
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
-	// POST: devuelve un puntero a un objeto dinamico Caminos, cargado con el camino mas barato si existe..
+	// POST: devuelve un puntero a un objeto dinamico Caminos, cargado con el camino mas barato, si existe.
 	//		 Debe liberarse la memoria del puntero luego de usarlo.
 	Caminos* caminoMasBarato(string partida, string destino);
 
 	// PRE: recibe el codigo iata de un vertice de salida y uno de llegada.
-	// POST: devuelve un puntero a un objeto dinamico Caminos, cargado con el camino mas corto si existe.
+	// POST: devuelve un puntero a un objeto dinamico Caminos, cargado con el camino mas corto, si existe.
 	//		 Debe liberarse la memoria del puntero luego de usarlo.
 	Caminos* caminoMasCorto(string partida, string destino);
 
@@ -53,12 +53,12 @@ private:
 	// POST: devuelve un puntero a un objeto dinamico Caminos cargado
 	Caminos* menorCamino(string partida, string destino, char tipoDato);
 
-	// PRE: recibe el codigo iata de dos vertices pertenecientes al grafo, y 2 vectores ya creados con tamanio = vertices.tam + 1 y una lista vacia.
-	// POST: devuelve un puntero a una lista de los predecesores
+	// PRE: recibe el codigo iata de dos vertices pertenecientes al grafo, 2 vectores ya creados con tamanio = vertices.tam + 1, una lista vacia, y el tipoDato para buscar por precio o por horas.
+	// POST: devuelve un puntero a una lista de los predecesores cargada segun las posiciones en la lista de vertices.
 	Lista<int*>* dijkstra(string partida, string destino, float* costo, bool* visitado, Lista<int*>* predecesores, char tipoDato);
 	
 	// PRE: recibe un vector de costos y uno de visitados, y el tope
-	// POST: inicializa el costo con NO_ASIGNADO y visitado en false.
+	// POST: inicializa el costo con INFINITO y visitado en false.
 	void inicializarEtiquetas(float* costo, bool* visitado, int n);
 
 	// PRE: recibe el vector de costo, la lista de predecesores, dos 

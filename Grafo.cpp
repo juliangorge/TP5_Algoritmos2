@@ -4,7 +4,6 @@
 #include <limits>
 
 const float INFINITO = numeric_limits<float>::max();
-const char NO_ASIGNADO = -1;
 const char COSTO = 'C';
 const char HORAS = 'H';
 
