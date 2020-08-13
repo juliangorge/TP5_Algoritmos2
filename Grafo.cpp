@@ -105,9 +105,6 @@ Caminos* Grafo::menorCamino(string partida, string destino, char tipoDato){
 Lista<int*>* Grafo::dijkstra(string partida, string destino, float* costo, bool* visitado, Lista<int*>* predecesores, char tipoDato){
 	Vertice* actual = getVertice(partida);
 	Vertice* verticeAux = getVertice(destino);
-	if (actual == 0 || verticeAux == 0)//si no existe el vertice de salida
-		return 0;
-
 
  	int posRaiz = vertices.getPos(actual);
 	
@@ -164,7 +161,6 @@ void Grafo::inicializarEtiquetas(float* costo, bool* visitado, int n){
 	for (int i = 1; i < n; ++i){
 		costo[i] = INFINITO;
 		visitado[i] = false;
-		//predecesores[i] = NO_ASIGNADO;
 	}
 }
 
@@ -195,13 +191,13 @@ Caminos* Grafo::cargarVuelos(Lista<int*>* predecesor, string raiz, string final)
 	return ListaVuelos;
 }
 
-void Grafo::cargarListaRecorridos(Caminos* listaReccorridos,Lista<Vuelo*>*vuelos, Lista<int*>* predecesor, int pos)
+void Grafo::cargarListaRecorridos(Caminos* listaRecorridos,Lista<Vuelo*>*vuelos, Lista<int*>* predecesor, int pos)
 {
 	if(predecesor[pos].listaVacia())
 	{
 		Lista<Vuelo*>*ListaAAgregar = new Lista<Vuelo*>;
 		*ListaAAgregar = *vuelos;
-		listaReccorridos->agregarRecorrido(ListaAAgregar);
+		listaRecorridos->agregarRecorrido(ListaAAgregar);
 	}
 	else
 	{
@@ -218,7 +214,7 @@ void Grafo::cargarListaRecorridos(Caminos* listaReccorridos,Lista<Vuelo*>*vuelos
 			stringAux = vertices.getDato(pos)->getIata();
 			vueloAux = verticeAux->getVuelo(stringAux);
 			vuelos->insertar(vueloAux,1);
-			cargarListaRecorridos(listaReccorridos, vuelos, predecesor, *posAux);
+			cargarListaRecorridos(listaRecorridos, vuelos, predecesor, *posAux);
 			vuelos->bajaDato(1);
 			itPredecesores.siguiente();
 		}

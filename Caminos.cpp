@@ -77,7 +77,6 @@ void Caminos::mostrarResumen(){
 		cout << "\nNo existe camino posible.\n";
 		return;
 	}	
-
 	setCamino();
 	cout << "Resumen del camino: \n";
 	cout << "\tPartida: " << iataPartida << endl;
@@ -86,15 +85,7 @@ void Caminos::mostrarResumen(){
 	cout << "\tCosto total: $" << costoTotal << endl;
 }
 
-void Caminos::mostrarResumenRecorrido(unsigned* cantidadVuelos, float* horasTotales, unsigned* costosTotales)
-{
-	cout << "\tResumen del camino: \n";
-	cout << "\tCantidad de vuelos: "<< *cantidadVuelos <<endl;
-	cout << "\tDuracion total: "<< *horasTotales <<  " horas" <<endl;
-	cout << "\tCosto total: $" << *costosTotales << endl;
-}
-
-void Caminos::mostrarDetalle(){ //completar segunda iteracion anidada
+void Caminos::mostrarDetalle(){	
 	unsigned i = vuelos.getTam();
 	unsigned cantidadVuelos;
 	float horasTotales;
@@ -138,4 +129,12 @@ void Caminos::mostrarRecorrido(Lista<Vuelo*>* recorrido, unsigned* cantidadVuelo
 		cout << endl;
 		itRecorrido.siguiente();
 	}
+}
+
+void Caminos::mostrarResumenRecorrido(unsigned* cantidadVuelos, float* horasTotales, unsigned* costosTotales)
+{
+	cout << "\tResumen del camino: \n";
+	cout << "\tCantidad de vuelos: "<< *cantidadVuelos <<endl;
+	cout << "\tDuracion total: "<< *horasTotales <<  " horas" <<endl;
+	cout << "\tCosto total: $" << *costosTotales << endl;
 }

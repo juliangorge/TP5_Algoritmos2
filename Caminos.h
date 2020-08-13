@@ -28,39 +28,56 @@ public:
 	// POST: crea un objeto Caminos
 	Caminos();
 
+	// PRE: 
 	// POST: destruye un objeto Caminos
 	~Caminos();
 
-	// POST: setea el atributo partida
+	// PRE: recibe un codigo iata de un vertice
+	// POST: setea el codigo de partida
 	void setPartida(string iataPartida);
 
-	// POST: setea el atributo destino
+	// PRE: recibe un codigo iata de un vertice
+	// POST: setea el el codigo de destino
 	void setDestino(string iataDestino);
 
+	// PRE: recibe un costo
+	// POST: seteal el valor de costoTotal
 	void setCostoTotal(unsigned costoTotal);
 
+	// PRE: recibe un valor de horas
+	// POST: setea el valor horasTotal
 	void setHorasTotal(float horasTotal);
 
-	// GET: setea el atributo partida
+	// PRE: -
+	// GET: devuelve el codigo iata de la partida
 	string getPartida();
 
-	// GET: setea el atributo destino
+	// PRE: -
+	// GET: setea el codigo iata del destino
 	string getDestino();
 
+	// PRE: -
+	// POST:  devuelve el costoTotal 
 	unsigned getCostoTotal();
 
+	// PRE: -
+	// POST: devuelve horasTotal
 	float getHorasTotal();
 
+	// PRE: recibe un puntero a una lista de vuelos
+	// POST: agrega una lista de vuelos a la lista de caminos
 	void agregarRecorrido(Lista<Vuelo*>* recorrido);
 
 	// PRE: los vuelos estan cargados correctamente.
-	// POST: setea los atributos de la clase segun el camino cargado.
+	// POST: setea los atributos de la clase.
 	void setCamino();
 
-	// PRE:
-	// POST: imprime
+	// PRE: los vuelos estan cargados correctamente
+	// POST: imprime el resumen del camino: la partida, destino, horasTotal y costoTotal.
 	void mostrarResumen();
 
+	// PRE: los vuelos estan cargados correctamente
+	// POST: imprime los detalles de cada vuelo del camino, para cada camino que haya. 
 	void mostrarDetalle();	
 
 
